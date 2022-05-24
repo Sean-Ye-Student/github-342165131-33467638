@@ -44,10 +44,10 @@ def PlaySound(sound_name, enabled_keys):
         if play_from_start == True:
             m.rewind()
 
-        # if repeat > -1:
-        #     m.loop(repeat - 1)
-        # else:
-        #     m.loop()
+        if repeat > -1:
+            m.loop(repeat - 1)
+        else:
+            m.loop()
 
 
 def ScreenEdgeTeleport(origin, sizeX, sizeY):
