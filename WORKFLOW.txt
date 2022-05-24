@@ -1,0 +1,7 @@
+WORKFLOW (Please follow these steps)
+
+-Create a new develop branch named "your_name-develop"
+-Edit develop to your liking. Only add one feature at a time (e.g. the main menu)
+-When your satified, merge your branch with main.
+-Delete your develop branch as it is not merged with main.
+-When starting again, follow the first step.
