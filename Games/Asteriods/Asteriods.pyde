@@ -18,6 +18,10 @@ player_points = [lambda s, a, o: s*cos(a) + o, lambda s, a, o: s*sin(a) + o,
         lambda s, a, o: -s*(2.5/6)*cos(a) + o, lambda s, a, o: -s*(2.5/6)*sin(a) + o,
         lambda s, a, o: -s*cos(a + 150) + o, lambda s, a, o: -s*sin(a + 150) + o]
 
+lazer_origin, lazer_start, lazer_velocity = 0, 1, 2
+lazer_speed = 400
+lazers = []
+
 sounds = {"shoot" : {"minim" : "Shoot.mp3", "repeat" : 1, "play_from_start" : True, "isolate" : False, "group" : 1},"explosion" : {"minim" : "Explosion.mp3", "repeat" : 1, "play_from_start" : True, "isolate" : False, "group" : 1}, "siren" : {"minim" : "Siren.mp3", "repeat" : 1, "play_from_start" : True, "isolate" : False, "group" : 1}, "siren2" : {"minim" : "Siren2.mp3", "repeat" : 1, "play_from_start" : True, "isolate" : False, "group" : 1}, "loop" : {"minim" : "Loop.mp3", "repeat" : -1, "play_from_start" : True, "isolate" : True, "group" : 0}}
 sound_kys = ("minim", "repeat", "play_from_start", "isolate", "group")
 def PlaySound(sound_name, enabled_keys):
@@ -61,6 +65,9 @@ def PlayerController():
     
     if mousePressed and mouseButton == LEFT and time.time() - player_last_shot > player_reload_time:
         player_last_shot = time.time()
+        x, y = player_points[0](player_scale, player_angle, player_origin[0]), player_points[1](player_scale, player_angle, player_origin[1])
+        xv, yv = cos(player_angle) * lazer_speed, sin(player_angle) * lazer_speed
+        lazers.append(((x, y), time.time(), (xv, yv)))
         PlaySound("shoot", ("minim", "repeat", "isolate", "group", "play_from_start"))
     
     
@@ -86,6 +93,15 @@ def DrawPlayer():
     line(points[4], points[5], points[6], points[7])
     line(points[6], points[7], points[0], points[1])
 
+def Lazers():
+    global lazers
+    for ii, lazer in enumerate(lazers):
+        elapsed = time.time() - lazer[lazer_start]
+        newX, newY = lazer[lazer_origin][0] + lazer[lazer_velocity][0] * elapsed, lazer[lazer_origin][1] + lazer[lazer_velocity][1] * elapsed
+        x, y = ScreenEdgeTeleport((newX, newY), 1, 1)
+        noSmooth()
+        point(newX, newY)
+        
 def setup():
     size(1000, 500)
     minim = Minim(this)
@@ -97,4 +113,5 @@ def draw():
     stroke(255)
     PlayerController()
     DrawPlayer()
+    Lazers()
         
