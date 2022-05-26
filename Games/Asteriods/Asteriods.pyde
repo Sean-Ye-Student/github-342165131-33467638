@@ -38,6 +38,7 @@ lazers = []
 
 sounds = {"shoot" : {"minim" : "Shoot.mp3", "repeat" : 1, "play_from_start" : True, "isolate" : False, "group" : 1},"explosion" : {"minim" : "Explosion.mp3", "repeat" : 1, "play_from_start" : True, "isolate" : False, "group" : 1}, "siren" : {"minim" : "Siren.mp3", "repeat" : 1, "play_from_start" : True, "isolate" : False, "group" : 1}, "siren2" : {"minim" : "Siren2.mp3", "repeat" : 1, "play_from_start" : True, "isolate" : False, "group" : 1}, "loop" : {"minim" : "Loop.mp3", "repeat" : -1, "play_from_start" : True, "isolate" : True, "group" : 0}}
 sound_kys = ("minim", "repeat", "play_from_start", "isolate", "group")
+
 def PlaySound(sound_name, enabled_keys):
     if not(sound_name in sounds.keys()):
         return
@@ -226,7 +227,8 @@ def Lazers():
 
             
 def Reset():
-    global mode, flickerCount, playerLives, livesImg, score, smoothTrans, time_opened_menu
+    global mode, flickerCount, playerLives, livesImg, score, smoothTrans, time_opened_menu, asteroids
+    global last_spawned, spawn_cooldown, asteroids, mode, flickerCount, playerLives, livesImg, score, smoothTrans, time_opened_menu, spawn_reduce, min_spawn_cooldown
     mode = 1
     flickerCount = 0
     playerLives = 2
@@ -235,8 +237,16 @@ def Reset():
     score = 0
     smoothTrans = 0
     time_opened_menu = time.time() + 2
- 
+    asteroids = []
+    
+    
+    spawn_cooldown = 3
+    last_spawned = time.time()
+    spawn_reduce = 1
+    min_spawn_cooldown = 1.0/1.5
+    maximum_asteroids = 1
 def setup():
+    global coolFont
     size(1000, 500)
     minim = Minim(this)
     for ky in sounds:
@@ -246,21 +256,15 @@ def setup():
 
     coolFont = createFont("Hyperspace-JvEM.ttf", 12)
     Reset()
-    
-spawn_cooldown = 3
-last_spawned = time.time()
-spawn_reduce = 1
-min_spawn_cooldown = 1.0/1.5
-maximum_asteroids = 1
 
 time_opened_menu = 0
-
 def draw():
-    global last_spawned, spawn_cooldown, asteroids, mode, flickerCount, playerLives, livesImg, score, smoothTrans, time_opened_menu
+    global last_spawned, spawn_cooldown, asteroids, mode, flickerCount, playerLives, livesImg, score, smoothTrans, time_opened_menu, spawn_reduce, min_spawn_cooldown
+    
     if keyPressed and key == " " and mode == 1 and time_opened_menu < time.time():
         mode = 2
         
-    print(mode) 
+
     if mode == 3:
         smoothTrans += 1
         flickerCount += 1
@@ -317,6 +321,10 @@ def draw():
         background(0)
         stroke(255)
         textSize(24)
+        PlayerController()
+        DrawPlayer()
+        Asteroids()
+        Lazers()
         if score == 0:
             text('00', 485, 65)
         for i in range(playerLives):
@@ -325,33 +333,3 @@ def draw():
                 break
         if playerLives == 0:
             mode = 3
-        
-spawn_cooldown = 3
-last_spawned = time.time()
-spawn_reduce = 0.5
-min_spawn_cooldown = 1.0/1.5
-maximum_asteroids = 1
-def draw():
-    global last_spawned, spawn_cooldown, asteroids
-    if time.time() > last_spawned + spawn_cooldown:
-        type = random.randint(0, len(asteroid_types) - 1)
-        minX, maxX = 0 - asteroid_types[type][asteroid_type_size][0], width + asteroid_types[type][asteroid_type_size][0]
-        minY, maxY = 0 - asteroid_types[type][asteroid_type_size][0], height + asteroid_types[type][asteroid_type_size][0]
-        on_sides = random.randint(0, 1) == 0
-        originX = (minX if random.randint(0, 1) == 0 else maxX) if on_sides else random.randint(minX, maxX)
-        originY = random.randint(minY, maxY) if on_sides else (minY if random.randint(0, 1) == 0 else maxY) 
-        xv, yv = -1 if random.randint(0, 1) == 0 else 1, -1 if random.randint(0, 1) == 0 else 1
-        CreateAsteroid(type, 1, [originX, originY], [60 * xv, 60 * yv])
-        
-        spawn_cooldown *= spawn_reduce
-        spawn_cooldown = max(spawn_cooldown, min_spawn_cooldown)
-        last_spawned = time.time()
-    background(0)
-    stroke(255)
-
-    PlayerController()
-    DrawPlayer()
-    Asteroids()
-    Lazers()
-
-        
