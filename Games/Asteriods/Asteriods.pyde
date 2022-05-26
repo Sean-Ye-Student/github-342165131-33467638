@@ -116,7 +116,6 @@ def PlayerController():
         player_velocity_angle = player_angle
         player_velocity[0] += cos(player_velocity_angle) * player_acceleration * (time.time() - time_elapsed)
         player_velocity[1] += sin(player_velocity_angle) * player_acceleration * (time.time() - time_elapsed)
- #       line(10, 100, mouseX, mouseY) ######======================================================================= MAKE THRUSTER HERE
     else:
         friction = player_friction*(time.time() - time_elapsed)
         player_velocity[0] *= min(0.99, friction)
@@ -137,6 +136,7 @@ def DrawPlayer():
 
 def Asteroids():
     global asteroids, invinciblity
+    
     for asteroid in asteroids:
         elapsed = time.time() - asteroid[asteroid_last_moved]
         asteroid[asteroid_last_moved] = time.time()
@@ -148,9 +148,7 @@ def Asteroids():
         origin = [(asteroid[asteroid_origin][0] * asteroid[asteroid_scale] + sizeX / 2), (asteroid[asteroid_origin][1] * asteroid[asteroid_scale] + sizeY / 2)]
         newX, newY = ScreenEdgeTeleport(origin, sizes[0] / 2, sizes[1] / 2)
         asteroid[asteroid_origin][0], asteroid[asteroid_origin][1] = (newX- sizeX / 2)/asteroid[asteroid_scale], (newY - sizeY / 2)/asteroid[asteroid_scale]
-        
-        
-        
+
         for i, l in enumerate(asteroid_types[asteroid[asteroid_type]][asteroid_type_lines]):
             s = asteroid[asteroid_scale]
             ao = asteroid[asteroid_origin] 
@@ -159,6 +157,7 @@ def Asteroids():
             
             if invinciblity >= time.time():
                 continue #Player is invincible, the player will not take damage
+
             for iii in range(0, len(player_points), 2):
                 s, a, o, o2 = player_scale, player_angle, player_origin[0], player_origin[1]
                 x, y = player_points[iii](s, a, o), player_points[iii + 1](s, a, o2)
@@ -168,6 +167,9 @@ def Asteroids():
                     PlayerDied()
                     break
             
+                    PlaySound("siren2", ("minim", "repeat", "isolate", "group", "play_from_start"))
+                    break
+            line(xx, yy, xx2, yy2)
 
 def Lazers():
     global lazers
@@ -221,6 +223,7 @@ def Lazers():
             r += 1
         else: 
             i += 1
+
             
 def Reset():
     global mode, flickerCount, playerLives, livesImg, score, smoothTrans, time_opened_menu
@@ -232,15 +235,15 @@ def Reset():
     score = 0
     smoothTrans = 0
     time_opened_menu = time.time() + 2
-                
+ 
 def setup():
-    global mode, coolFont, flickerCount, playerLives, livesImg, score, smoothTrans
     size(1000, 500)
     minim = Minim(this)
     for ky in sounds:
         sounds[ky]["minim"] = minim.loadFile("sounds/" + sounds[ky]["minim"])
     PlaySound("loop", ("minim", "repeat", "isolate", "group", "play_from_start"))
     
+
     coolFont = createFont("Hyperspace-JvEM.ttf", 12)
     Reset()
     
@@ -323,10 +326,32 @@ def draw():
         if playerLives == 0:
             mode = 3
         
-    
+spawn_cooldown = 3
+last_spawned = time.time()
+spawn_reduce = 0.5
+min_spawn_cooldown = 1.0/1.5
+maximum_asteroids = 1
+def draw():
+    global last_spawned, spawn_cooldown, asteroids
+    if time.time() > last_spawned + spawn_cooldown:
+        type = random.randint(0, len(asteroid_types) - 1)
+        minX, maxX = 0 - asteroid_types[type][asteroid_type_size][0], width + asteroid_types[type][asteroid_type_size][0]
+        minY, maxY = 0 - asteroid_types[type][asteroid_type_size][0], height + asteroid_types[type][asteroid_type_size][0]
+        on_sides = random.randint(0, 1) == 0
+        originX = (minX if random.randint(0, 1) == 0 else maxX) if on_sides else random.randint(minX, maxX)
+        originY = random.randint(minY, maxY) if on_sides else (minY if random.randint(0, 1) == 0 else maxY) 
+        xv, yv = -1 if random.randint(0, 1) == 0 else 1, -1 if random.randint(0, 1) == 0 else 1
+        CreateAsteroid(type, 1, [originX, originY], [60 * xv, 60 * yv])
+        
+        spawn_cooldown *= spawn_reduce
+        spawn_cooldown = max(spawn_cooldown, min_spawn_cooldown)
+        last_spawned = time.time()
+    background(0)
+    stroke(255)
+
     PlayerController()
     DrawPlayer()
     Asteroids()
     Lazers()
-    
+
         
