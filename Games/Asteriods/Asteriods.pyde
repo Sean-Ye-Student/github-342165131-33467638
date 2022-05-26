@@ -2,40 +2,6 @@ import time
 import random
 add_library("minim")
 
-#Asteroid Related Variables
-asteroid_type, asteroid_scale, asteroid_origin, asteroid_velocity, asteroid_last_moved = 0, 1, 2, 3, 4
-asteroid_type_size, asteroid_type_lines = 0, 1
-minimum_asteroid_scale = 0.25
-asteroid_types = [
-((91, 92), ((13, 15, 38, 0), (38, 0, 51, 25), (51, 25, 78, 13), (78, 13, 91, 40), (91, 40, 74, 58), (74, 58, 77, 81), (77, 81, 42, 92), (42, 92, 14, 83), (14, 83, 0, 56), (0, 56, 13, 15))),
-((111, 97), ((0, 25, 42, 25), (42, 25, 28, 0), (28, 0, 69, 0), (69, 0, 111, 26), (111, 26, 111, 36), (111, 36, 70, 48), (70, 48, 110, 72), (110, 72, 83, 97), (83, 97, 70, 83), (70, 83, 29, 96), (29, 96, 0, 60), (0, 60, 0, 25))),
-((98, 105), ((13, 75, 25, 55), (25, 55, 18, 31), (18, 31, 40, 14), (40, 14, 60, 27), (60, 27, 82, 20), (82, 20, 98, 43), (98, 43, 78, 51), (78, 51, 95, 76), (95, 76, 71, 105), (71, 105, 41, 90), (41, 90, 30, 99), (30, 99, 13, 75))),
-]
-asteroids = []
-
-#Player Related Variables
-player_scale = 10
-player_offset = (250, 250)
-player_angle = 0
-player_velocity_angle = 0
-player_origin = [250, 250] #spawn location, but will change when player moves
-player_velocity = [0,0]#will change when player moves
-player_acceleration = 5
-player_friction = 65
-player_control_minimum_range = 10
-player_reload_time = 0.25
-player_last_shot = 0
-time_elapsed = time.time()
-player_points = [lambda s, a, o: s*cos(a) + o, lambda s, a, o: s*sin(a) + o,
-        lambda s, a, o: -s*cos(-a + 150) + o, lambda s, a, o: s*sin(-a + 150) + o,
-        lambda s, a, o: -s*(2.5/6)*cos(a) + o, lambda s, a, o: -s*(2.5/6)*sin(a) + o,
-        lambda s, a, o: -s*cos(a + 150) + o, lambda s, a, o: -s*sin(a + 150) + o]
-
-#Lazer Related Variables
-lazer_origin, lazer_start, lazer_velocity = 0, 1, 2
-lazer_speed = 400
-lazers = []
-
 sounds = {"shoot" : {"minim" : "Shoot.mp3", "repeat" : 1, "play_from_start" : True, "isolate" : False, "group" : 1},"explosion" : {"minim" : "Explosion.mp3", "repeat" : 1, "play_from_start" : True, "isolate" : False, "group" : 1}, "siren" : {"minim" : "Siren.mp3", "repeat" : 1, "play_from_start" : True, "isolate" : False, "group" : 1}, "siren2" : {"minim" : "Siren2.mp3", "repeat" : 1, "play_from_start" : True, "isolate" : False, "group" : 1}, "loop" : {"minim" : "Loop.mp3", "repeat" : -1, "play_from_start" : True, "isolate" : True, "group" : 0}}
 sound_kys = ("minim", "repeat", "play_from_start", "isolate", "group")
 
@@ -98,14 +64,14 @@ def PlayerDied():
         print("GAME OVER GAME OVER GAME OVER")
     
 def PlayerController():
-    global  player_angle, player_origin, player_velocity, time_elapsed, player_acceleration, player_velocity_angle, player_last_shot
+    global key_status, player_angle, player_origin, player_velocity, time_elapsed, player_acceleration, player_velocity_angle, player_last_shot
     offsetX = mouseX - player_origin[0] + 0.0
     offsetY = -(mouseY - player_origin[1] + 0.0)
     if (offsetX**2 + offsetY **2)**0.5 >= player_control_minimum_range:
         player_angle = -atan(offsetY/offsetX) if offsetX != 0 else 0
         player_angle = -(atan(offsetY/offsetX)+3.1) if offsetX != 0 and offsetX < 0 else player_angle
-    
-    if mousePressed and mouseButton == LEFT and time.time() - player_last_shot > player_reload_time:
+        
+    if " " in key_status.keys() and key_status[" "]%2.0 != 0 and time.time() - player_last_shot > player_reload_time:
         player_last_shot = time.time()
         x, y = player_points[0](player_scale, player_angle, player_origin[0]), player_points[1](player_scale, player_angle, player_origin[1])
         xv, yv = cos(player_angle) * lazer_speed, sin(player_angle) * lazer_speed
@@ -113,7 +79,7 @@ def PlayerController():
         PlaySound("shoot", ("minim", "repeat", "isolate", "group", "play_from_start"))
     
     
-    if keyPressed and key == "w":
+    if "w" in key_status.keys() and key_status["w"]%2.0 != 0:
         player_velocity_angle = player_angle
         player_velocity[0] += cos(player_velocity_angle) * player_acceleration * (time.time() - time_elapsed)
         player_velocity[1] += sin(player_velocity_angle) * player_acceleration * (time.time() - time_elapsed)
@@ -231,20 +197,71 @@ def Reset():
     global last_spawned, spawn_cooldown, asteroids, mode, flickerCount, playerLives, livesImg, score, smoothTrans, time_opened_menu, spawn_reduce, min_spawn_cooldown
     mode = 1
     flickerCount = 0
-    playerLives = 2
+    playerLives = 1
     livesImg = loadImage("lives.png")
     livesImg.resize(30, 30)
     score = 0
     smoothTrans = 0
     time_opened_menu = time.time() + 2
+    
+    #Asteroid Related Variables
+    global asteroid_type, asteroid_scale, asteroid_origin, asteroid_velocity, asteroid_last_moved, asteroid_type_size, asteroid_type_lines, minimum_asteroid_scale
+    global asteroid_types, asteroids
+
+    asteroid_type, asteroid_scale, asteroid_origin, asteroid_velocity, asteroid_last_moved = 0, 1, 2, 3, 4
+    asteroid_type_size, asteroid_type_lines = 0, 1
+    minimum_asteroid_scale = 0.25
+    asteroid_types = [
+    ((91, 92), ((13, 15, 38, 0), (38, 0, 51, 25), (51, 25, 78, 13), (78, 13, 91, 40), (91, 40, 74, 58), (74, 58, 77, 81), (77, 81, 42, 92), (42, 92, 14, 83), (14, 83, 0, 56), (0, 56, 13, 15))),
+    ((111, 97), ((0, 25, 42, 25), (42, 25, 28, 0), (28, 0, 69, 0), (69, 0, 111, 26), (111, 26, 111, 36), (111, 36, 70, 48), (70, 48, 110, 72), (110, 72, 83, 97), (83, 97, 70, 83), (70, 83, 29, 96), (29, 96, 0, 60), (0, 60, 0, 25))),
+    ((98, 105), ((13, 75, 25, 55), (25, 55, 18, 31), (18, 31, 40, 14), (40, 14, 60, 27), (60, 27, 82, 20), (82, 20, 98, 43), (98, 43, 78, 51), (78, 51, 95, 76), (95, 76, 71, 105), (71, 105, 41, 90), (41, 90, 30, 99), (30, 99, 13, 75))),
+    ]
     asteroids = []
     
-    
+    global spawn_cooldown, last_spawned, spawn_reduce, min_spawn_cooldown, maximum_asteroids
     spawn_cooldown = 3
     last_spawned = time.time()
     spawn_reduce = 1
     min_spawn_cooldown = 1.0/1.5
     maximum_asteroids = 1
+    
+    #Player Related Variables
+    global player_scale, player_offset, player_angle, player_velocity_angle, player_origin, player_velocity, player_acceleration, player_friction, player_control_minimum_range
+
+    player_scale = 10
+    player_offset = (250, 250)
+    player_angle = 0
+    player_velocity_angle = 0
+    player_origin = [250, 250] #spawn location, but will change when player moves
+    player_velocity = [0,0]#will change when player moves
+    player_acceleration = 5
+    player_friction = 65
+    player_control_minimum_range = 10
+    
+    global time_elapsed, player_points
+    time_elapsed = time.time()
+    player_points = [lambda s, a, o: s*cos(a) + o, lambda s, a, o: s*sin(a) + o,
+    lambda s, a, o: -s*cos(-a + 150) + o, lambda s, a, o: s*sin(-a + 150) + o,
+    lambda s, a, o: -s*(2.5/6)*cos(a) + o, lambda s, a, o: -s*(2.5/6)*sin(a) + o,
+    lambda s, a, o: -s*cos(a + 150) + o, lambda s, a, o: -s*sin(a + 150) + o] 
+    
+    global lazer_origin, lazer_start, lazer_velocity, lazer_speed, lazers, player_reload_time, player_last_shot
+    #Lazer Related Variables
+    lazer_origin, lazer_start, lazer_velocity = 0, 1, 2
+    lazer_speed = 400
+    lazers = []
+    player_reload_time = 0.25
+    player_last_shot = 0
+    
+key_status = {}
+def keyPressed():
+    global key_status
+    key_status[key] = key_status[key] if key in key_status.keys() else 0
+    if key_status[key]%2 == 0:
+        key_status[key] += 1
+def keyReleased():    
+    global key_status
+    key_status[key] += 1
 def setup():
     global coolFont
     size(1000, 500)
@@ -257,13 +274,12 @@ def setup():
     coolFont = createFont("Hyperspace-JvEM.ttf", 12)
     Reset()
 
-time_opened_menu = 0
+clicks_required = 0
 def draw():
     global last_spawned, spawn_cooldown, asteroids, mode, flickerCount, playerLives, livesImg, score, smoothTrans, time_opened_menu, spawn_reduce, min_spawn_cooldown
-    
-    if keyPressed and key == " " and mode == 1 and time_opened_menu < time.time():
+    global clicks_required, key_status
+    if " " in key_status.keys() and key_status[" "] >= clicks_required and key_status[" "]%2 == 0 and mode == 1:
         mode = 2
-        
 
     if mode == 3:
         smoothTrans += 1
@@ -275,6 +291,7 @@ def draw():
         textSize(70)
         text("GAME OVER", 300, 175)
         # print(smoothTrans)
+
         if smoothTrans > 150:
             fill(0)
             rect(0, 0, 1000, 500)
@@ -286,8 +303,11 @@ def draw():
                 text("PRESS SPACE TO PLAY AGAIN", 120, 450)
             if flickerCount > 100:
                 flickerCount = 0
-            if key == " ":
+            if clicks_required <= key_status[" "] and key_status[" "]%2 == 0:
+                clicks_required = key_status[" "] + 2
                 Reset()
+        else:
+            clicks_required = key_status[" "] + 2
         return
     
     if mode == 1:
