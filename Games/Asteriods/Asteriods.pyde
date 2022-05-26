@@ -87,6 +87,15 @@ def ScreenEdgeTeleport(origin, sizeX, sizeY):
     new_originY =  -sizeY if origin[1] > height + sizeY else (height + sizeY if player_origin[1] < -sizeY else origin[1])
     return new_originX, new_originY
 
+invinciblity = time.time()
+def PlayerDied():
+    global playerLives, invinciblity 
+    playerLives -= 1 
+    invinciblity = time.time() + 5
+    PlaySound("siren2", ("minim", "repeat", "isolate", "group", "play_from_start"))
+    if playerLives <= 0:
+        print("GAME OVER GAME OVER GAME OVER")
+    
 def PlayerController():
     global  player_angle, player_origin, player_velocity, time_elapsed, player_acceleration, player_velocity_angle, player_last_shot
     offsetX = mouseX - player_origin[0] + 0.0
@@ -126,7 +135,8 @@ def DrawPlayer():
     line(points[6], points[7], points[0], points[1])
 
 def Asteroids():
-    global asteroids
+    global asteroids, invinciblity
+    
     for asteroid in asteroids:
         elapsed = time.time() - asteroid[asteroid_last_moved]
         asteroid[asteroid_last_moved] = time.time()
@@ -143,12 +153,20 @@ def Asteroids():
             s = asteroid[asteroid_scale]
             ao = asteroid[asteroid_origin] 
             xx, yy, xx2, yy2, axv, ayv = (l[0] + ao[0]) * s, (l[1] + ao[1]) * s, (l[2] + ao[0]) * s, (l[3] + ao[1]) * s, asteroid[asteroid_velocity][0], asteroid[asteroid_velocity][1]
+            line(xx, yy, xx2, yy2)
+            
+            if invinciblity >= time.time():
+                continue #Player is invincible, the player will not take damage
+
             for iii in range(0, len(player_points), 2):
                 s, a, o, o2 = player_scale, player_angle, player_origin[0], player_origin[1]
                 x, y = player_points[iii](s, a, o), player_points[iii + 1](s, a, o2)
                 x2, y2 = player_points[iii + 1 if iii + 1 < len(player_points) else 0](s, a, o), player_points[iii + 2 if iii + 2 < len(player_points) else 1](s, a, o2)
                 collided_x, collided_y, xi, yi = LineIntersection(x, y, x2, y2, player_velocity[0], player_velocity[1], xx, yy, xx2, yy2, axv, ayv)
                 if collided_x or collided_y: 
+                    PlayerDied()
+                    break
+            
                     PlaySound("siren2", ("minim", "repeat", "isolate", "group", "play_from_start"))
                     break
             line(xx, yy, xx2, yy2)
@@ -205,6 +223,19 @@ def Lazers():
             r += 1
         else: 
             i += 1
+
+            
+def Reset():
+    global mode, flickerCount, playerLives, livesImg, score, smoothTrans, time_opened_menu
+    mode = 1
+    flickerCount = 0
+    playerLives = 2
+    livesImg = loadImage("lives.png")
+    livesImg.resize(30, 30)
+    score = 0
+    smoothTrans = 0
+    time_opened_menu = time.time() + 2
+ 
 def setup():
     size(1000, 500)
     minim = Minim(this)
@@ -212,6 +243,89 @@ def setup():
         sounds[ky]["minim"] = minim.loadFile("sounds/" + sounds[ky]["minim"])
     PlaySound("loop", ("minim", "repeat", "isolate", "group", "play_from_start"))
     
+
+    coolFont = createFont("Hyperspace-JvEM.ttf", 12)
+    Reset()
+    
+spawn_cooldown = 3
+last_spawned = time.time()
+spawn_reduce = 1
+min_spawn_cooldown = 1.0/1.5
+maximum_asteroids = 1
+
+time_opened_menu = 0
+
+def draw():
+    global last_spawned, spawn_cooldown, asteroids, mode, flickerCount, playerLives, livesImg, score, smoothTrans, time_opened_menu
+    if keyPressed and key == " " and mode == 1 and time_opened_menu < time.time():
+        mode = 2
+        
+    print(mode) 
+    if mode == 3:
+        smoothTrans += 1
+        flickerCount += 1
+        fill(0)
+        noStroke()
+        rect(290, 120, 400, 60)
+        fill(255)
+        textSize(70)
+        text("GAME OVER", 300, 175)
+        # print(smoothTrans)
+        if smoothTrans > 150:
+            fill(0)
+            rect(0, 0, 1000, 500)
+            fill(255)
+            textSize(50)
+            text("YOUR SCORE:", 320, 100)
+            text("HIGH SCORE:", 320, 250)
+            if flickerCount < 50:
+                text("PRESS SPACE TO PLAY AGAIN", 120, 450)
+            if flickerCount > 100:
+                flickerCount = 0
+            if key == " ":
+                Reset()
+        return
+    
+    if mode == 1:
+        flickerCount += 1
+        fill(0)
+        rect(0, 0, 1000, 500)
+        fill(255)
+        textFont(coolFont)
+        textSize(70)
+        text("ASTEROIDS", 300, 175)
+        if flickerCount < 50:
+            textSize(24)
+            text("PRESS SPACE TO PLAY", 360, 250)
+        if flickerCount > 100:
+            flickerCount = 0
+        
+    if mode == 2:
+        if time.time() > last_spawned + spawn_cooldown:
+            type = random.randint(0, len(asteroid_types) - 1)
+            minX, maxX = 0 - asteroid_types[type][asteroid_type_size][0], width + asteroid_types[type][asteroid_type_size][0]
+            minY, maxY = 0 - asteroid_types[type][asteroid_type_size][0], height + asteroid_types[type][asteroid_type_size][0]
+            on_sides = random.randint(0, 1) == 0
+            originX = (minX if random.randint(0, 1) == 0 else maxX) if on_sides else random.randint(minX, maxX)
+            originY = random.randint(minY, maxY) if on_sides else (minY if random.randint(0, 1) == 0 else maxY) 
+            xv, yv = -1 if random.randint(0, 1) == 0 else 1, -1 if random.randint(0, 1) == 0 else 1
+            CreateAsteroid(type, 1, [originX, originY], [60 * xv, 60 * yv])
+            
+            spawn_cooldown *= spawn_reduce
+            spawn_cooldown = max(spawn_cooldown, min_spawn_cooldown)
+            last_spawned = time.time()
+        background(0)
+        stroke(255)
+        textSize(24)
+        if score == 0:
+            text('00', 485, 65)
+        for i in range(playerLives):
+            image(livesImg, 75+(30*i), 65)
+            if i == playerLives + 1:
+                break
+        if playerLives == 0:
+            mode = 3
+        
 spawn_cooldown = 3
 last_spawned = time.time()
 spawn_reduce = 0.5
@@ -234,8 +348,10 @@ def draw():
         last_spawned = time.time()
     background(0)
     stroke(255)
+
     PlayerController()
     DrawPlayer()
     Asteroids()
     Lazers()
+
         
