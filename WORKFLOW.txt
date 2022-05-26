@@ -1,0 +1,9 @@
+WORKFLOW (Please follow these steps and review them whenever uploading)
+
+-Create a new develop branch named "firstname-develop" (git branch -M firstname-develop)
+-Push your new branch (git push origin firstname-develop)
+-Edit develop to your liking. Only add one feature at a time (e.g. the main menu)
+-When your satified, add all your changes (git add .), make a commit message (git commit -m "what did you did"), and then push origin to YOUR branch NOT main (git push origin firstname-develop). 
+-Make sure to merge your branch into main before deleting your branch. Create a merge request and then confirm the merge of branches (This is done from the website)
+-Delete your develop branch using the button on the website (it will show up after the merge request confirmation, in grey)
+-When starting again, follow the first step.
