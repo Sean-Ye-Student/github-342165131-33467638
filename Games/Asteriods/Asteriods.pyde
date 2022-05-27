@@ -81,8 +81,8 @@ def PlayerController():
     
     if "w" in key_status.keys() and key_status["w"]%2.0 != 0:
         player_velocity_angle = player_angle
-        player_velocity[0] += cos(player_velocity_angle) * player_acceleration * (time.time() - time_elapsed)
-        player_velocity[1] += sin(player_velocity_angle) * player_acceleration * (time.time() - time_elapsed)
+        player_velocity[0] += (cos(player_velocity_angle) * player_acceleration * (time.time() - time_elapsed)) if abs(player_velocity[0]) < player_max_acceleration else 0
+        player_velocity[1] += (sin(player_velocity_angle) * player_acceleration * (time.time() - time_elapsed)) if abs(player_velocity[1]) < player_max_acceleration else 0
     else:
         friction = player_friction*(time.time() - time_elapsed)
         player_velocity[0] *= min(0.99, friction)
@@ -203,7 +203,7 @@ def Reset():
     global last_spawned, spawn_cooldown, asteroids, mode, flickerCount, playerLives, livesImg, score, smoothTrans, time_opened_menu, spawn_reduce, min_spawn_cooldown
     mode = 1
     flickerCount = 0
-    playerLives = 1
+    playerLives = 5
     livesImg = loadImage("lives.png")
     livesImg.resize(30, 30)
     score = 0
@@ -232,7 +232,7 @@ def Reset():
     maximum_asteroids = 1
     
     #Player Related Variables
-    global player_scale, player_offset, player_angle, player_velocity_angle, player_origin, player_velocity, player_acceleration, player_friction, player_control_minimum_range
+    global player_scale, player_offset, player_max_acceleration, player_angle, player_velocity_angle, player_origin, player_velocity, player_acceleration, player_friction, player_control_minimum_range
     player_scale = 10
     player_offset = (250, 250)
     player_angle = 0
@@ -240,6 +240,7 @@ def Reset():
     player_origin = [250, 250] #spawn location, but will change when player moves
     player_velocity = [0,0]#will change when player moves
     player_acceleration = 5
+    player_max_acceleration = 5
     player_friction = 65
     player_control_minimum_range = 10
     
