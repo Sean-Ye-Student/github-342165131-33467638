@@ -93,14 +93,20 @@ def PlayerController():
     player_origin[0], player_origin[1] = ScreenEdgeTeleport(player_origin, player_scale, player_scale)
     time_elapsed = time.time()
     
-    
+player_r, player_g, player_b = 255, 255, 255
+def mouseWheel(event):
+    global player_r, player_g, player_b
+    player_r, player_g, player_b = map(int, tuple(random.randint(0, 255) for i in range(3))) 
+
 def DrawPlayer():
+    global player_r, player_g, player_b
+    stroke(player_r, player_g, player_b)
     points = tuple(formula(player_scale, player_angle, player_origin[0] if i%2 == 0 else player_origin[1]) for i, formula in enumerate(player_points))
     for x in range(0, len(points), 2):
         points_needed = 4
         current_points = points[x:x + points_needed] + points[0:(x + points_needed) - len(points)]
         line(current_points[0], current_points[1], current_points[2], current_points[3])
-        
+    stroke(255, 255, 255)
 def Asteroids():
     global asteroids, invinciblity
     
@@ -227,7 +233,6 @@ def Reset():
     
     #Player Related Variables
     global player_scale, player_offset, player_angle, player_velocity_angle, player_origin, player_velocity, player_acceleration, player_friction, player_control_minimum_range
-
     player_scale = 10
     player_offset = (250, 250)
     player_angle = 0
