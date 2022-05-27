@@ -96,11 +96,11 @@ def PlayerController():
     
 def DrawPlayer():
     points = tuple(formula(player_scale, player_angle, player_origin[0] if i%2 == 0 else player_origin[1]) for i, formula in enumerate(player_points))
-    line(points[0], points[1], points[2], points[3])
-    line(points[2], points[3], points[4], points[5])
-    line(points[4], points[5], points[6], points[7])
-    line(points[6], points[7], points[0], points[1])
-
+    for x in range(0, len(points), 2):
+        points_needed = 4
+        current_points = points[x:x + points_needed] + points[0:(x + points_needed) - len(points)]
+        line(current_points[0], current_points[1], current_points[2], current_points[3])
+        
 def Asteroids():
     global asteroids, invinciblity
     
@@ -242,8 +242,10 @@ def Reset():
     time_elapsed = time.time()
     player_points = [lambda s, a, o: s*cos(a) + o, lambda s, a, o: s*sin(a) + o,
     lambda s, a, o: -s*cos(-a + 150) + o, lambda s, a, o: s*sin(-a + 150) + o,
-    lambda s, a, o: -s*(2.5/6)*cos(a) + o, lambda s, a, o: -s*(2.5/6)*sin(a) + o,
-    lambda s, a, o: -s*cos(a + 150) + o, lambda s, a, o: -s*sin(a + 150) + o] 
+    lambda s, a, o: -s*(0.45)*cos(-a + 99.9) + o, lambda s, a, o: s*(0.45)*sin(-a + 99.9) + o,
+    lambda s, a, o: -s*(0.45)*cos(a + 99.9) + o, lambda s, a, o: -s*(0.45)*sin(a + 99.9) + o,
+    lambda s, a, o: -s*cos(a + 150) + o, lambda s, a, o: -s*sin(a + 150) + o
+    ] 
     
     global lazer_origin, lazer_start, lazer_velocity, lazer_speed, lazers, player_reload_time, player_last_shot
     #Lazer Related Variables
@@ -252,7 +254,7 @@ def Reset():
     lazers = []
     player_reload_time = 0.25
     player_last_shot = 0
-    
+
 key_status = {}
 def keyPressed():
     global key_status
