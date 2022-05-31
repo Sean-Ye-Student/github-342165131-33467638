@@ -226,7 +226,7 @@ def Reset():
     global mode, flickerCount, playerLives, livesImg, score, smoothTrans, time_opened_menu
     mode = 1
     flickerCount = 0
-    playerLives = 2
+    playerLives = 5
     livesImg = loadImage("lives.png")
     livesImg.resize(30, 30)
     score = 0
