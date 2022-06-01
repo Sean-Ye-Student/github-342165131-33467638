@@ -257,6 +257,7 @@ def Reset():
     lambda s, a, o: -s*cos(-a + 150) + o, lambda s, a, o: s*sin(-a + 150) + o,
     lambda s, a, o: -s*(0.45)*cos(-a + 99.9) + o, lambda s, a, o: s*(0.45)*sin(-a + 99.9) + o,
     lambda s, a, o: -s*(0.45)*cos(a + 99.9) + o, lambda s, a, o: -s*(0.45)*sin(a + 99.9) + o,
+    lambda s, a, o: -s*cos(a + 150) + o, lambda s, a, o: -s*sin(a + 150) + o] 
     
     global lazer_origin, lazer_start, lazer_velocity, lazer_speed, lazers, player_reload_time, player_last_shot
     #Lazer Related Variables
