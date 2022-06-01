@@ -97,7 +97,7 @@ player_r, player_g, player_b = 255, 255, 255
 def mouseWheel(event):
     global player_r, player_g, player_b
     player_r, player_g, player_b = map(int, tuple(random.randint(0, 255) for i in range(3))) 
-    
+
 def DrawPlayer():
     global player_r, player_g, player_b
     stroke(player_r, player_g, player_b)
@@ -257,7 +257,6 @@ def Reset():
     lambda s, a, o: -s*cos(-a + 150) + o, lambda s, a, o: s*sin(-a + 150) + o,
     lambda s, a, o: -s*(0.45)*cos(-a + 99.9) + o, lambda s, a, o: s*(0.45)*sin(-a + 99.9) + o,
     lambda s, a, o: -s*(0.45)*cos(a + 99.9) + o, lambda s, a, o: -s*(0.45)*sin(a + 99.9) + o,
-    lambda s, a, o: -s*cos(a + 150) + o, lambda s, a, o: -s*sin(a + 150) + o] 
     
     global lazer_origin, lazer_start, lazer_velocity, lazer_speed, lazers, player_reload_time, player_last_shot
     #Lazer Related Variables
@@ -266,7 +265,7 @@ def Reset():
     lazers = []
     player_reload_time = 0.25
     player_last_shot = 0
-    
+
 key_status = {}
 def keyPressed():
     global key_status
