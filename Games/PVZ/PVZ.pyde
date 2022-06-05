@@ -1,29 +1,29 @@
 import time
 import random
-spawn_pos_x = 1027
+spawn_pos_x = 900
 column_pos = (80,183,279,385,467, 573) #The borders between rows from the very top to the very bottom
 row_pos = (251, 334, 408, 493, 576, 654, 738, 812, 898, 987) #The borders between columns from the very left to the very right
 rows = list([{"Plants" : [None for ii in range(len(row_pos) - 1)], "Projectiles" : [], "Zombies" : []} for i in range(len(column_pos) - 1)])
 
-zombies = {"Football" : {"image" : { "name" : "football", "size" : {"x" : 154, "y" : 160}, "pos" : {"x" : spawn_pos_x, "y" : 0}, "fill" : {"r" : 255, "g" : 255, "b" : 255, "a" : 255},
+zombies = {"Football" : {"image" : { "name" : "football", "size" : {"x" : 360, "y" : 203}, "pos" : {"x" : spawn_pos_x, "y" : 0}, "fill" : {"r" : 255, "g" : 255, "b" : 255, "a" : 255},
                          "animations" : [{"file_index" : "zombies/football/walk/(", 
                         "file_type" : ").png", 
                         "start" : 0,
-                        "total_frames" : 11, 
-                        "frame_duration" : 0.18}, 
+                        "total_frames" : 15, 
+                        "frame_duration" : 0.09}, 
                                     
                                             {"file_index" : "zombies/football/eat/(",
                                             "file_type" : ").png", 
                                             "start" : 0,
-                                            "total_frames" : 11, 
-                                            "frame_duration" : 0.18},
+                                            "total_frames" : 25, 
+                                            "frame_duration" : 0.04},
     
                                             {"file_index" : "zombies/died/(", 
                                             "file_type" : ").png", 
                                             "start" : 0,
                                             "total_frames" : 202, 
                                             "frame_duration" : 0.04}]},
-                        "Settings" : {"offset" : {"x" : 50, "y" : 0}, "speed" : 40, "last_moved" : time.time(), "last_attacked" : time.time(), "blocked" : False, "health" : 20, "dps" : 3, "death_timer" : 1},
+                        "Settings" : {"offset" : {"x" : 180, "y" : 0}, "speed" : 40, "last_moved" : time.time(), "last_attacked" : time.time(), "blocked" : False, "health" : 20, "dps" : 3, "death_timer" : 1},
                         }, 
                          
                          
@@ -46,7 +46,7 @@ zombies = {"Football" : {"image" : { "name" : "football", "size" : {"x" : 154, "
                                                    {"file_index" : "zombies/basic/eat/(",
                                                    "file_type" : ").png", 
                                                    "start" : 0,
-                                                   "total_frames" : 57, 
+                                                   "total_frames" : 28, 
                                                    "frame_duration" : 0.04},
            
                                                    {"file_index" : "zombies/died/(", 
@@ -242,8 +242,19 @@ def Zombies(i, row):
             imagz["pos"]["y"] = column_pos[i + 1] + settingz["offset"]["y"] - imagz["size"]["y"]
             elapsed = time.time() - settingz["last_moved"]
             zombie["Settings"]["last_moved"] = time.time()
-            x, y = GetLocation(imagz["pos"]["x"] + settingz["offset"]["x"], imagz["pos"]["y"] + imagz["size"]["y"]/2) #x + 1 so the zombie target plants infront and in the current tile
-            target_plant = rows[y]["Plants"][x] if x != None and y != None else (rows[y]["Plants"][x + 1] if x != None and y != None and x + 1 < len(rows[y]["Plants"][x]) else None)
+            x, y = GetLocation(imagz["pos"]["x"] + settingz["offset"]["x"], imagz["pos"]["y"] + imagz["size"]["y"]/1.4) #x + 1 so the zombie target plants infront and in the current tile
+            # print(imagz["pos"]["x"] + settingz["offset"]["x"], imagz["pos"]["y"] + imagz["size"]["y"]/2, x, y)
+            # if x != None and y != None:
+            #     tint(125)
+            #     fill(255, 0, 0, 255)
+            #     print(x, y)
+            #     rect(row_pos[x], column_pos[y], row_pos[x + 1] - row_pos[x], column_pos[y + 1] - column_pos[y])
+            #     # if x + 2 < len(row_pos) and y + 2 < len(column_pos):
+            #     #     rect(row_pos[x + 1], column_pos[y + 1], row_pos[x + 2] - row_pos[ + 1], column_pos[y + 2] - column_pos[y + 1])
+
+            target_plant = None if x == None or y == None else rows[y]["Plants"][x] 
+            if target_plant == None:
+                targest_plant = None if x == None or y == None or x + 1 >= len(rows[y]["Plants"]) else rows[y]["Plants"][x + 1]
             settingz["blocked"] = True if target_plant != None else False
             if settingz["health"] > 0:
                 if not(settingz["blocked"]):
@@ -332,16 +343,16 @@ def GetLocation(ax, ay):
 def setup():
     size(1000, 600)
     
-cooldown = time.time()+1
+cooldown = time.time()
 projectile_removed = time.time()
 projectile_remove_cooldown = 10
 
 def draw():
     global cooldown, projectile_removed, plant_selected
     if time.time() >= cooldown:        
-        options = tuple(zombies.keys())
+        options = tuple(zombies.keys()) 
         Spawn(zombies[options[random.randint(0, len(options) - 1)]], random.randint(0,4), None, True)
-        cooldown = time.time() + 5
+        cooldown = time.time() + 3
     
     copy(loadImage("Lawn.png"), 0, 0, 1400, 600, 0, 0, 1400, 600)
     
@@ -357,6 +368,7 @@ def draw():
     
     x, y = GetLocation(mouseX, mouseY)
     if x != None and y != None:
+        #print(mouseX, mouseY, x, y, rows[y]["Plants"][x], rows[4]["Plants"])
         noStroke()
         fill(255, 255, 255, 125)
         rect(row_pos[x], column_pos[y], row_pos[x + 1] - row_pos[x], column_pos[y + 1] - column_pos[y])
