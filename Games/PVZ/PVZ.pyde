@@ -61,7 +61,7 @@ zombies = {"Football" : {"image" : { "name" : "football", "size" : {"x" : 360, "
                                                 "last_moved" : time.time(), 
                                                 "last_attacked" : time.time(), 
                                                 "blocked" : False, 
-                                                "health" : 200,
+                                                "health" : 1, #200,
                                                 "dps" : 1,
                                                 "death_timer" : 1}
         },
@@ -96,7 +96,7 @@ zombies = {"Football" : {"image" : { "name" : "football", "size" : {"x" : 360, "
                                                     "last_moved" : time.time(), 
                                                     "last_attacked" : time.time(), 
                                                     "blocked" : False, 
-                                                    "health" : 640,
+                                                    "health" : 1, #640,
                                                     "dps" : 1,
                                                     "death_timer" : 1}
             },
@@ -122,7 +122,28 @@ plants = {"Wallnut" : {"image" : {"size" : {"x" : 148, "y" : 125},"pos" : {"x" :
                                      "pos" : {"x" : 0, "y" : 0},
                                      "fill" : {"r" : 255, "g" : 255, "b" : 255, "a" : 255}, 
                                      "animation" : {"file_index" : "plants/cobcannon/(", "file_type" : ").png", "start" : 0,"total_frames" : 11, "frame_duration" : 0.13}}, 
-                          "Settings" : {"offset" : {"x" : 0, "y" : -30}, "reload_time" : 1.5, "last_shot" : 0, "projectile" : "cob", "amount" : 1, "health" : 5 }},
+                          "Settings" : {"offset" : {"x" : 0, "y" : -30}, "reload_time" : 3, "last_shot" : 0, "projectile" : "cob", "amount" : 1, "health" : 5 }},
+          
+          "Spikeweed" : {
+                          "image" : {"size" : {"x" : 80, "y" : 34},
+                                     "pos" : {"x" : 0, "y" : 0},
+                                     "fill" : {"r" : 255, "g" : 255, "b" : 255, "a" : 255}, 
+                                     "animation" : {"file_index" : "plants/spikeweed/(", "file_type" : ").png", "start" : 0,"total_frames" : 38, "frame_duration" : 0.04}}, 
+                          "Settings" : {"offset" : {"x" : 0, "y" : -30}, "reload_time" : 3, "amount" : 1, "health" : 5 }},
+          
+          "Torchwood" : {
+                          "image" : {"size" : {"x" : 80, "y" : 107},
+                                     "pos" : {"x" : 0, "y" : 0},
+                                     "fill" : {"r" : 255, "g" : 255, "b" : 255, "a" : 255}, 
+                                     "animation" : {"file_index" : "plants/torchwood/(", "file_type" : ").png", "start" : 0,"total_frames" : 82, "frame_duration" : 0.04}}, 
+                          "Settings" : {"offset" : {"x" : 0, "y" : -30}, "health" : 5 }},
+          
+          "Spikerock" : {
+                    "image" : {"size" : {"x" : 80, "y" : 34},
+                                "pos" : {"x" : 0, "y" : 0},
+                                "fill" : {"r" : 255, "g" : 255, "b" : 255, "a" : 255}, 
+                                "animation" : {"file_index" : "plants/spikerock/(", "file_type" : ").png", "start" : 0,"total_frames" : 33, "frame_duration" : 0.04}}, 
+                    "Settings" : {"offset" : {"x" : 0, "y" : -30}, "reload_time" : 3, "amount" : 1, "health" : 5 }},
           
           "Sunflower" : {
                           "image" : {"size" : {"x" : 100, "y" : 106},
@@ -132,16 +153,15 @@ plants = {"Wallnut" : {"image" : {"size" : {"x" : 148, "y" : 125},"pos" : {"x" :
                           "Settings" : {"offset" : {"x" : 0, "y" : -30}, "amount" : 1, "health" : 5}}
         }
 
-projectile_height = 120
-projectile_time = 1
-projectile_gravity = 9.8
+projectile_height = 700
+projectile_gravity = 98
 projectiles = {"pea" : {"image" : {"name" : "plants/projectiles/pea.png", "size" : {"x" : 21, "y" : 21}, "pos" : {"x" : 0, "y" : 0}},
                     "Settings" : {"offset" : {"x" : 65, "y" : 30}, "start_x" : 0, "start" : time.time(), "speed" : 150, "damage" : 20, "is_projectile" : False}},
                 "kernel" : {"image" : {"name" : "plants/projectiles/kernel.png", "size" : {"x" : 21, "y" : 22}, "pos" : {"x" : 0, "y" : 0}},
                     "Settings" : {"offset" : {"x" : 0, "y" : 0}, "velocity" : {"x" : 0, "y" : 0}, "start_x" : 0, "start" : time.time(), "damage" : 20, "is_projectile" : True, "target" : {"x" : 0, "y" : 0}}},
                 
                 "cob" : {"image" : {"name" : "plants/projectiles/cob.png", "size" : {"x" : 107, "y" : 50}, "pos" : {"x" : 0, "y" : 0}},
-                    "Settings" : {"offset" : {"x" : 0, "y" : 0}, "velocity" : {"x" : 0, "y" : 0}, "start_x" : 0, "start_y_velocity" : 0, "start" : time.time(), "damage" : 20, "is_projectile" : True, "target" : {"x" : 0, "y" : 0}}}
+                    "Settings" : {"offset" : {"x" : 200, "y" : 0}, "velocity" : {"x" : 0, "y" : 0}, "start_x" : 0, "start_y" : 0, "start_velocity_y" : 0,  "start" : time.time(), "damage" : 20, "is_projectile" : True, "target" : {"x" : 0, "y" : 0}}}
                 
 }
 
@@ -186,6 +206,7 @@ sound_kys = ("minim", "repeat", "play_from_start", "isolate", "group")
 def PlaySound(sound_name, enabled_keys):
     if not(sound_name in sounds.keys()):
         return
+    
     sound = sounds[sound_name]
     m, repeat, play_from_start, isolate, group = map(None, (sound[ky] if ky in enabled_keys else None for ky in sound_kys))
     if m == None:
@@ -197,13 +218,13 @@ def PlaySound(sound_name, enabled_keys):
             same_group = True if "group" in sounds[ky].keys() and sounds[ky]["group"] == group else False
             if same_group:
                 sounds[ky]["minim"].pause()
-    # if m.isPlaying() == False:
-    #     if play_from_start == True:
-    #         m.rewind()
-    #     if repeat == -1:
-    #         m.loop()
-    #     else:
-    #         m.play()
+    if m.isPlaying() == False:
+        if play_from_start == True:
+            m.rewind()
+        if repeat == -1:
+            m.loop()
+        else:
+            m.play()
 
 plant_selected = None
 def SELECTPLANT(name):
@@ -214,16 +235,35 @@ def SELECTPLANT(name):
 
 def SELECTPEASHOOTER():
     SELECTPLANT("Peashooter")
-def SELECTWALLNUT():
-    SELECTPLANT("Wallnut")
 def SELECTSUNFLOWER():
     SELECTPLANT("Sunflower")
+def SELECTWALLNUT():
+    SELECTPLANT("Wallnut")
+def SELECTTORCHWOOD():
+    SELECTPLANT("Torchwood")
+def SELECTSPIKEWEED():
+    SELECTPLANT("Spikeweed")
+def SELECTSPIKEROCK():
+    SELECTPLANT("Spikerock")
 def SELECTKERNELPULT():
     SELECTPLANT("Kernelpult")
 def SELECTCOBCANNON():
     SELECTPLANT("Cobcannon")
 
+list_x, list_y, list_y_increment = 10, 0, 80
+
 buttons = [
+    {"button" : {
+    "mouse" : LEFT,
+    "function" : SELECTSUNFLOWER,
+    "area" : {"pos" : {"x" : 10, "y" : 160}, "pos2" : {"x" : 116, "y" : 246}}},
+    
+    "image" : {"name" : "icons/sunflower.png",
+               "size" : {"x" : 106, "y" : 66},
+                "pos" : {"x" : 10, "y" : 160},
+                "fill" : {"r" : 255, "g" : 255, "b" : 255, "a" : 255}
+    }},       
+    
            {"button" : {
     "mouse" : LEFT,
     "function" : SELECTPEASHOOTER,
@@ -231,10 +271,9 @@ buttons = [
     
     "image" : {"name" : "icons/peashooter.png",
                "size" : {"x" : 106, "y" : 66},
-                "pos" : {"x" : 10, "y" : 0},
+                "pos" : {"x" : 100000, "y" : 0},
                 "fill" : {"r" : 255, "g" : 255, "b" : 255, "a" : 255}
     }},
-           
            
       {"button" : {
     "mouse" : LEFT,
@@ -246,18 +285,40 @@ buttons = [
                 "pos" : {"x" : 10, "y" : 80},
                 "fill" : {"r" : 255, "g" : 255, "b" : 255, "a" : 255}
     }},
-      
+    
     {"button" : {
     "mouse" : LEFT,
-    "function" : SELECTSUNFLOWER,
+    "function" : SELECTTORCHWOOD,
     "area" : {"pos" : {"x" : 10, "y" : 160}, "pos2" : {"x" : 116, "y" : 246}}},
     
-    "image" : {"name" : "icons/sunflower.png",
+    "image" : {"name" : "icons/torchwood.png",
                "size" : {"x" : 106, "y" : 66},
                 "pos" : {"x" : 10, "y" : 160},
                 "fill" : {"r" : 255, "g" : 255, "b" : 255, "a" : 255}
     }},
     
+     {"button" : {
+    "mouse" : LEFT,
+    "function" : SELECTSPIKEWEED,
+    "area" : {"pos" : {"x" : 10, "y" : 240}, "pos2" : {"x" : 116, "y" : 306}}},
+    
+    "image" : {"name" : "icons/spikeweed.png",
+               "size" : {"x" : 106, "y" : 66},
+                "pos" : {"x" : 10, "y" : 240},
+                "fill" : {"r" : 255, "g" : 255, "b" : 255, "a" : 255}
+    }},
+     
+     {"button" : {
+    "mouse" : LEFT,
+    "function" : SELECTSPIKEROCK,
+    "area" : {"pos" : {"x" : 10, "y" : 240}, "pos2" : {"x" : 116, "y" : 306}}},
+    
+    "image" : {"name" : "icons/spikerock.png",
+               "size" : {"x" : 106, "y" : 66},
+                "pos" : {"x" : 10, "y" : 240},
+                "fill" : {"r" : 255, "g" : 255, "b" : 255, "a" : 255}
+    }},
+     
      {"button" : {
     "mouse" : LEFT,
     "function" : SELECTKERNELPULT,
@@ -281,8 +342,12 @@ buttons = [
     }}
            ]
 
-
-
+for i, button in enumerate(buttons):
+    x, y = list_x, list_y + list_y_increment * i 
+    x2, y2 = button["image"]["size"]["x"], y + button["image"]["size"]["y"]
+    button["image"]["pos"]["x"], button["button"]["area"]["pos"]["x"] = x, x
+    button["image"]["pos"]["y"], button["button"]["area"]["pos"]["y"] = y, y
+    button["button"]["area"]["pos2"]["x"], button["button"]["area"]["pos2"]["y"] = x2, y2
 button_kys = ("area", "function", "mouse")
 fallback = lambda dic, ky, default: dic[ky] if dic != None else default
 def mousePressed():
@@ -316,18 +381,17 @@ def Zombies(i, row):
             elapsed = time.time() - settingz["last_moved"]
             zombie["Settings"]["last_moved"] = time.time()
             x, y = GetLocation(imagz["pos"]["x"] + settingz["offset"]["x"], imagz["pos"]["y"] + imagz["size"]["y"]/1.4) #x + 1 so the zombie target plants infront and in the current tile
-            # print(imagz["pos"]["x"] + settingz["offset"]["x"], imagz["pos"]["y"] + imagz["size"]["y"]/2, x, y)
-            # if x != None and y != None:
-            #     tint(125)
-            #     fill(255, 0, 0, 255)
-            #     print(x, y)
-            #     rect(row_pos[x], column_pos[y], row_pos[x + 1] - row_pos[x], column_pos[y + 1] - column_pos[y])
-            #     # if x + 2 < len(row_pos) and y + 2 < len(column_pos):
-            #     #     rect(row_pos[x + 1], column_pos[y + 1], row_pos[x + 2] - row_pos[ + 1], column_pos[y + 2] - column_pos[y + 1])
 
-            target_plant = None if x == None or y == None else rows[y]["Plants"][x] 
+            target_plant = None if x == None or y == None else rows[y]["Plants"][x]
+            if target_plant != None and (target_plant["Settings"]["name"] == "Spikerock" or target_plant["Settings"]["name"] == "Spikeweed"):
+                target_plant = None
+                
             if target_plant == None:
                 targest_plant = None if x == None or y == None or x + 1 >= len(rows[y]["Plants"]) else rows[y]["Plants"][x + 1]
+
+            if target_plant != None and (target_plant["Settings"]["name"] == "Spikerock" or target_plant["Settings"]["name"] == "Spikeweed"):
+                target_plant = None
+            
             settingz["blocked"] = True if target_plant != None else False
             if settingz["health"] > 0:
                 
@@ -372,26 +436,24 @@ def Plants(i, row):
                 new_projectile = copycollection(projectiles[settingp["projectile"]])
                 new_settings, new_image = new_projectile["Settings"], new_projectile["image"]
                 new_settings["start"] = time.time()
-                new_settings["start_x"], new_image["pos"]["y"]  = imagp["pos"]["x"] + new_settings["offset"]["x"], imagp["pos"]["y"] + new_settings["offset"]["y"]
-                
+                new_settings["start_x"], new_settings["start_y"]  = imagp["pos"]["x"] + new_settings["offset"]["x"], imagp["pos"]["y"] + new_settings["offset"]["y"]
+                new_image["pos"]["y"] = new_settings["start_y"]
                 if new_settings["is_projectile"]:
+                    new_settings["velocity"]["y"] = -(2*projectile_gravity*projectile_height)**0.5
+                    new_settings["start_velocity_y"] = new_settings["velocity"]["y"]
+                    new_settings["total_time"] = (-new_settings["velocity"]["y"]/projectile_gravity) + ((2.0*projectile_height)/projectile_gravity)**0.5
+                    
                     closest, closest_y = 10**16, new_image["pos"]["y"]
                     for zombie in row["Zombies"]:
                         settingz, imagz = zombie["Settings"], zombie["image"]
-                        d = settingz["offset"]["x"] + (imagz["pos"]["x"]*1.2) - settingz["speed"] * projectile_time
-                        #ellipse(d, imagz["pos"]["y"], 50, 50)
+                        d = imagz["pos"]["x"] + imagz["size"]["x"]/2.0 - settingz["speed"] * new_settings["total_time"]*0.5 #+ imagz["size"]["x"]  #projectile_time
                         closest = min(closest, d) if d > new_settings["start_x"] else closest
                         closest_y = settingz["offset"]["y"] if d > new_settings["start_x"] else closest_y
-                    #print(len(row["Zombies"]), closest)    
-                    # fill(255, 0, 0, 255)
-                    # rect(new_settings["start_x"], 0, closest - new_settings["start_x"], 50)
-                    new_settings["velocity"]["x"] = (closest - new_settings["start_x"])/projectile_time
-                    ti = projectile_time
-                    new_settings["velocity"]["y"] = -(projectile_height - 0.5*projectile_gravity*(ti**2))/ti  #-(projectile_height - 0.5*projectile_gravity*(projectile_time**2))/projectile_time
-                    new_settings["start_y_velocity"] = new_settings["velocity"]["y"]
-                    print(new_settings["velocity"]["y"], ti)
+                    global xxx
+                    xxx = closest
+                    new_settings["velocity"]["x"] = ((closest - new_settings["start_x"])/new_settings["total_time"])*2
+                    print("new shot with velocity", new_settings["velocity"]["x"], "with", len(row["Zombies"]), "zombies")
                     new_settings["target"]["x"], new_settings["target"]["y"] = closest, closest_y
-                    # print(new_settings["velocity"]["y"])
                 rows[i]["Projectiles"].append(new_projectile)
             
             RENDERIMAGE(plant, ("animation", "pos", "size", "fill"))
@@ -400,51 +462,48 @@ def Projectiles(i, row):
     global rows
     remove_indexes = []
     angle = 0
-    for i, projectile in enumerate(row["Projectiles"]):
+    for ii, projectile in enumerate(row["Projectiles"]):
             setting, imagp = projectile["Settings"], projectile["image"]
+            flying = False
             already_removed = False
             if setting["is_projectile"] == False:
                 imagp["pos"]["x"] = setting["start_x"] + (time.time() - setting["start"]) * setting["speed"]
             else:
                 delta_time = time.time() - setting["start"]
+                flying = delta_time <= setting["total_time"]*0.5
                 imagp["pos"]["x"] = setting["velocity"]["x"]*delta_time + setting["start_x"]
-                imagp["pos"]["y"] = setting["velocity"]["y"]*delta_time + projectile_gravity/2*delta_time**2 + imagp["pos"]["y"]
-                setting["velocity"]["y"] = setting["start_y_velocity"] - projectile_gravity * delta_time
-                print(setting["start_y_velocity"], "v", projectile_gravity * delta_time, "a")
-                #print(atan(setting["velocity"]["y"]/setting["velocity"]["x"]))
-                rect(imagp["pos"]["x"], imagp["pos"]["y"], setting["velocity"]["x"], setting["velocity"]["y"])
-                angle = atan(((setting["velocity"]["y"] + 0.0)/setting["velocity"]["x"]) if setting["velocity"]["x"] != 0 else 0) #if setting["velocity"]["y"] < 0 else atan(setting["velocity"]["y"]/setting["velocity"]["x"])
-                print(degrees(angle))
+                imagp["pos"]["y"] = setting["velocity"]["y"]*delta_time + setting["start_y"]  #+ projectile_gravity/2*delta_time**2 + imagp["pos"]["y"]
+                setting["velocity"]["y"] = setting["start_velocity_y"] + projectile_gravity*delta_time
+                angle = atan((setting["velocity"]["y"] + 0.0)/setting["velocity"]["x"]) 
+                if setting["velocity"]["y"] > setting["start_velocity_y"]/2.0:
+                    angle = radians(90) + atan((setting["velocity"]["y"] + 0.0)/(setting["target"]["x"] - imagp["pos"]["x"])) if (setting["target"]["x"] - imagp["pos"]["x"]) != 0 else 0
+                
                 pushMatrix()
-                #x_offset, y_offset = imagp["pos"]["x"] + int(imagp["size"]["x"])/2 + setting["offset"]["x"], imagp["pos"]["y"] + int(imagp["size"]["y"])/2 + setting["offset"]["y"]
-                #translate(-x_offset, -y_offset)
                 translate(imagp["pos"]["x"], imagp["pos"]["y"])
                 rotate(angle)
-                #translate(x_offset, y_offset)
-                #translate(imagp["pos"]["x"] + setting["offset"]["x"], imagp["pos"]["y"] + setting["offset"]["y"])
-                #column_pos = (80,183,279,385,467, 573)
-                if imagp["pos"]["y"] + setting["offset"]["y"] > column_pos[i + 1] and delta_time > projectile_time*0.8:
+                if imagp["pos"]["y"] + setting["offset"]["y"] > column_pos[i + 1]:
                     already_removed = True
-                    remove_indexes.append(i)
-                
-            
-            closest_setting, closest = None, 10**6
-            for zombie in row["Zombies"]:
-                settingz, imagz = zombie["Settings"], zombie["image"]
-                can_hit = setting["start_x"] <= zombie["image"]["pos"]["x"] + settingz["offset"]["x"] <= imagp["pos"]["x"]
-                can_reach = setting["is_projectile"] and setting["start_x"] <= zombie["image"]["pos"]["x"] + settingz["offset"]["x"]
-                d = zombie["image"]["pos"]["x"] + settingz["offset"]["x"] - setting["start_x"]
-                if can_hit:
-                    closest_setting = settingz
-                    closest = d 
+                    remove_indexes.append(ii)
+            if not(flying):
+                closest_setting, closest = None, 10**6
+                for zombie in row["Zombies"]:
+                    settingz, imagz = zombie["Settings"], zombie["image"]
+                    can_hit = setting["start_x"] <= imagz["pos"]["x"] + settingz["offset"]["x"] <= imagp["pos"]["x"]
+                    can_reach = setting["is_projectile"] and setting["start_x"] <= imagz["pos"]["x"] + imagz["size"]["x"] + settingz["offset"]["x"] <= imagp["pos"]["x"]
+                    d = imagz["pos"]["x"] + settingz["offset"]["x"] - setting["start_x"]
 
-            if closest_setting != None:
-                if not(already_removed):
-                    remove_indexes.append(i)
-                closest_setting["health"] -= setting["damage"]
+                    if can_hit or can_reach:
+                        closest_setting = settingz
+
+                if closest_setting != None:
+                    if not(already_removed):
+                        remove_indexes.append(ii)
+                    closest_setting["health"] -= setting["damage"]
             if not(already_removed):
-                RENDERIMAGE(projectile, ("name", "size"))
-            popMatrix()
+                RENDERIMAGE(projectile, ("name", "size", "pos" if not(setting["is_projectile"]) else ""))
+            if setting["is_projectile"]:    
+                popMatrix()
+
             
     index, r = 0, 0
     while len(remove_indexes) > 0:
@@ -478,21 +537,36 @@ projectile_removed = time.time()
 projectile_remove_cooldown = 10
 state = "title"
 
-xv, yv = 200, 200
-xp, yp = 0, 0
-s = time.time()
+xxx, xxxx, xxxxx, xxxxxx = 0, 0, 0, 0
+started = False
+loaded = False
 def draw():
-    global cooldown, projectile_removed, plant_selected, state, s, yv, start_music
+        
+    copy(loadImage("Lawn.png"), 0, 0, 1400, 600, 0, 0, 1400, 600)
+    
+    # global started, xv, yv, xp, yp, tx, ty, ac, s, loaded
+    # if keyPressed and key == "s" and loaded == False:
+    #     started = True
+    #     xd, h, t = 500, 1000, 2#xd/1 
+    #     ac = 9.8
+    #     yv = -(h-0.5*ac*(t**2.0))/t
+    #     xv = -yv * atan(0.36)
+    #     print(yv)
+    #     xp, yp = 375.00262260437, 434.7293981075287
+    #     tx, ty = 0, 0
+    #     s = time.time()
+    #     loaded = True
+    # if not(started):
+    #     return
+    global rows, cooldown, projectile_removed, plant_selected, state, s, yv, start_music
     if start_music <= time.time():    # if mousePressed:
         PlaySound("game", ("minim", "repeat", "play_from_start", "isolate", "group"))   
     
     if time.time() >= cooldown:        
-        options = ("Football",)#tuple(zombies.keys()) 
+        options = tuple(zombies.keys()) 
         Spawn(zombies[options[random.randint(0, len(options) - 1)]], random.randint(4,4), None, True)
-        cooldown = time.time() + 3
-    
-    copy(loadImage("Lawn.png"), 0, 0, 1400, 600, 0, 0, 1400, 600)
-    
+        cooldown = time.time() + 5
+
     if time.time() >= projectile_removed + projectile_remove_cooldown:
         projectile_removed = time.time()
         for row in rows:
@@ -516,18 +590,24 @@ def draw():
                 
     for object in buttons:
         RENDERIMAGE(object, ("name", "fill", "size", "pos"))   
-        
     for i, row in enumerate(rows):
         Plants(i, row)
         Zombies(i, row)
         Projectiles(i, row)
-        dt = time.time() - s
-        
+    # fill(255, 255, 255, 125)
+    # rect(358.37500262260437 - 53.5, 434.7293981075287 + 25, 500, -400)
+    # dt = time.time() - s
+    # #rect(500, 300, 100, -150)
     # pushMatrix()
-    # translate(500, 300)
-    # x, y = mouseX - 500, mouseY - 300
-    # a = atan((y + 0.0)/x) if x != 0 else 0
+    # dt = time.time() - s
+    # x = xp + xv * dt
+    # y = yp + yv * dt
+    # translate(x, y)
+
+    # yv += ac * dt
+    # #rect(x - 53, y - 25, xv, yv)
+    # a = atan((yv + 0.0)/xv)
     # rotate(a)
-    # image(loadImage("messages/Title.png"), -25, -25, 50, 50)
+    # image(loadImage("plants/projectiles/cob.png"), 0-53,0-25, 107, 50)
     # popMatrix()
     
