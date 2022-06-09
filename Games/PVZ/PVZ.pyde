@@ -124,6 +124,27 @@ plants = {"Wallnut" : {"image" : {"size" : {"x" : 148, "y" : 125},"pos" : {"x" :
                                      "animation" : {"file_index" : "plants/cobcannon/(", "file_type" : ").png", "start" : 0,"total_frames" : 11, "frame_duration" : 0.13}}, 
                           "Settings" : {"offset" : {"x" : 0, "y" : -30}, "reload_time" : 3, "last_shot" : 0, "projectile" : "cob", "amount" : 1, "health" : 5 }},
           
+          "Spikeweed" : {
+                          "image" : {"size" : {"x" : 80, "y" : 34},
+                                     "pos" : {"x" : 0, "y" : 0},
+                                     "fill" : {"r" : 255, "g" : 255, "b" : 255, "a" : 255}, 
+                                     "animation" : {"file_index" : "plants/spikeweed/(", "file_type" : ").png", "start" : 0,"total_frames" : 38, "frame_duration" : 0.04}}, 
+                          "Settings" : {"offset" : {"x" : 0, "y" : -30}, "reload_time" : 3, "amount" : 1, "health" : 5 }},
+          
+          "Torchwood" : {
+                          "image" : {"size" : {"x" : 80, "y" : 107},
+                                     "pos" : {"x" : 0, "y" : 0},
+                                     "fill" : {"r" : 255, "g" : 255, "b" : 255, "a" : 255}, 
+                                     "animation" : {"file_index" : "plants/torchwood/(", "file_type" : ").png", "start" : 0,"total_frames" : 82, "frame_duration" : 0.04}}, 
+                          "Settings" : {"offset" : {"x" : 0, "y" : -30}, "health" : 5 }},
+          
+          "Spikerock" : {
+                    "image" : {"size" : {"x" : 80, "y" : 34},
+                                "pos" : {"x" : 0, "y" : 0},
+                                "fill" : {"r" : 255, "g" : 255, "b" : 255, "a" : 255}, 
+                                "animation" : {"file_index" : "plants/spikerock/(", "file_type" : ").png", "start" : 0,"total_frames" : 33, "frame_duration" : 0.04}}, 
+                    "Settings" : {"offset" : {"x" : 0, "y" : -30}, "reload_time" : 3, "amount" : 1, "health" : 5 }},
+          
           "Sunflower" : {
                           "image" : {"size" : {"x" : 100, "y" : 106},
                                      "pos" : {"x" : 0, "y" : 0},
@@ -214,16 +235,35 @@ def SELECTPLANT(name):
 
 def SELECTPEASHOOTER():
     SELECTPLANT("Peashooter")
-def SELECTWALLNUT():
-    SELECTPLANT("Wallnut")
 def SELECTSUNFLOWER():
     SELECTPLANT("Sunflower")
+def SELECTWALLNUT():
+    SELECTPLANT("Wallnut")
+def SELECTTORCHWOOD():
+    SELECTPLANT("Torchwood")
+def SELECTSPIKEWEED():
+    SELECTPLANT("Spikeweed")
+def SELECTSPIKEROCK():
+    SELECTPLANT("Spikerock")
 def SELECTKERNELPULT():
     SELECTPLANT("Kernelpult")
 def SELECTCOBCANNON():
     SELECTPLANT("Cobcannon")
 
+list_x, list_y, list_y_increment = 10, 0, 80
+
 buttons = [
+    {"button" : {
+    "mouse" : LEFT,
+    "function" : SELECTSUNFLOWER,
+    "area" : {"pos" : {"x" : 10, "y" : 160}, "pos2" : {"x" : 116, "y" : 246}}},
+    
+    "image" : {"name" : "icons/sunflower.png",
+               "size" : {"x" : 106, "y" : 66},
+                "pos" : {"x" : 10, "y" : 160},
+                "fill" : {"r" : 255, "g" : 255, "b" : 255, "a" : 255}
+    }},       
+    
            {"button" : {
     "mouse" : LEFT,
     "function" : SELECTPEASHOOTER,
@@ -231,10 +271,9 @@ buttons = [
     
     "image" : {"name" : "icons/peashooter.png",
                "size" : {"x" : 106, "y" : 66},
-                "pos" : {"x" : 10, "y" : 0},
+                "pos" : {"x" : 100000, "y" : 0},
                 "fill" : {"r" : 255, "g" : 255, "b" : 255, "a" : 255}
     }},
-           
            
       {"button" : {
     "mouse" : LEFT,
@@ -246,18 +285,40 @@ buttons = [
                 "pos" : {"x" : 10, "y" : 80},
                 "fill" : {"r" : 255, "g" : 255, "b" : 255, "a" : 255}
     }},
-      
+    
     {"button" : {
     "mouse" : LEFT,
-    "function" : SELECTSUNFLOWER,
+    "function" : SELECTTORCHWOOD,
     "area" : {"pos" : {"x" : 10, "y" : 160}, "pos2" : {"x" : 116, "y" : 246}}},
     
-    "image" : {"name" : "icons/sunflower.png",
+    "image" : {"name" : "icons/torchwood.png",
                "size" : {"x" : 106, "y" : 66},
                 "pos" : {"x" : 10, "y" : 160},
                 "fill" : {"r" : 255, "g" : 255, "b" : 255, "a" : 255}
     }},
     
+     {"button" : {
+    "mouse" : LEFT,
+    "function" : SELECTSPIKEWEED,
+    "area" : {"pos" : {"x" : 10, "y" : 240}, "pos2" : {"x" : 116, "y" : 306}}},
+    
+    "image" : {"name" : "icons/spikeweed.png",
+               "size" : {"x" : 106, "y" : 66},
+                "pos" : {"x" : 10, "y" : 240},
+                "fill" : {"r" : 255, "g" : 255, "b" : 255, "a" : 255}
+    }},
+     
+     {"button" : {
+    "mouse" : LEFT,
+    "function" : SELECTSPIKEROCK,
+    "area" : {"pos" : {"x" : 10, "y" : 240}, "pos2" : {"x" : 116, "y" : 306}}},
+    
+    "image" : {"name" : "icons/spikerock.png",
+               "size" : {"x" : 106, "y" : 66},
+                "pos" : {"x" : 10, "y" : 240},
+                "fill" : {"r" : 255, "g" : 255, "b" : 255, "a" : 255}
+    }},
+     
      {"button" : {
     "mouse" : LEFT,
     "function" : SELECTKERNELPULT,
@@ -281,8 +342,12 @@ buttons = [
     }}
            ]
 
-
-
+for i, button in enumerate(buttons):
+    x, y = list_x, list_y + list_y_increment * i 
+    x2, y2 = button["image"]["size"]["x"], y + button["image"]["size"]["y"]
+    button["image"]["pos"]["x"], button["button"]["area"]["pos"]["x"] = x, x
+    button["image"]["pos"]["y"], button["button"]["area"]["pos"]["y"] = y, y
+    button["button"]["area"]["pos2"]["x"], button["button"]["area"]["pos2"]["y"] = x2, y2
 button_kys = ("area", "function", "mouse")
 fallback = lambda dic, ky, default: dic[ky] if dic != None else default
 def mousePressed():
@@ -317,9 +382,16 @@ def Zombies(i, row):
             zombie["Settings"]["last_moved"] = time.time()
             x, y = GetLocation(imagz["pos"]["x"] + settingz["offset"]["x"], imagz["pos"]["y"] + imagz["size"]["y"]/1.4) #x + 1 so the zombie target plants infront and in the current tile
 
-            target_plant = None if x == None or y == None else rows[y]["Plants"][x] 
+            target_plant = None if x == None or y == None else rows[y]["Plants"][x]
+            if target_plant != None and (target_plant["Settings"]["name"] == "Spikerock" or target_plant["Settings"]["name"] == "Spikeweed"):
+                target_plant = None
+                
             if target_plant == None:
                 targest_plant = None if x == None or y == None or x + 1 >= len(rows[y]["Plants"]) else rows[y]["Plants"][x + 1]
+
+            if target_plant != None and (target_plant["Settings"]["name"] == "Spikerock" or target_plant["Settings"]["name"] == "Spikeweed"):
+                target_plant = None
+            
             settingz["blocked"] = True if target_plant != None else False
             if settingz["health"] > 0:
                 
@@ -427,10 +499,10 @@ def Projectiles(i, row):
                     if not(already_removed):
                         remove_indexes.append(ii)
                     closest_setting["health"] -= setting["damage"]
-            
             if not(already_removed):
-                RENDERIMAGE(projectile, ("name", "size"))
-            popMatrix()
+                RENDERIMAGE(projectile, ("name", "size", "pos" if not(setting["is_projectile"]) else ""))
+            if setting["is_projectile"]:    
+                popMatrix()
 
             
     index, r = 0, 0
