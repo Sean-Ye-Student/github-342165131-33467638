@@ -23,8 +23,8 @@ zombies = {"Football" : {"image" : { "name" : "football", "size" : {"x" : 360, "
                                             "file_type" : ").png", 
                                             "start" : 0,
                                             "total_frames" : 202, 
-                                            "frame_duration" : 0.04}]},
-                        "Settings" : {"offset" : {"x" : 150, "y" : 0}, "speed" : 40, "last_moved" : time.time(), "last_attacked" : time.time(), "blocked" : False, "health" : 20, "dps" : 3, "death_timer" : 1},
+                                            "frame_duration" : 0.04}]},#40
+                        "Settings" : {"offset" : {"x" : 150, "y" : 0}, "speed" : 0, "last_moved" : time.time(), "last_attacked" : time.time(), "blocked" : False, "health" : 20, "dps" : 3, "death_timer" : 1},
                         }, 
                          
                          
@@ -57,7 +57,7 @@ zombies = {"Football" : {"image" : { "name" : "football", "size" : {"x" : 360, "
                                                    "frame_duration" : 0.04}]
                                     },
                                     "Settings" : {"offset" : {"x" : 180, "y" : 0}, 
-                                                "speed" : 10, 
+                                                "speed" : 0, #10
                                                 "last_moved" : time.time(), 
                                                 "last_attacked" : time.time(), 
                                                 "blocked" : False, 
@@ -92,7 +92,7 @@ zombies = {"Football" : {"image" : { "name" : "football", "size" : {"x" : 360, "
                                                     "frame_duration" : 0.04}]
                                         },
                                         "Settings" : {"offset" : {"x" : 180, "y" : 0}, 
-                                                    "speed" : 10, 
+                                                    "speed" : 0, #10
                                                     "last_moved" : time.time(), 
                                                     "last_attacked" : time.time(), 
                                                     "blocked" : False, 
@@ -109,27 +109,41 @@ plants = {"Wallnut" : {"image" : {"size" : {"x" : 148, "y" : 125},"pos" : {"x" :
                                      "pos" : {"x" : 0, "y" : 0},
                                      "fill" : {"r" : 255, "g" : 255, "b" : 255, "a" : 255}, 
                                      "animation" : {"file_index" : "plants/peashooter/(", "file_type" : ").png", "start" : 0,"total_frames" : 49, "frame_duration" : 0.03}}, 
-                          "Settings" : {"offset" : {"x" : 15, "y" : -30}, "reload_time" : 1.5, "last_shot" : 0, "projectile" : "pea", "amount" : 1, "health" : 5}},
+                          "Settings" : {"offset" : {"x" : 15, "y" : -30}, "projectile_offset" : {"x" : 0, "y" : 0}, "reload_time" : 1.5, "last_shot" : 0, "projectile" : "pea", "amount" : 1, "health" : 5}},
+          
+          "Repeater" : {
+                          "image" : {"size" : {"x" : 100, "y" : 100},
+                                     "pos" : {"x" : 0, "y" : 0},
+                                     "fill" : {"r" : 255, "g" : 255, "b" : 255, "a" : 255}, 
+                                     "animation" : {"file_index" : "plants/repeater/(", "file_type" : ").png", "start" : 0,"total_frames" : 49, "frame_duration" : 0.03}}, 
+                          "Settings" : {"offset" : {"x" : 0, "y" : -30}, "projectile_offset" : {"x" : 0, "y" : 0}, "reload_time" : 1.5, "last_shot" : 0, "projectile" : "pea", "max_amount" : 2, "amount" : 1, "health" : 5}},
+          
+           "Gatlingpea" : {
+                          "image" : {"size" : {"x" : 90, "y" : 85},
+                                     "pos" : {"x" : 0, "y" : 0},
+                                     "fill" : {"r" : 255, "g" : 255, "b" : 255, "a" : 255}, 
+                                     "animation" : {"file_index" : "plants/gatlingpea/(", "file_type" : ").png", "start" : 0,"total_frames" : 13, "frame_duration" : 0.09}}, 
+                          "Settings" : {"offset" : {"x" : 0, "y" : -30}, "projectile_offset" : {"x" : 0, "y" : -15}, "reload_time" : 1.5, "last_shot" : 0, "projectile" : "pea", "max_amount" : 4, "amount" : 3, "health" : 5}},
           
           "Kernelpult" : {
                           "image" : {"size" : {"x" : 100, "y" : 82},
                                      "pos" : {"x" : 0, "y" : 0},
                                      "fill" : {"r" : 255, "g" : 255, "b" : 255, "a" : 255}, 
                                      "animation" : {"file_index" : "plants/kernelpult/(", "file_type" : ").png", "start" : 0,"total_frames" : 47, "frame_duration" : 0.04}}, 
-                          "Settings" : {"offset" : {"x" : 0, "y" : -30}, "reload_time" : 1.5, "last_shot" : 0, "projectile" : "kernel", "amount" : 1, "health" : 5}},
+                          "Settings" : {"offset" : {"x" : 0, "y" : -30}, "projectile_offset" : {"x" : 0, "y" : 0}, "reload_time" : 1.5, "last_shot" : 0, "projectile" : ["kernel", "butter"], "amount" : 1, "health" : 5}},
           "Cobcannon" : {
                           "image" : {"size" : {"x" : 176, "y" : 108},
                                      "pos" : {"x" : 0, "y" : 0},
                                      "fill" : {"r" : 255, "g" : 255, "b" : 255, "a" : 255}, 
                                      "animation" : {"file_index" : "plants/cobcannon/(", "file_type" : ").png", "start" : 0,"total_frames" : 11, "frame_duration" : 0.13}}, 
-                          "Settings" : {"offset" : {"x" : 0, "y" : -30}, "reload_time" : 3, "last_shot" : 0, "projectile" : "cob", "amount" : 1, "health" : 5 }},
+                          "Settings" : {"offset" : {"x" : 0, "y" : -30}, "projectile_offset" : {"x" : 0, "y" : 0}, "reload_time" : 3, "last_shot" : 0, "projectile" : "cob", "amount" : 1, "health" : 5 }},
           
           "Spikeweed" : {
                           "image" : {"size" : {"x" : 80, "y" : 34},
                                      "pos" : {"x" : 0, "y" : 0},
                                      "fill" : {"r" : 255, "g" : 255, "b" : 255, "a" : 255}, 
                                      "animation" : {"file_index" : "plants/spikeweed/(", "file_type" : ").png", "start" : 0,"total_frames" : 38, "frame_duration" : 0.04}}, 
-                          "Settings" : {"offset" : {"x" : 0, "y" : -30}, "reload_time" : 3, "amount" : 1, "health" : 5 }},
+                          "Settings" : {"offset" : {"x" : 0, "y" : -30}, "projectile_offset" : {"x" : 0, "y" : 0}, "reload_time" : 3, "amount" : 1, "health" : 5 }},
           
           "Torchwood" : {
                           "image" : {"size" : {"x" : 80, "y" : 107},
@@ -143,7 +157,7 @@ plants = {"Wallnut" : {"image" : {"size" : {"x" : 148, "y" : 125},"pos" : {"x" :
                                 "pos" : {"x" : 0, "y" : 0},
                                 "fill" : {"r" : 255, "g" : 255, "b" : 255, "a" : 255}, 
                                 "animation" : {"file_index" : "plants/spikerock/(", "file_type" : ").png", "start" : 0,"total_frames" : 33, "frame_duration" : 0.04}}, 
-                    "Settings" : {"offset" : {"x" : 0, "y" : -30}, "reload_time" : 3, "amount" : 1, "health" : 5 }},
+                    "Settings" : {"offset" : {"x" : 0, "y" : -30}, "projectile_offset" : {"x" : 0, "y" : 0}, "reload_time" : 3, "amount" : 1, "health" : 5 }},
           
           "Sunflower" : {
                           "image" : {"size" : {"x" : 100, "y" : 106},
@@ -153,12 +167,18 @@ plants = {"Wallnut" : {"image" : {"size" : {"x" : 148, "y" : 125},"pos" : {"x" :
                           "Settings" : {"offset" : {"x" : 0, "y" : -30}, "amount" : 1, "health" : 5}}
         }
 
+for name in plants:
+    plants[name]["Settings"]["name"] = name
+
 projectile_height = 700
 projectile_gravity = 98
 projectiles = {"pea" : {"image" : {"name" : "plants/projectiles/pea.png", "size" : {"x" : 21, "y" : 21}, "pos" : {"x" : 0, "y" : 0}},
                     "Settings" : {"offset" : {"x" : 65, "y" : 30}, "start_x" : 0, "start" : time.time(), "speed" : 150, "damage" : 20, "is_projectile" : False}},
                 "kernel" : {"image" : {"name" : "plants/projectiles/kernel.png", "size" : {"x" : 21, "y" : 22}, "pos" : {"x" : 0, "y" : 0}},
                     "Settings" : {"offset" : {"x" : 0, "y" : 0}, "velocity" : {"x" : 0, "y" : 0}, "start_x" : 0, "start" : time.time(), "damage" : 20, "is_projectile" : True, "target" : {"x" : 0, "y" : 0}}},
+                
+                "butter" : {"image" : {"name" : "plants/projectiles/butter.png", "size" : {"x" : 49, "y" : 50}, "pos" : {"x" : 0, "y" : 0}},
+                    "Settings" : {"offset" : {"x" : 0, "y" : 0}, "velocity" : {"x" : 0, "y" : 0}, "start_x" : 0, "start" : time.time(), "damage" : 40, "is_projectile" : True, "target" : {"x" : 0, "y" : 0}}},
                 
                 "cob" : {"image" : {"name" : "plants/projectiles/cob.png", "size" : {"x" : 107, "y" : 50}, "pos" : {"x" : 0, "y" : 0}},
                     "Settings" : {"offset" : {"x" : 200, "y" : 0}, "velocity" : {"x" : 0, "y" : 0}, "start_x" : 0, "start_y" : 0, "start_velocity_y" : 0,  "start" : time.time(), "damage" : 20, "is_projectile" : True, "target" : {"x" : 0, "y" : 0}}}
@@ -178,8 +198,7 @@ def copycollection(coll):
 
     return n
 
-for name in plants:
-    plants[name]["Settings"]["name"] = name
+
 
 img_kys = ("name", "size", "pos", "fill", "animation", "animations", "animation_selected")
 fallback = lambda dic, ky, default: dic[ky] if dic != None else default
@@ -200,7 +219,11 @@ def RENDERIMAGE(object, enabled_keys): #object is a dictionary, enabled_keys is 
     tint(fallback(f, "r", 255), fallback(f, "g", 255), fallback(f, "b", 255), fallback(f, "a", 255))
     image(loadImage(img_name), fallback(pos, "x", -int(xs/2) if xs != None else 0), fallback(pos, "y", -int(ys/2) if ys != None else 0), xs, ys)   
 
-sounds = {"tutorial" : {"minim" : "Cipher - Electronic Light.mp3", "repeat" : -1, "play_from_start" : True, "isolate" : True, "group" : 0}, "intro" : {"minim" : "The_Zombies_Are_Coming.mp3", "repeat" : 1, "play_from_start" : True, "isolate" : True, "group" : 0}, "menu" : {"minim" : "Crazy Dave Intro Theme.mp3", "repeat" : -1, "play_from_start" : True, "isolate" : True,"group" : 0}, "game" : {"minim" : "Grasswalk (In-Game).mp3", "repeat" : -1, "play_from_start" : True, "isolate" : True, "group" : 0}}
+sounds = {"tutorial" : {"minim" : "Cipher - Electronic Light.mp3", "repeat" : -1, "play_from_start" : True, "isolate" : True, "group" : 0}, 
+          "intro" : {"minim" : "The_Zombies_Are_Coming.mp3", "repeat" : 1, "play_from_start" : True, "isolate" : True, "group" : 0}, 
+          "menu" : {"minim" : "Crazy Dave Intro Theme.mp3", "repeat" : -1, "play_from_start" : True, "isolate" : True,"group" : 0}, 
+          "game" : {"minim" : "Grasswalk (In-Game).mp3", "repeat" : -1, "play_from_start" : True, "isolate" : True, "group" : 0}, 
+          "game2" : {"minim" : "Plants vs Zombies Soundtrack [Mini Games].mp3", "repeat" : -1, "play_from_start" : True, "isolate" : True, "group" : 0}}
 
 sound_kys = ("minim", "repeat", "play_from_start", "isolate", "group")
 def PlaySound(sound_name, enabled_keys):
@@ -226,15 +249,37 @@ def PlaySound(sound_name, enabled_keys):
         else:
             m.play()
 
+removing = False
+def RemovePlantMode():
+    global removing
+    removing = True
+    
+buttons = [ {"button" : {
+    "mouse" : LEFT,
+    "function" : RemovePlantMode,
+    "area" : {"pos" : {"x" : 150, "y" : 30}, "pos2" : {"x" : 225, "y" : 105}}},
+    
+    "image" : {"name" : "buttons/Shovel.png",
+               "size" : {"x" : 75, "y" : 75},
+                "pos" : {"x" : 150, "y" : 30},
+                "fill" : {"r" : 255, "g" : 255, "b" : 255, "a" : 255}
+    }},       
+]
+
+
+
 plant_selected = None
 def SELECTPLANT(name):
     global plant_selected
     print(name)
     plant_selected = name
-    
 
 def SELECTPEASHOOTER():
     SELECTPLANT("Peashooter")
+def SELECTREPEATER():
+    SELECTPLANT("Repeater")
+def SELECTGATLINGPEA():
+    SELECTPLANT("Gatlingpea")
 def SELECTSUNFLOWER():
     SELECTPLANT("Sunflower")
 def SELECTWALLNUT():
@@ -250,9 +295,9 @@ def SELECTKERNELPULT():
 def SELECTCOBCANNON():
     SELECTPLANT("Cobcannon")
 
-list_x, list_y, list_y_increment = 10, 0, 80
+list_x, list_y, list_y_increment = 10, 30, 80
 
-buttons = [
+sidebar = [
     {"button" : {
     "mouse" : LEFT,
     "function" : SELECTSUNFLOWER,
@@ -270,6 +315,28 @@ buttons = [
     "area" : {"pos" : {"x" : 10, "y" : 0}, "pos2" : {"x" : 116, "y" : 66}}},
     
     "image" : {"name" : "icons/peashooter.png",
+               "size" : {"x" : 106, "y" : 66},
+                "pos" : {"x" : 100000, "y" : 0},
+                "fill" : {"r" : 255, "g" : 255, "b" : 255, "a" : 255}
+    }},
+           
+            {"button" : {
+    "mouse" : LEFT,
+    "function" : SELECTREPEATER,
+    "area" : {"pos" : {"x" : 10, "y" : 0}, "pos2" : {"x" : 116, "y" : 66}}},
+    
+    "image" : {"name" : "icons/repeater.png",
+               "size" : {"x" : 106, "y" : 66},
+                "pos" : {"x" : 100000, "y" : 0},
+                "fill" : {"r" : 255, "g" : 255, "b" : 255, "a" : 255}
+    }},
+            
+    {"button" : {
+    "mouse" : LEFT,
+    "function" : SELECTGATLINGPEA,
+    "area" : {"pos" : {"x" : 10, "y" : 0}, "pos2" : {"x" : 116, "y" : 66}}},
+    
+    "image" : {"name" : "icons/gatlingpea.png",
                "size" : {"x" : 106, "y" : 66},
                 "pos" : {"x" : 100000, "y" : 0},
                 "fill" : {"r" : 255, "g" : 255, "b" : 255, "a" : 255}
@@ -341,26 +408,79 @@ buttons = [
                 "fill" : {"r" : 255, "g" : 255, "b" : 255, "a" : 255}
     }}
            ]
+bar_size = 7
+selector_x, selector_y, is_selected = -10000, -10000, False
+def ReloadSelector(x, y, name, visible):
+    global selector_x, selector_y, is_selected
+    if plant_selected != None and name == plant_selected.lower():
+        selector_x, selector_y = x, y
+        is_selected = visible
+    
+def SideBar(column_size, offset):
+    global sidebar, is_selected, plant_selected, selector_x, selector_y
+    
+    for i, button in enumerate(sidebar[offset:] + sidebar[:offset]): 
+        x, y = list_x, list_y + list_y_increment * i 
+        ReloadSelector(x, y, button["image"]["name"][6:len(button["image"]["name"]) - 4], i < column_size)
+        if i < column_size:
+            for c in button["image"]["fill"].keys():
+                button["image"]["fill"][c] = 255
+           
+            x2, y2 = button["image"]["size"]["x"], y + button["image"]["size"]["y"]
+            button["image"]["pos"]["x"], button["button"]["area"]["pos"]["x"] = x, x
+            button["image"]["pos"]["y"], button["button"]["area"]["pos"]["y"] = y, y
+            button["button"]["area"]["pos2"]["x"], button["button"]["area"]["pos2"]["y"] = x2, y2
+        else:
+            for c in button["image"]["fill"].keys():
+                button["image"]["fill"][c] = 0
+    print(selector_x, selector_y)
+        
+shift = 0
+SideBar(bar_size, 0)
+def mouseWheel(event):
+    global shift, plant_selected
+    if abs(shift) <= len(sidebar) - 2:
+        shift += event.getCount()  
+    else:
+        shift = 0
 
-for i, button in enumerate(buttons):
-    x, y = list_x, list_y + list_y_increment * i 
-    x2, y2 = button["image"]["size"]["x"], y + button["image"]["size"]["y"]
-    button["image"]["pos"]["x"], button["button"]["area"]["pos"]["x"] = x, x
-    button["image"]["pos"]["y"], button["button"]["area"]["pos"]["y"] = y, y
-    button["button"]["area"]["pos2"]["x"], button["button"]["area"]["pos2"]["y"] = x2, y2
+    SideBar(bar_size, shift)
+    
+    
 button_kys = ("area", "function", "mouse")
 fallback = lambda dic, ky, default: dic[ky] if dic != None else default
-def mousePressed():
-    for object in buttons:
-        button = object["button"]
-        a, f, m = fallback(button, "area", None), fallback(button, "function", None), fallback(button, "mouse", None)
-        p, p2 = fallback(a, "pos", None), fallback(a, "pos2", None)
-        x, y, x2, y2 = fallback(p, "x", 0), fallback(p, "y", 0), fallback(p2, "x", 0), fallback(p2, "y", 0)
-        if min(x, x2) <= mouseX <= max(x, x2) and min(y, y2) <= mouseY <= max(y, y2):
-            if f != None and mouseButton == m:
-                f()
 
-can_place = lambda x, y: rows[y]["Plants"][x] == None
+def TriggerButtonPress(object):
+    button = object["button"]
+    a, f, m = fallback(button, "area", None), fallback(button, "function", None), fallback(button, "mouse", None)
+    p, p2 = fallback(a, "pos", None), fallback(a, "pos2", None)
+    x, y, x2, y2 = fallback(p, "x", 0), fallback(p, "y", 0), fallback(p2, "x", 0), fallback(p2, "y", 0)
+    if min(x, x2) <= mouseX <= max(x, x2) and min(y, y2) <= mouseY <= max(y, y2):
+        if f != None and mouseButton == m:
+            f()
+
+mouse_presses = 0
+def mousePressed():
+
+    for object in buttons:
+        TriggerButtonPress(object)
+    for object in sidebar:
+        if object["image"]["fill"]["a"] > 0:
+            TriggerButtonPress(object)
+
+def mouseReleased():
+    global mouse_presses
+    mouse_presses += 1
+    for i, object in enumerate(sidebar):
+        x, y = list_x, list_y + list_y_increment * i 
+        visible = object["image"]["fill"]["a"] > 0
+        ReloadSelector(x, y, object["image"]["name"][6:len(object["image"]["name"]) - 4], visible)
+
+upgradable_plants = {"Gatlingpea" : "Repeater", "Spikerock" : "Spikeweed", "Cobcannon" : "Kernelpult"}
+can_place_cobcannon = lambda x, y: rows[y]["Plants"][x - 1]["Settings"]["name"] == "Kernelpult" if x - 1 > -1 and rows[y]["Plants"][x - 1] != None else False
+can_place = lambda x, y, type: rows[y]["Plants"][x] == None if not(type in upgradable_plants.keys()) else rows[y]["Plants"][x] != None and rows[y]["Plants"][x]["Settings"]["name"] == upgradable_plants[type] and (type != "Cobcannon" or can_place_cobcannon(x, y)) 
+                                                                                                            
+
 def Spawn(object, row, column, is_zombie):
     new = copycollection(object)
     if is_zombie:
@@ -371,6 +491,8 @@ def Spawn(object, row, column, is_zombie):
         imagp["pos"]["y"] = column_pos[row + 1] + settingp["offset"]["y"] - imagp["size"]["y"]
         imagp["pos"]["x"] = row_pos[column + 1] + settingp["offset"]["x"] - imagp["size"]["x"]
         rows[row]["Plants"][column] = new
+        if settingp["name"] == "Cobcannon":
+            rows[row]["Plants"][column - 1] = new
 
 def Zombies(i, row):
     global rows
@@ -429,12 +551,20 @@ def Plants(i, row):
     for ii, plant in enumerate(row["Plants"]):
             if not(plant):
                 continue
-            #print(row)
+
             settingp, imagp  = plant["Settings"], plant["image"]
+                
             if "last_shot" in settingp.keys() and time.time() >= settingp["last_shot"] + settingp["reload_time"] and len(rows[i]["Zombies"]) > 0: 
+                if "max_amount" in settingp.keys():
+                    settingp["amount"] = settingp["amount"] + 1 if settingp["amount"] < settingp["max_amount"] - 1 else 0
+                    settingp["reload_time"] = 0.4 if settingp["amount"] < settingp["max_amount"] - 1 else 1.5
+                    
                 settingp["last_shot"] = time.time()
-                new_projectile = copycollection(projectiles[settingp["projectile"]])
+                projectile = settingp["projectile"] if type(settingp["projectile"]) == type("") else settingp["projectile"][0 if random.randint(1, 100) <= 75 else 1]
+                new_projectile = copycollection(projectiles[projectile])
                 new_settings, new_image = new_projectile["Settings"], new_projectile["image"]
+                new_settings["offset"]["x"] += settingp["projectile_offset"]["x"] 
+                new_settings["offset"]["y"] += settingp["projectile_offset"]["y"] 
                 new_settings["start"] = time.time()
                 new_settings["start_x"], new_settings["start_y"]  = imagp["pos"]["x"] + new_settings["offset"]["x"], imagp["pos"]["y"] + new_settings["offset"]["y"]
                 new_image["pos"]["y"] = new_settings["start_y"]
@@ -449,10 +579,7 @@ def Plants(i, row):
                         d = imagz["pos"]["x"] + imagz["size"]["x"]/2.0 - settingz["speed"] * new_settings["total_time"]*0.5 #+ imagz["size"]["x"]  #projectile_time
                         closest = min(closest, d) if d > new_settings["start_x"] else closest
                         closest_y = settingz["offset"]["y"] if d > new_settings["start_x"] else closest_y
-                    global xxx
-                    xxx = closest
                     new_settings["velocity"]["x"] = ((closest - new_settings["start_x"])/new_settings["total_time"])*2
-                    print("new shot with velocity", new_settings["velocity"]["x"], "with", len(row["Zombies"]), "zombies")
                     new_settings["target"]["x"], new_settings["target"]["y"] = closest, closest_y
                 rows[i]["Projectiles"].append(new_projectile)
             
@@ -485,6 +612,15 @@ def Projectiles(i, row):
                     already_removed = True
                     remove_indexes.append(ii)
             if not(flying):
+                if imagp["name"] == "plants/projectiles/pea.png":
+                    crossed = False
+                    for c, plant in enumerate(row["Plants"]):
+                        if plant != None:
+                            print(plant["Settings"]["name"], (i, c), GetLocation(imagp["pos"]["x"], imagp["pos"]["y"]))
+                        if plant != None and plant["Settings"]["name"] == "Torchwood" and (c, i) == GetLocation(imagp["pos"]["x"], imagp["pos"]["y"]):
+                            imagp["name"] = "plants/projectiles/firepea.png"
+                            setting["damage"] *= 2
+                
                 closest_setting, closest = None, 10**6
                 for zombie in row["Zombies"]:
                     settingz, imagz = zombie["Settings"], zombie["image"]
@@ -494,7 +630,6 @@ def Projectiles(i, row):
 
                     if can_hit or can_reach:
                         closest_setting = settingz
-
                 if closest_setting != None:
                     if not(already_removed):
                         remove_indexes.append(ii)
@@ -531,36 +666,20 @@ def setup():
     for ky in sounds:
         sounds[ky]["minim"] = minim.loadFile("sounds/" + sounds[ky]["minim"])
     PlaySound("intro", ("minim", "repeat", "play_from_start", "isolate", "group"))
+    
 cooldown = time.time()
 start_music = time.time() + 6
 projectile_removed = time.time()
 projectile_remove_cooldown = 10
 state = "title"
 
-xxx, xxxx, xxxxx, xxxxxx = 0, 0, 0, 0
-started = False
-loaded = False
+
 def draw():
-        
     copy(loadImage("Lawn.png"), 0, 0, 1400, 600, 0, 0, 1400, 600)
     
-    # global started, xv, yv, xp, yp, tx, ty, ac, s, loaded
-    # if keyPressed and key == "s" and loaded == False:
-    #     started = True
-    #     xd, h, t = 500, 1000, 2#xd/1 
-    #     ac = 9.8
-    #     yv = -(h-0.5*ac*(t**2.0))/t
-    #     xv = -yv * atan(0.36)
-    #     print(yv)
-    #     xp, yp = 375.00262260437, 434.7293981075287
-    #     tx, ty = 0, 0
-    #     s = time.time()
-    #     loaded = True
-    # if not(started):
-    #     return
-    global rows, cooldown, projectile_removed, plant_selected, state, s, yv, start_music
-    if start_music <= time.time():    # if mousePressed:
-        PlaySound("game", ("minim", "repeat", "play_from_start", "isolate", "group"))   
+    global rows, cooldown, projectile_removed, plant_selected, state, s, yv, start_music, removing, mouse_presses, selector_x, selector_y
+    # if start_music <= time.time():    # if mousePressed:
+    #     PlaySound("game", ("minim", "repeat", "play_from_start", "isolate", "group"))   
     
     if time.time() >= cooldown:        
         options = tuple(zombies.keys()) 
@@ -576,38 +695,33 @@ def draw():
                     row["Projectiles"].pop(i)
                 else:
                     i += 1 
-    
-    x, y = GetLocation(mouseX, mouseY)
-    if x != None and y != None:
-        #print(mouseX, mouseY, x, y, rows[y]["Plants"][x], rows[4]["Plants"])
-        noStroke()
-        fill(255, 255, 255, 125)
-        rect(row_pos[x], column_pos[y], row_pos[x + 1] - row_pos[x], column_pos[y + 1] - column_pos[y])
-                
-        if mousePressed and mouseButton == LEFT and can_place(x, y):
-            if plant_selected != None:
-                Spawn(plants[plant_selected], y, x, False) 
-                
+
+    for object in sidebar:
+        RENDERIMAGE(object, ("name", "fill", "size", "pos"))  
     for object in buttons:
         RENDERIMAGE(object, ("name", "fill", "size", "pos"))   
     for i, row in enumerate(rows):
         Plants(i, row)
         Zombies(i, row)
         Projectiles(i, row)
-    # fill(255, 255, 255, 125)
-    # rect(358.37500262260437 - 53.5, 434.7293981075287 + 25, 500, -400)
-    # dt = time.time() - s
-    # #rect(500, 300, 100, -150)
-    # pushMatrix()
-    # dt = time.time() - s
-    # x = xp + xv * dt
-    # y = yp + yv * dt
-    # translate(x, y)
-
-    # yv += ac * dt
-    # #rect(x - 53, y - 25, xv, yv)
-    # a = atan((yv + 0.0)/xv)
-    # rotate(a)
-    # image(loadImage("plants/projectiles/cob.png"), 0-53,0-25, 107, 50)
-    # popMatrix()
-    
+    if plant_selected != None and is_selected:
+        image(loadImage("selector.png"), selector_x, selector_y, 106, 66)
+    x, y = GetLocation(mouseX, mouseY)
+    if x != None and y != None:
+        #print(mouseX, mouseY, x, y, rows[y]["Plants"][x], rows[4]["Plants"])
+        noStroke()
+        fill(255, 255, 255, 125)
+        rect(row_pos[x], column_pos[y], row_pos[x + 1] - row_pos[x], column_pos[y + 1] - column_pos[y])
+        if removing:
+            image(loadImage("shovel.png"), mouseX, mouseY - 75, 75, 75) 
+        if mousePressed and mouseButton == LEFT and mouse_presses%2 == 0:
+            mouse_presses += 1
+            if removing:
+                if x - 1 > -1 and rows[y]["Plants"][x - 1] == rows[y]["Plants"][x]:
+                    rows[y]["Plants"][x - 1] = None
+                elif x + 1 < len(row_pos) and rows[y]["Plants"][x + 1] == rows[y]["Plants"][x]:
+                    rows[y]["Plants"][x + 1] = None
+                rows[y]["Plants"][x] = None
+            elif plant_selected != None and is_selected and can_place(x, y, plant_selected):
+                Spawn(plants[plant_selected], y, x, False) 
+            removing = False
