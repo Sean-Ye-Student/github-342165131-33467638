@@ -146,11 +146,11 @@ plants = {"Wallnut" : {"image" : {"size" : {"x" : 148, "y" : 125},"pos" : {"x" :
                           "Settings" : {"offset" : {"x" : 0, "y" : -30}, "projectile_offset" : {"x" : 0, "y" : 0}, "reload_time" : 3, "amount" : 1, "health" : 5 }},
           
           "Torchwood" : {
-                          "image" : {"size" : {"x" : 80, "y" : 107},
+                          "image" : {"size" : {"x" : 66, "y" : 90},
                                      "pos" : {"x" : 0, "y" : 0},
                                      "fill" : {"r" : 255, "g" : 255, "b" : 255, "a" : 255}, 
                                      "animation" : {"file_index" : "plants/torchwood/(", "file_type" : ").png", "start" : 0,"total_frames" : 82, "frame_duration" : 0.04}}, 
-                          "Settings" : {"offset" : {"x" : 0, "y" : -30}, "health" : 5 }},
+                          "Settings" : {"offset" : {"x" : -5, "y" : -30}, "health" : 5 }},
           
           "Spikerock" : {
                     "image" : {"size" : {"x" : 80, "y" : 34},
@@ -160,10 +160,17 @@ plants = {"Wallnut" : {"image" : {"size" : {"x" : 148, "y" : 125},"pos" : {"x" :
                     "Settings" : {"offset" : {"x" : 0, "y" : -30}, "projectile_offset" : {"x" : 0, "y" : 0}, "reload_time" : 3, "amount" : 1, "health" : 5 }},
           
           "Sunflower" : {
-                          "image" : {"size" : {"x" : 100, "y" : 106},
+                          "image" : {"size" : {"x" : 90, "y" : 95},
                                      "pos" : {"x" : 0, "y" : 0},
                                      "fill" : {"r" : 255, "g" : 255, "b" : 255, "a" : 255}, 
                                      "animation" : {"file_index" : "plants/sunflower/(", "file_type" : ").png", "start" : 0,"total_frames" : 54, "frame_duration" : 0.03}}, 
+                          "Settings" : {"offset" : {"x" : -5, "y" : -30}, "amount" : 1, "health" : 5}},
+          
+          "Twinsunflower" : {
+                          "image" : {"size" : {"x" : 83, "y" : 84},
+                                     "pos" : {"x" : 0, "y" : 0},
+                                     "fill" : {"r" : 255, "g" : 255, "b" : 255, "a" : 255}, 
+                                     "animation" : {"file_index" : "plants/twinsunflower/(", "file_type" : ").png", "start" : 0,"total_frames" : 20, "frame_duration" : 0.09}}, 
                           "Settings" : {"offset" : {"x" : 0, "y" : -30}, "amount" : 1, "health" : 5}}
         }
 
@@ -282,6 +289,8 @@ def SELECTGATLINGPEA():
     SELECTPLANT("Gatlingpea")
 def SELECTSUNFLOWER():
     SELECTPLANT("Sunflower")
+def SELECTTWINSUNFLOWER():
+    SELECTPLANT("Twinsunflower")
 def SELECTWALLNUT():
     SELECTPLANT("Wallnut")
 def SELECTTORCHWOOD():
@@ -308,6 +317,17 @@ sidebar = [
                 "pos" : {"x" : 10, "y" : 160},
                 "fill" : {"r" : 255, "g" : 255, "b" : 255, "a" : 255}
     }},       
+    
+     {"button" : {
+    "mouse" : LEFT,
+    "function" : SELECTTWINSUNFLOWER,
+    "area" : {"pos" : {"x" : 10, "y" : 160}, "pos2" : {"x" : 116, "y" : 246}}},
+    
+    "image" : {"name" : "icons/twinsunflower.png",
+               "size" : {"x" : 106, "y" : 66},
+                "pos" : {"x" : 10, "y" : 160},
+                "fill" : {"r" : 255, "g" : 255, "b" : 255, "a" : 255}
+    }},     
     
            {"button" : {
     "mouse" : LEFT,
