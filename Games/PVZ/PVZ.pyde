@@ -6,7 +6,62 @@ column_pos = (80,183,279,385,467, 573) #The borders between rows from the very t
 row_pos = (251, 334, 408, 493, 576, 654, 738, 812, 898, 987) #The borders between columns from the very left to the very right
 rows = list([{"Plants" : [None for ii in range(len(row_pos) - 1)], "Projectiles" : [], "Zombies" : []} for i in range(len(column_pos) - 1)])
 
-zombies = {"Football" : {"image" : { "name" : "football", "size" : {"x" : 360, "y" : 203}, "pos" : {"x" : spawn_pos_x, "y" : 0}, "fill" : {"r" : 255, "g" : 255, "b" : 255, "a" : 255},
+amplifier = 1 #Maybe hard waves run after every 3 easy waves
+max_amplifier = 3
+amplifier_rate = 2#1.038609898 #will reach max_amplifier in 30 waves
+waves_completed = 0
+easy_waves = [{"Football" : 5,
+          "Basic" : 0,
+          "Cone" : 0,
+          "Gargantuar" : 5},
+
+        {"Football" : 0,
+          "Basic" : 5,
+          "Cone" : 0,
+          "Gargantuar" : 5},
+        
+        {"Football" : 0,
+          "Basic" : 0,
+          "Cone" : 5,
+          "Gargantuar" : 5}]
+hard_waves = [{"Football" : 15,
+          "Basic" : 0,
+          "Cone" : 0},
+
+        {"Football" : 0,
+          "Basic" : 15,
+          "Cone" : 0},
+        
+        {"Football" : 0,
+          "Basic" : 0,
+          "Cone" : 15},
+        
+        {"Football" : 5,
+          "Basic" : 5,
+          "Cone" : 5}] 
+
+zombies = {"Gargantuar" : {"image" : { "name" : "gargantuar", "size" : {"x" : 600, "y" : 338}, "pos" : {"x" : spawn_pos_x, "y" : 0}, "fill" : {"r" : 255, "g" : 255, "b" : 255, "a" : 255},
+                         "animations" : [{"file_index" : "zombies/gargantuar/walk/(", 
+                        "file_type" : ").png", 
+                        "start" : 0,
+                        "total_frames" : 196, 
+                        "frame_duration" : 0.09}, 
+                                    
+                                            {"file_index" : "zombies/gargantuar/eat/(",
+                                            "file_type" : ").png", 
+                                            "start" : 0,
+                                            "total_frames" : 48, 
+                                            "frame_duration" : 0.09},
+    
+                                            {"file_index" : "zombies/gargantuar/died/(", 
+                                            "file_type" : ").png", 
+                                            "start" : 0,
+                                            "total_frames" : 119, 
+                                            "frame_duration" : 0.09}]},
+                        "Settings" : {"offset" : {"x" : 150, "y" : -25}, "speed" : 5, "last_moved" : time.time(), "last_attacked" : time.time(), "blocked" : False, "health" : 20, "dps" : 3, "death_timer" : 1},
+                        }, 
+           
+           "Football" : {"image" : { "name" : "football", "size" : {"x" : 360, "y" : 203}, "pos" : {"x" : spawn_pos_x, "y" : 0}, "fill" : {"r" : 255, "g" : 255, "b" : 255, "a" : 255},
                          "animations" : [{"file_index" : "zombies/football/walk/(", 
                         "file_type" : ").png", 
                         "start" : 0,
@@ -23,8 +78,8 @@ zombies = {"Football" : {"image" : { "name" : "football", "size" : {"x" : 360, "
                                             "file_type" : ").png", 
                                             "start" : 0,
                                             "total_frames" : 202, 
-                                            "frame_duration" : 0.04}]},#40
-                        "Settings" : {"offset" : {"x" : 150, "y" : 0}, "speed" : 0, "last_moved" : time.time(), "last_attacked" : time.time(), "blocked" : False, "health" : 20, "dps" : 3, "death_timer" : 1},
+                                            "frame_duration" : 0.04}]},
+                        "Settings" : {"offset" : {"x" : 150, "y" : 0}, "speed" : 40, "last_moved" : time.time(), "last_attacked" : time.time(), "blocked" : False, "health" : 20, "dps" : 3, "death_timer" : 1},
                         }, 
                          
                          
@@ -57,7 +112,7 @@ zombies = {"Football" : {"image" : { "name" : "football", "size" : {"x" : 360, "
                                                    "frame_duration" : 0.04}]
                                     },
                                     "Settings" : {"offset" : {"x" : 180, "y" : 0}, 
-                                                "speed" : 0, #10
+                                                "speed" : 10,
                                                 "last_moved" : time.time(), 
                                                 "last_attacked" : time.time(), 
                                                 "blocked" : False, 
@@ -92,7 +147,7 @@ zombies = {"Football" : {"image" : { "name" : "football", "size" : {"x" : 360, "
                                                     "frame_duration" : 0.04}]
                                         },
                                         "Settings" : {"offset" : {"x" : 180, "y" : 0}, 
-                                                    "speed" : 0, #10
+                                                    "speed" : 10,
                                                     "last_moved" : time.time(), 
                                                     "last_attacked" : time.time(), 
                                                     "blocked" : False, 
@@ -505,6 +560,8 @@ def Spawn(object, row, column, is_zombie):
     new = copycollection(object)
     if is_zombie:
         new["Settings"]["last_moved"] = time.time()
+        for i in range(len(new["image"]["animations"])):
+            new["image"]["animations"][i]["start"] = random.randint(0, 10000)
         rows[row]["Zombies"].append(new)
     else:
         settingp, imagp  = new["Settings"], new["image"]
@@ -513,7 +570,7 @@ def Spawn(object, row, column, is_zombie):
         rows[row]["Plants"][column] = new
         if settingp["name"] == "Cobcannon":
             rows[row]["Plants"][column - 1] = new
-
+        imagp["animation"]["start"] = random.randint(0, 10000)
 def Zombies(i, row):
     global rows
     
@@ -635,9 +692,7 @@ def Projectiles(i, row):
                 if imagp["name"] == "plants/projectiles/pea.png":
                     crossed = False
                     for c, plant in enumerate(row["Plants"]):
-                        if plant != None:
-                            print(plant["Settings"]["name"], (i, c), GetLocation(imagp["pos"]["x"], imagp["pos"]["y"]))
-                        if plant != None and plant["Settings"]["name"] == "Torchwood" and (c, i) == GetLocation(imagp["pos"]["x"], imagp["pos"]["y"]):
+                        if plant != None and plant["Settings"]["name"] == "Torchwood" and (c, i) == GetLocation(imagp["pos"]["x"], imagp["pos"]["y"] + imagp["size"]["y"]):
                             imagp["name"] = "plants/projectiles/firepea.png"
                             setting["damage"] *= 2
                 
@@ -678,7 +733,49 @@ def GetLocation(ax, ay):
                 return x, y
     return None, None
 
+# amplifier = 1 #Maybe hard waves run after every 3 easy waves
+# waves_completed = 0
+# easy_waves = [{"Football" : 5,
+#           "Basic" : 0,
+#           "Cone" : 0},
 
+#         {"Football" : 0,
+#           "Basic" : 5,
+#           "Cone" : 0},
+        
+#         {"Football" : 0,
+#           "Basic" : 0,
+#           "Cone" : 5}]
+# hard_waves = [{"Football" : 15,
+#           "Basic" : 0,
+#           "Cone" : 0},
+
+#         {"Football" : 0,
+#           "Basic" : 15,
+#           "Cone" : 0},
+        
+#         {"Football" : 0,
+#           "Basic" : 0,
+#           "Cone" : 15},
+        
+#         {"Football" : 5,
+#           "Basic" : 5,
+#           "Cone" : 5}] 
+
+wave = None
+wave_duration = 30
+spawn_cooldown = 1
+def StartWave():
+    global amplifier, waves_completed, easy_waves, hard_waves, wave, spawn_cooldown
+    is_hard = (waves_completed + 1)%4 == 0
+    wave = copycollection(hard_waves[random.randint(0, len(hard_waves) - 1)] if is_hard else easy_waves[random.randint(0, len(easy_waves) - 1)])
+    total_zombies = 0
+    for ky in wave:
+        wave[ky] *= amplifier
+        total_zombies += wave[ky]
+    print(wave, amplifier)
+    spawn_cooldown = (wave_duration + 0.0)/total_zombies
+StartWave() #You can rig this to a start button later on
 
 def setup():
     size(1000, 600)
@@ -693,18 +790,32 @@ projectile_removed = time.time()
 projectile_remove_cooldown = 10
 state = "title"
 
-
 def draw():
-    copy(loadImage("Lawn.png"), 0, 0, 1400, 600, 0, 0, 1400, 600)
-    
     global rows, cooldown, projectile_removed, plant_selected, state, s, yv, start_music, removing, mouse_presses, selector_x, selector_y
-    # if start_music <= time.time():    # if mousePressed:
-    #     PlaySound("game", ("minim", "repeat", "play_from_start", "isolate", "group"))   
+    copy(loadImage("Lawn.png"), 0, 0, 1400, 600, 0, 0, 1400, 600)
+    if start_music <= time.time():    # if mousePressed:
+        PlaySound("game", ("minim", "repeat", "play_from_start", "isolate", "group"))   
     
-    if time.time() >= cooldown:        
-        options = tuple(zombies.keys()) 
-        Spawn(zombies[options[random.randint(0, len(options) - 1)]], random.randint(4,4), None, True)
-        cooldown = time.time() + 5
+    global wave, spawn_cooldown, waves_completed, max_amplifier, amplifier
+    if wave != None and time.time() > cooldown:
+        kys = tuple(wave.keys())
+        for ky in kys:
+            if wave[ky] == 0:
+                wave.pop(ky)
+        kys = tuple(wave.keys())
+        if len(kys) <= 0:
+            waves_completed += 1
+            amplifier = min(max_amplifier, amplifier * amplifier_rate)
+            StartWave()
+        else:
+            cooldown = time.time() + spawn_cooldown
+            selected_type = kys[random.randint(0, len(kys) - 1)]
+            wave[selected_type] -= 1
+            Spawn(zombies[selected_type], random.randint(0,4), None, True)
+    # if time.time() >= cooldown:        
+    #     options = tuple(zombies.keys()) 
+    #     Spawn(zombies[options[random.randint(0, len(options) - 1)]], random.randint(4,4), None, True)
+    #     cooldown = time.time() + 5
 
     if time.time() >= projectile_removed + projectile_remove_cooldown:
         projectile_removed = time.time()
