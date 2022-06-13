@@ -6,7 +6,85 @@ column_pos = (80,183,279,385,467, 573) #The borders between rows from the very t
 row_pos = (251, 334, 408, 493, 576, 654, 738, 812, 898, 987) #The borders between columns from the very left to the very right
 rows = list([{"Plants" : [None for ii in range(len(row_pos) - 1)], "Projectiles" : [], "Zombies" : []} for i in range(len(column_pos) - 1)])
 
-zombies = {"Football" : {"image" : { "name" : "football", "size" : {"x" : 360, "y" : 203}, "pos" : {"x" : spawn_pos_x, "y" : 0}, "fill" : {"r" : 255, "g" : 255, "b" : 255, "a" : 255},
+amplifier = 1 #Maybe hard waves run after every 3 easy waves
+max_amplifier = 3
+amplifier_rate = 2#1.038609898 #will reach max_amplifier in 30 waves
+waves_completed = 0
+easy_waves = [{"Gargantuar" : 1}]
+              #{"Football" : 5,
+        #   "Basic" : 0,
+        #   "Cone" : 0,
+        #   "Gargantuar" : 5},
+
+        # {"Football" : 0,
+        #   "Basic" : 5,
+        #   "Cone" : 0,
+        #   "Gargantuar" : 5},
+        
+        # {"Football" : 0,
+        #   "Basic" : 0,
+        #   "Cone" : 5,
+        #   "Gargantuar" : 5}]
+hard_waves = easy_waves #[{"Football" : 15,
+#           "Basic" : 0,
+#           "Cone" : 0},
+
+#         {"Football" : 0,
+#           "Basic" : 15,
+#           "Cone" : 0},
+        
+#         {"Football" : 0,
+#           "Basic" : 0,
+#           "Cone" : 15},
+        
+#         {"Football" : 5,
+#           "Basic" : 5,
+#           "Cone" : 5}] 
+
+zombies = {"Zamboni" : {"image" : {"size" : {"x" : 185, "y" : 185}, "pos" : {"x" : spawn_pos_x + 185, "y" : 0}, "fill" : {"r" : 255, "g" : 255, "b" : 255, "a" : 255},
+                         "animations" : [{"file_index" : "zombies/zamboni/walk/(", 
+                        "file_type" : ").png", 
+                        "start" : 0,
+                        "total_frames" : 32, 
+                        "frame_duration" : 0.03}, 
+                                    
+                                            {"file_index" : "zombies/zamboni/walk/(",
+                                            "file_type" : ").png", 
+                                            "start" : 0,
+                                            "total_frames" : 32, 
+                                            "frame_duration" : 0.03},
+    
+                                            {"file_index" : "zombies/zamboni/died/(", 
+                                            "file_type" : ").png", 
+                                            "start" : 0,
+                                            "total_frames" : 20, 
+                                            "frame_duration" : 0.1}]},
+                        "Settings" : {"offset" : {"x" : 92, "y" : -25}, "speed" : 10, "last_moved" : time.time(), "last_attacked" : time.time(), "blocked" : False, "health" : 20, "dps" : 1000, "death_timer" : 1},
+                        }, 
+           
+           
+           "Gargantuar" : {"image" : {"size" : {"x" : 360, "y" : 203}, "pos" : {"x" : spawn_pos_x, "y" : 0}, "fill" : {"r" : 255, "g" : 255, "b" : 255, "a" : 255},
+                         "animations" : [{"file_index" : "zombies/gargantuar/walk/(", 
+                        "file_type" : ").png", 
+                        "start" : 0,
+                        "total_frames" : 196, 
+                        "frame_duration" : 0.09}, 
+                                    
+                                            {"file_index" : "zombies/gargantuar/eat/(",
+                                            "file_type" : ").png", 
+                                            "start" : 0,
+                                            "total_frames" : 48, 
+                                            "frame_duration" : 0.09},
+    
+                                            {"file_index" : "zombies/gargantuar/died/(", 
+                                            "file_type" : ").png", 
+                                            "start" : 0,
+                                            "total_frames" : 83, 
+                                            "frame_duration" : 0.09}]},
+                        "Settings" : {"offset" : {"x" : 150, "y" : -25}, "speed" : 5, "last_moved" : time.time(), "last_attacked" : time.time(), "blocked" : False, "health" : 20, "dps" : 232, "death_timer" : 1},
+                        }, 
+           
+           "Football" : {"image" : {"size" : {"x" : 360, "y" : 203}, "pos" : {"x" : spawn_pos_x, "y" : 0}, "fill" : {"r" : 255, "g" : 255, "b" : 255, "a" : 255},
                          "animations" : [{"file_index" : "zombies/football/walk/(", 
                         "file_type" : ").png", 
                         "start" : 0,
@@ -23,8 +101,8 @@ zombies = {"Football" : {"image" : { "name" : "football", "size" : {"x" : 360, "
                                             "file_type" : ").png", 
                                             "start" : 0,
                                             "total_frames" : 202, 
-                                            "frame_duration" : 0.04}]},#40
-                        "Settings" : {"offset" : {"x" : 150, "y" : 0}, "speed" : 0, "last_moved" : time.time(), "last_attacked" : time.time(), "blocked" : False, "health" : 20, "dps" : 3, "death_timer" : 1},
+                                            "frame_duration" : 0.04}]},
+                        "Settings" : {"offset" : {"x" : 150, "y" : 0}, "speed" : 40, "last_moved" : time.time(), "last_attacked" : time.time(), "blocked" : False, "health" : 20, "dps" : 3, "death_timer" : 1},
                         }, 
                          
                          
@@ -33,7 +111,6 @@ zombies = {"Football" : {"image" : { "name" : "football", "size" : {"x" : 360, "
                          
            
            "Basic" :  {"image" : {
-                                    "name" : "dancer",
                                     "size" : {"x" : 360, "y" : 203}, 
                                     "pos" : {"x" : spawn_pos_x, "y" : 0}, 
                                     "fill" : {"r" : 255, "g" : 255, "b" : 255, "a" : 255},
@@ -57,7 +134,7 @@ zombies = {"Football" : {"image" : { "name" : "football", "size" : {"x" : 360, "
                                                    "frame_duration" : 0.04}]
                                     },
                                     "Settings" : {"offset" : {"x" : 180, "y" : 0}, 
-                                                "speed" : 0, #10
+                                                "speed" : 10,
                                                 "last_moved" : time.time(), 
                                                 "last_attacked" : time.time(), 
                                                 "blocked" : False, 
@@ -68,7 +145,6 @@ zombies = {"Football" : {"image" : { "name" : "football", "size" : {"x" : 360, "
            
            
         "Cone" :  {"image" : {
-                                        "name" : "dancer",
                                         "size" : {"x" : 360, "y" : 203}, 
                                         "pos" : {"x" : spawn_pos_x, "y" : 0}, 
                                         "fill" : {"r" : 255, "g" : 255, "b" : 255, "a" : 255},
@@ -92,7 +168,7 @@ zombies = {"Football" : {"image" : { "name" : "football", "size" : {"x" : 360, "
                                                     "frame_duration" : 0.04}]
                                         },
                                         "Settings" : {"offset" : {"x" : 180, "y" : 0}, 
-                                                    "speed" : 0, #10
+                                                    "speed" : 10,
                                                     "last_moved" : time.time(), 
                                                     "last_attacked" : time.time(), 
                                                     "blocked" : False, 
@@ -143,33 +219,41 @@ plants = {"Wallnut" : {"image" : {"size" : {"x" : 148, "y" : 125},"pos" : {"x" :
                                      "pos" : {"x" : 0, "y" : 0},
                                      "fill" : {"r" : 255, "g" : 255, "b" : 255, "a" : 255}, 
                                      "animation" : {"file_index" : "plants/spikeweed/(", "file_type" : ").png", "start" : 0,"total_frames" : 38, "frame_duration" : 0.04}}, 
-                          "Settings" : {"offset" : {"x" : 0, "y" : -30}, "projectile_offset" : {"x" : 0, "y" : 0}, "reload_time" : 3, "amount" : 1, "health" : 5 }},
+                          "Settings" : {"offset" : {"x" : 0, "y" : -30}, "projectile_offset" : {"x" : 0, "y" : 0}, "reload_time" : 3, "amount" : 1, "health" : 1000 }},
           
           "Torchwood" : {
-                          "image" : {"size" : {"x" : 80, "y" : 107},
+                          "image" : {"size" : {"x" : 66, "y" : 90},
                                      "pos" : {"x" : 0, "y" : 0},
                                      "fill" : {"r" : 255, "g" : 255, "b" : 255, "a" : 255}, 
                                      "animation" : {"file_index" : "plants/torchwood/(", "file_type" : ").png", "start" : 0,"total_frames" : 82, "frame_duration" : 0.04}}, 
-                          "Settings" : {"offset" : {"x" : 0, "y" : -30}, "health" : 5 }},
+                          "Settings" : {"offset" : {"x" : -5, "y" : -30}, "health" : 5 }},
           
           "Spikerock" : {
                     "image" : {"size" : {"x" : 80, "y" : 34},
                                 "pos" : {"x" : 0, "y" : 0},
                                 "fill" : {"r" : 255, "g" : 255, "b" : 255, "a" : 255}, 
                                 "animation" : {"file_index" : "plants/spikerock/(", "file_type" : ").png", "start" : 0,"total_frames" : 33, "frame_duration" : 0.04}}, 
-                    "Settings" : {"offset" : {"x" : 0, "y" : -30}, "projectile_offset" : {"x" : 0, "y" : 0}, "reload_time" : 3, "amount" : 1, "health" : 5 }},
+                    "Settings" : {"offset" : {"x" : 0, "y" : -30}, "projectile_offset" : {"x" : 0, "y" : 0}, "reload_time" : 3, "amount" : 1, "health" : 8000 }},
           
           "Sunflower" : {
-                          "image" : {"size" : {"x" : 100, "y" : 106},
+                          "image" : {"size" : {"x" : 90, "y" : 95},
                                      "pos" : {"x" : 0, "y" : 0},
                                      "fill" : {"r" : 255, "g" : 255, "b" : 255, "a" : 255}, 
                                      "animation" : {"file_index" : "plants/sunflower/(", "file_type" : ").png", "start" : 0,"total_frames" : 54, "frame_duration" : 0.03}}, 
+                          "Settings" : {"offset" : {"x" : -5, "y" : -30}, "amount" : 1, "health" : 5}},
+          
+          "Twinsunflower" : {
+                          "image" : {"size" : {"x" : 83, "y" : 84},
+                                     "pos" : {"x" : 0, "y" : 0},
+                                     "fill" : {"r" : 255, "g" : 255, "b" : 255, "a" : 255}, 
+                                     "animation" : {"file_index" : "plants/twinsunflower/(", "file_type" : ").png", "start" : 0,"total_frames" : 20, "frame_duration" : 0.09}}, 
                           "Settings" : {"offset" : {"x" : 0, "y" : -30}, "amount" : 1, "health" : 5}}
         }
 
 for name in plants:
     plants[name]["Settings"]["name"] = name
-
+for name in zombies:
+    zombies[name]["Settings"]["name"] = name
 projectile_height = 700
 projectile_gravity = 98
 projectiles = {"pea" : {"image" : {"name" : "plants/projectiles/pea.png", "size" : {"x" : 21, "y" : 21}, "pos" : {"x" : 0, "y" : 0}},
@@ -223,7 +307,8 @@ sounds = {"tutorial" : {"minim" : "Cipher - Electronic Light.mp3", "repeat" : -1
           "intro" : {"minim" : "The_Zombies_Are_Coming.mp3", "repeat" : 1, "play_from_start" : True, "isolate" : True, "group" : 0}, 
           "menu" : {"minim" : "Crazy Dave Intro Theme.mp3", "repeat" : -1, "play_from_start" : True, "isolate" : True,"group" : 0}, 
           "game" : {"minim" : "Grasswalk (In-Game).mp3", "repeat" : -1, "play_from_start" : True, "isolate" : True, "group" : 0}, 
-          "game2" : {"minim" : "Plants vs Zombies Soundtrack [Mini Games].mp3", "repeat" : -1, "play_from_start" : True, "isolate" : True, "group" : 0}}
+          "game2" : {"minim" : "Plants vs Zombies Soundtrack [Mini Games].mp3", "repeat" : -1, "play_from_start" : True, "isolate" : True, "group" : 0},
+          "game3" : {"minim" : "Brainiac Maniac.mp3", "repeat" : -1, "play_from_start" : True, "isolate" : True, "group" : 0}}
 
 sound_kys = ("minim", "repeat", "play_from_start", "isolate", "group")
 def PlaySound(sound_name, enabled_keys):
@@ -282,6 +367,8 @@ def SELECTGATLINGPEA():
     SELECTPLANT("Gatlingpea")
 def SELECTSUNFLOWER():
     SELECTPLANT("Sunflower")
+def SELECTTWINSUNFLOWER():
+    SELECTPLANT("Twinsunflower")
 def SELECTWALLNUT():
     SELECTPLANT("Wallnut")
 def SELECTTORCHWOOD():
@@ -308,6 +395,17 @@ sidebar = [
                 "pos" : {"x" : 10, "y" : 160},
                 "fill" : {"r" : 255, "g" : 255, "b" : 255, "a" : 255}
     }},       
+    
+     {"button" : {
+    "mouse" : LEFT,
+    "function" : SELECTTWINSUNFLOWER,
+    "area" : {"pos" : {"x" : 10, "y" : 160}, "pos2" : {"x" : 116, "y" : 246}}},
+    
+    "image" : {"name" : "icons/twinsunflower.png",
+               "size" : {"x" : 106, "y" : 66},
+                "pos" : {"x" : 10, "y" : 160},
+                "fill" : {"r" : 255, "g" : 255, "b" : 255, "a" : 255}
+    }},     
     
            {"button" : {
     "mouse" : LEFT,
@@ -433,8 +531,7 @@ def SideBar(column_size, offset):
         else:
             for c in button["image"]["fill"].keys():
                 button["image"]["fill"][c] = 0
-    print(selector_x, selector_y)
-        
+
 shift = 0
 SideBar(bar_size, 0)
 def mouseWheel(event):
@@ -476,15 +573,18 @@ def mouseReleased():
         visible = object["image"]["fill"]["a"] > 0
         ReloadSelector(x, y, object["image"]["name"][6:len(object["image"]["name"]) - 4], visible)
 
-upgradable_plants = {"Gatlingpea" : "Repeater", "Spikerock" : "Spikeweed", "Cobcannon" : "Kernelpult"}
+upgradable_plants = {"Gatlingpea" : "Repeater", "Spikerock" : "Spikeweed", "Cobcannon" : "Kernelpult", "Twinsunflower" : "Sunflower"}
 can_place_cobcannon = lambda x, y: rows[y]["Plants"][x - 1]["Settings"]["name"] == "Kernelpult" if x - 1 > -1 and rows[y]["Plants"][x - 1] != None else False
 can_place = lambda x, y, type: rows[y]["Plants"][x] == None if not(type in upgradable_plants.keys()) else rows[y]["Plants"][x] != None and rows[y]["Plants"][x]["Settings"]["name"] == upgradable_plants[type] and (type != "Cobcannon" or can_place_cobcannon(x, y)) 
-                                                                                                            
+
+can_detect_plant = lambda settingz, target_plant : target_plant != None and (settingz["name"] == "Zamboni" or settingz["name"] == "Gargantuar" or (target_plant["Settings"]["name"] != "Spikerock" and target_plant["Settings"]["name"] != "Spikeweed"))                                                                                                                                                                            
 
 def Spawn(object, row, column, is_zombie):
     new = copycollection(object)
     if is_zombie:
         new["Settings"]["last_moved"] = time.time()
+        for i in range(len(new["image"]["animations"])):
+            new["image"]["animations"][i]["start"] = random.randint(0, 10000)
         rows[row]["Zombies"].append(new)
     else:
         settingp, imagp  = new["Settings"], new["image"]
@@ -493,7 +593,7 @@ def Spawn(object, row, column, is_zombie):
         rows[row]["Plants"][column] = new
         if settingp["name"] == "Cobcannon":
             rows[row]["Plants"][column - 1] = new
-
+        imagp["animation"]["start"] = random.randint(0, 10000)
 def Zombies(i, row):
     global rows
     
@@ -505,30 +605,37 @@ def Zombies(i, row):
             x, y = GetLocation(imagz["pos"]["x"] + settingz["offset"]["x"], imagz["pos"]["y"] + imagz["size"]["y"]/1.4) #x + 1 so the zombie target plants infront and in the current tile
 
             target_plant = None if x == None or y == None else rows[y]["Plants"][x]
-            if target_plant != None and (target_plant["Settings"]["name"] == "Spikerock" or target_plant["Settings"]["name"] == "Spikeweed"):
+            if not(can_detect_plant(settingz, target_plant)):
                 target_plant = None
                 
             if target_plant == None:
                 targest_plant = None if x == None or y == None or x + 1 >= len(rows[y]["Plants"]) else rows[y]["Plants"][x + 1]
 
-            if target_plant != None and (target_plant["Settings"]["name"] == "Spikerock" or target_plant["Settings"]["name"] == "Spikeweed"):
+            if not(can_detect_plant(settingz, target_plant)):
                 target_plant = None
             
-            settingz["blocked"] = True if target_plant != None else False
-            if settingz["health"] > 0:
+            
                 
-                            
+            if settingz["health"] > 0:    
                 if target_plant != None:
-                    target_plant["Settings"]["health"] -= (time.time() - settingz["last_attacked"]) * settingz["dps"]
+                    special_damage = settingz["name"] == "Zamboni" and (target_plant["Settings"]["name"] == "Spikeweed" or target_plant["Settings"]["name"] == "Spikerock")
+                    if special_damage:
+                        settingz["health"] = 0
+                        target_plant["Settings"]["health"] -= settingz["dps"]
+                    else:
+                        target_plant["Settings"]["health"] -= (time.time() - settingz["last_attacked"]) * settingz["dps"]
                     if target_plant["Settings"]["health"] <= 0:
                         rows[y]["Plants"][x] = None
-                
+                        
+                settingz["blocked"] = True if target_plant != None else False
                 if not(settingz["blocked"]):
                     imagz["pos"]["x"] -= settingz["speed"] * elapsed        
                     imagz["animation_selected"] = 0
                 else:
                     imagz["animation_selected"] = 1
-            else:
+            
+                
+            if settingz["health"] <= 0:
                 imagz["animation_selected"] = 2
                 if settingz["health"] <= 0 and settingz["death_timer"] == 1:
                     imagz["animations"][2]["start"] = time.time()
@@ -615,9 +722,7 @@ def Projectiles(i, row):
                 if imagp["name"] == "plants/projectiles/pea.png":
                     crossed = False
                     for c, plant in enumerate(row["Plants"]):
-                        if plant != None:
-                            print(plant["Settings"]["name"], (i, c), GetLocation(imagp["pos"]["x"], imagp["pos"]["y"]))
-                        if plant != None and plant["Settings"]["name"] == "Torchwood" and (c, i) == GetLocation(imagp["pos"]["x"], imagp["pos"]["y"]):
+                        if plant != None and plant["Settings"]["name"] == "Torchwood" and (c, i) == GetLocation(imagp["pos"]["x"], imagp["pos"]["y"] + imagp["size"]["y"]):
                             imagp["name"] = "plants/projectiles/firepea.png"
                             setting["damage"] *= 2
                 
@@ -658,7 +763,48 @@ def GetLocation(ax, ay):
                 return x, y
     return None, None
 
+# amplifier = 1 #Maybe hard waves run after every 3 easy waves
+# waves_completed = 0
+# easy_waves = [{"Football" : 5,
+#           "Basic" : 0,
+#           "Cone" : 0},
 
+#         {"Football" : 0,
+#           "Basic" : 5,
+#           "Cone" : 0},
+        
+#         {"Football" : 0,
+#           "Basic" : 0,
+#           "Cone" : 5}]
+# hard_waves = [{"Football" : 15,
+#           "Basic" : 0,
+#           "Cone" : 0},
+
+#         {"Football" : 0,
+#           "Basic" : 15,
+#           "Cone" : 0},
+        
+#         {"Football" : 0,
+#           "Basic" : 0,
+#           "Cone" : 15},
+        
+#         {"Football" : 5,
+#           "Basic" : 5,
+#           "Cone" : 5}] 
+
+wave = None
+wave_duration = 10#30
+spawn_cooldown = 1
+def StartWave():
+    global amplifier, waves_completed, easy_waves, hard_waves, wave, spawn_cooldown
+    is_hard = (waves_completed + 1)%4 == 0
+    wave = copycollection(hard_waves[random.randint(0, len(hard_waves) - 1)] if is_hard else easy_waves[random.randint(0, len(easy_waves) - 1)])
+    total_zombies = 0
+    for ky in wave:
+        wave[ky] *= amplifier
+        total_zombies += wave[ky]
+    spawn_cooldown = (wave_duration + 0.0)/total_zombies
+StartWave() #You can rig this to a start button later on
 
 def setup():
     size(1000, 600)
@@ -673,18 +819,33 @@ projectile_removed = time.time()
 projectile_remove_cooldown = 10
 state = "title"
 
-
 def draw():
-    copy(loadImage("Lawn.png"), 0, 0, 1400, 600, 0, 0, 1400, 600)
-    
     global rows, cooldown, projectile_removed, plant_selected, state, s, yv, start_music, removing, mouse_presses, selector_x, selector_y
-    # if start_music <= time.time():    # if mousePressed:
-    #     PlaySound("game", ("minim", "repeat", "play_from_start", "isolate", "group"))   
+    copy(loadImage("Lawn.png"), 0, 0, 1400, 600, 0, 0, 1400, 600)
+    if start_music <= time.time():    # if mousePressed:
+        PlaySound("game3", ("minim", "repeat", "play_from_start", "isolate", "group"))   
     
-    if time.time() >= cooldown:        
-        options = tuple(zombies.keys()) 
-        Spawn(zombies[options[random.randint(0, len(options) - 1)]], random.randint(4,4), None, True)
-        cooldown = time.time() + 5
+    global wave, spawn_cooldown, waves_completed, max_amplifier, amplifier
+    if wave != None and time.time() > cooldown:
+        kys = tuple(wave.keys())
+        for ky in kys:
+            if wave[ky] == 0:
+                wave.pop(ky)
+        kys = tuple(wave.keys())
+        #print(wave)
+        if len(kys) <= 0:
+            waves_completed += 1
+            amplifier = min(max_amplifier, amplifier * amplifier_rate)
+            StartWave()
+        else:
+            cooldown = time.time() + spawn_cooldown
+            selected_type = kys[random.randint(0, len(kys) - 1)]
+            wave[selected_type] -= 1
+            Spawn(zombies[selected_type], random.randint(0,4), None, True)
+    # if time.time() >= cooldown:        
+    #     options = tuple(zombies.keys()) 
+    #     Spawn(zombies[options[random.randint(0, len(options) - 1)]], random.randint(4,4), None, True)
+    #     cooldown = time.time() + 5
 
     if time.time() >= projectile_removed + projectile_remove_cooldown:
         projectile_removed = time.time()
@@ -708,7 +869,6 @@ def draw():
         image(loadImage("selector.png"), selector_x, selector_y, 106, 66)
     x, y = GetLocation(mouseX, mouseY)
     if x != None and y != None:
-        #print(mouseX, mouseY, x, y, rows[y]["Plants"][x], rows[4]["Plants"])
         noStroke()
         fill(255, 255, 255, 125)
         rect(row_pos[x], column_pos[y], row_pos[x + 1] - row_pos[x], column_pos[y + 1] - column_pos[y])
