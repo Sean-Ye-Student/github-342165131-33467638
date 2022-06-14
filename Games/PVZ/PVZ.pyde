@@ -61,7 +61,7 @@ zombies = {"Zamboni" : {"image" : {"size" : {"x" : 185, "y" : 185}, "pos" : {"x"
                                             "start" : 0,
                                             "total_frames" : 20, 
                                             "frame_duration" : 0.1}]},
-                        "Settings" : {"offset" : {"x" : 92, "y" : -25}, "ground_offset" : -14, "speed" : 10, "last_moved" : time.time(), "last_attacked" : time.time(), "blocked" : False, "health" : 20, "dps" : 1000, "death_timer" : 1},
+                        "Settings" : {"offset" : {"x" : 92, "y" : -25}, "ground_offset" : -14, "speed" : 10, "last_moved" : time.time(), "last_attacked" : time.time(), "blocked" : False, "health" : 1350, "dps" : 1000, "death_timer" : 1},
                         }, 
            
            
@@ -83,7 +83,7 @@ zombies = {"Zamboni" : {"image" : {"size" : {"x" : 185, "y" : 185}, "pos" : {"x"
                                             "start" : 0,
                                             "total_frames" : 83, 
                                             "frame_duration" : 0.09}]},
-                        "Settings" : {"offset" : {"x" : 150, "y" : -25}, "ground_offset" : -30, "speed" : 5, "last_moved" : time.time(), "last_attacked" : time.time(), "blocked" : False, "health" : 20, "dps" : 232, "death_timer" : 1},
+                        "Settings" : {"offset" : {"x" : 150, "y" : -25}, "ground_offset" : -30, "speed" : 5, "last_moved" : time.time(), "last_attacked" : time.time(), "blocked" : False, "health" : 2800, "dps" : 232, "death_timer" : 1},
                         }, 
            
            "Football" : {"image" : {"size" : {"x" : 360, "y" : 203}, "pos" : {"x" : spawn_pos_x, "y" : 0}, "fill" : {"r" : 255, "g" : 255, "b" : 255, "a" : 255},
@@ -104,7 +104,7 @@ zombies = {"Zamboni" : {"image" : {"size" : {"x" : 185, "y" : 185}, "pos" : {"x"
                                             "start" : 0,
                                             "total_frames" : 202, 
                                             "frame_duration" : 0.04}]},
-                        "Settings" : {"offset" : {"x" : 150, "y" : 0}, "ground_offset" : -90, "speed" : 40, "last_moved" : time.time(), "last_attacked" : time.time(), "blocked" : False, "health" : 20, "dps" : 3, "death_timer" : 1},
+                        "Settings" : {"offset" : {"x" : 150, "y" : 0}, "ground_offset" : -90, "speed" : 40, "last_moved" : time.time(), "last_attacked" : time.time(), "blocked" : False, "health" : 1670, "dps" : 3, "death_timer" : 1},
                         }, 
             "Bucket" :  {"image" : {
                                     "size" : {"x" : 360, "y" : 203}, 
@@ -136,7 +136,7 @@ zombies = {"Zamboni" : {"image" : {"size" : {"x" : 185, "y" : 185}, "pos" : {"x"
                                                 "last_moved" : time.time(), 
                                                 "last_attacked" : time.time(), 
                                                 "blocked" : False, 
-                                                "health" : 1, #200,
+                                                "health" : 1370,
                                                 "dps" : 1,
                                                 "death_timer" : 1}
            },
@@ -170,7 +170,7 @@ zombies = {"Zamboni" : {"image" : {"size" : {"x" : 185, "y" : 185}, "pos" : {"x"
                                             "last_moved" : time.time(), 
                                             "last_attacked" : time.time(), 
                                             "blocked" : False, 
-                                            "health" : 1, #200,
+                                            "health" : 1370,
                                             "dps" : 1,
                                             "death_timer" : 1}
             },
@@ -207,7 +207,7 @@ zombies = {"Zamboni" : {"image" : {"size" : {"x" : 185, "y" : 185}, "pos" : {"x"
                                 "last_moved" : time.time(), 
                                 "last_attacked" : time.time(), 
                                 "blocked" : False, 
-                                "health" : 1, #200,
+                                "health" : 200,
                                 "dps" : 1,
                                 "death_timer" : 1}
         },
@@ -242,7 +242,7 @@ zombies = {"Zamboni" : {"image" : {"size" : {"x" : 185, "y" : 185}, "pos" : {"x"
                                                     "last_moved" : time.time(), 
                                                     "last_attacked" : time.time(), 
                                                     "blocked" : False, 
-                                                    "health" : 1, #640,
+                                                    "health" : 640,
                                                     "dps" : 1,
                                                     "death_timer" : 1}
             },
@@ -326,21 +326,11 @@ for name in zombies:
     zombies[name]["Settings"]["name"] = name
 projectile_height = 700
 projectile_gravity = 98
-projectiles = {"pea" : {"image" : {"name" : "plants/projectiles/pea.png", "size" : {"x" : 21, "y" : 21}, "pos" : {"x" : 0, "y" : 0}},
-                    "Settings" : {"offset" : {"x" : 65, "y" : 30}, "start_x" : 0, "start" : time.time(), "speed" : 150, "damage" : 20, "is_projectile" : False}},
-
-                "lawnmower" : {"image" : {"name" : "Lawn Mower.png", "size" : {"x" : 80, "y" : 68}, "pos" : {"x" : 0, "y" : 0}},
-                    "Settings" : {"offset" : {"x" : 0, "y" : 0}, "start_x" : 0, "start" : time.time(), "speed" : 250, "damage" : 69420, "is_projectile" : False}},
-                "kernel" : {"image" : {"name" : "plants/projectiles/kernel.png", "size" : {"x" : 21, "y" : 22}, "pos" : {"x" : 0, "y" : 0}},
-                    "Settings" : {"offset" : {"x" : 0, "y" : 0}, "velocity" : {"x" : 0, "y" : 0}, "start_x" : 0, "start" : time.time(), "damage" : 20, "is_projectile" : True, "target" : {"x" : 0, "y" : 0}}},
-                
-                "butter" : {"image" : {"name" : "plants/projectiles/butter.png", "size" : {"x" : 49, "y" : 50}, "pos" : {"x" : 0, "y" : 0}},
-                    "Settings" : {"offset" : {"x" : 0, "y" : 0}, "velocity" : {"x" : 0, "y" : 0}, "start_x" : 0, "start" : time.time(), "damage" : 40, "is_projectile" : True, "target" : {"x" : 0, "y" : 0}}},
-                
-                "cob" : {"image" : {"name" : "plants/projectiles/cob.png", "size" : {"x" : 107, "y" : 50}, "pos" : {"x" : 0, "y" : 0}},
-                    "Settings" : {"offset" : {"x" : 200, "y" : 0}, "velocity" : {"x" : 0, "y" : 0}, "start_x" : 0, "start_y" : 0, "start_velocity_y" : 0,  "start" : time.time(), "damage" : 20, "is_projectile" : True, "target" : {"x" : 0, "y" : 0}}}
-                
-}
+projectiles = {"pea" : {"image" : {"name" : "plants/projectiles/pea.png", "size" : {"x" : 21, "y" : 21}, "pos" : {"x" : 0, "y" : 0}}, "Settings" : {"offset" : {"x" : 65, "y" : 30}, "start_x" : 0, "start" : time.time(), "speed" : 150, "damage" : 20, "is_projectile" : False}},
+               "lawnmower" : {"image" : {"name" : "Lawn Mower.png", "size" : {"x" : 80, "y" : 68}, "pos" : {"x" : 0, "y" : 0}}, "Settings" : {"offset" : {"x" : 0, "y" : 0}, "start_x" : 0, "start" : time.time(), "speed" : 250, "damage" : 69420, "is_projectile" : False}},
+               "kernel" : {"image" : {"name" : "plants/projectiles/kernel.png", "size" : {"x" : 21, "y" : 22}, "pos" : {"x" : 0, "y" : 0}}, "Settings" : {"offset" : {"x" : 0, "y" : 0}, "velocity" : {"x" : 0, "y" : 0}, "start_x" : 0, "start" : time.time(), "damage" : 20, "is_projectile" : True, "target" : {"x" : 0, "y" : 0}}},
+               "butter" : {"image" : {"name" : "plants/projectiles/butter.png", "size" : {"x" : 49, "y" : 50}, "pos" : {"x" : 0, "y" : 0}}, "Settings" : {"offset" : {"x" : 0, "y" : 0}, "velocity" : {"x" : 0, "y" : 0}, "start_x" : 0, "start" : time.time(), "damage" : 40, "is_projectile" : True, "target" : {"x" : 0, "y" : 0}}},
+               "cob" : {"image" : {"name" : "plants/projectiles/cob.png", "size" : {"x" : 107, "y" : 50}, "pos" : {"x" : 0, "y" : 0}}, "Settings" : {"offset" : {"x" : 200, "y" : 0}, "velocity" : {"x" : 0, "y" : 0}, "start_x" : 0, "start_y" : 0, "start_velocity_y" : 0,  "start" : time.time(), "damage" : 20, "is_projectile" : True, "target" : {"x" : 0, "y" : 0}}}}
 
 types = (type([]), type({}))
 def copycollection(coll):
@@ -378,9 +368,10 @@ def RENDERIMAGE(object, enabled_keys): #object is a dictionary, enabled_keys is 
 
 sounds = {"tutorial" : {"minim" : "Cipher - Electronic Light.mp3", "repeat" : -1, "play_from_start" : True, "isolate" : True, "group" : 0}, 
           "intro" : {"minim" : "The_Zombies_Are_Coming.mp3", "repeat" : 1, "play_from_start" : True, "isolate" : True, "group" : 0}, 
+          "seed" : {"minim" : "Choose Your Seeds.mp3", "repeat" : 1, "play_from_start" : True, "isolate" : True, "group" : 0}, 
           "menu" : {"minim" : "Crazy Dave Intro Theme.mp3", "repeat" : -1, "play_from_start" : True, "isolate" : True,"group" : 0}, 
           "gameover" : {"minim" : "The Zombies Ate Your Brains.mp3", "repeat" : 0, "play_from_start" : True, "isolate" : True, "group" : 0}, 
-          "grasswalk" : {"minim" : "Grasswalk (In-Game).mp3", "repeat" : -1, "play_from_start" : True, "isolate" : True, "group" : 0}, 
+          "grass" : {"minim" : "Grasswalk (In-Game).mp3", "repeat" : -1, "play_from_start" : True, "isolate" : True, "group" : 0}, 
           "fast" : {"minim" : "Plants vs Zombies Soundtrack [Mini Games].mp3", "repeat" : -1, "play_from_start" : True, "isolate" : True, "group" : 0},
           "brain" : {"minim" : "Brainiac Maniac.mp3", "repeat" : -1, "play_from_start" : True, "isolate" : True, "group" : 0},
           "moon" : {"minim" : "Moongrains.mp3", "repeat" : -1, "play_from_start" : True, "isolate" : True, "group" : 0}}
@@ -461,127 +452,17 @@ def SELECTCOBCANNON():
 list_x, list_y, list_y_increment = 10, 30, 80
 
 sidebar = [
-    {"button" : {
-    "mouse" : LEFT,
-    "function" : SELECTSUNFLOWER,
-    "area" : {"pos" : {"x" : 10, "y" : 160}, "pos2" : {"x" : 116, "y" : 246}}},
-    
-    "image" : {"name" : "icons/sunflower.png",
-               "size" : {"x" : 106, "y" : 66},
-                "pos" : {"x" : 10, "y" : 160},
-                "fill" : {"r" : 255, "g" : 255, "b" : 255, "a" : 255}
-    }},       
-    
-     {"button" : {
-    "mouse" : LEFT,
-    "function" : SELECTTWINSUNFLOWER,
-    "area" : {"pos" : {"x" : 10, "y" : 160}, "pos2" : {"x" : 116, "y" : 246}}},
-    
-    "image" : {"name" : "icons/twinsunflower.png",
-               "size" : {"x" : 106, "y" : 66},
-                "pos" : {"x" : 10, "y" : 160},
-                "fill" : {"r" : 255, "g" : 255, "b" : 255, "a" : 255}
-    }},     
-    
-           {"button" : {
-    "mouse" : LEFT,
-    "function" : SELECTPEASHOOTER,
-    "area" : {"pos" : {"x" : 10, "y" : 0}, "pos2" : {"x" : 116, "y" : 66}}},
-    
-    "image" : {"name" : "icons/peashooter.png",
-               "size" : {"x" : 106, "y" : 66},
-                "pos" : {"x" : 100000, "y" : 0},
-                "fill" : {"r" : 255, "g" : 255, "b" : 255, "a" : 255}
-    }},
-           
-            {"button" : {
-    "mouse" : LEFT,
-    "function" : SELECTREPEATER,
-    "area" : {"pos" : {"x" : 10, "y" : 0}, "pos2" : {"x" : 116, "y" : 66}}},
-    
-    "image" : {"name" : "icons/repeater.png",
-               "size" : {"x" : 106, "y" : 66},
-                "pos" : {"x" : 100000, "y" : 0},
-                "fill" : {"r" : 255, "g" : 255, "b" : 255, "a" : 255}
-    }},
-            
-    {"button" : {
-    "mouse" : LEFT,
-    "function" : SELECTGATLINGPEA,
-    "area" : {"pos" : {"x" : 10, "y" : 0}, "pos2" : {"x" : 116, "y" : 66}}},
-    
-    "image" : {"name" : "icons/gatlingpea.png",
-               "size" : {"x" : 106, "y" : 66},
-                "pos" : {"x" : 100000, "y" : 0},
-                "fill" : {"r" : 255, "g" : 255, "b" : 255, "a" : 255}
-    }},
-           
-      {"button" : {
-    "mouse" : LEFT,
-    "function" : SELECTWALLNUT,
-    "area" : {"pos" : {"x" : 10, "y" : 80}, "pos2" : {"x" : 116, "y" : 146}}},
-    
-    "image" : {"name" : "icons/wallnut.png",
-               "size" : {"x" : 106, "y" : 66},
-                "pos" : {"x" : 10, "y" : 80},
-                "fill" : {"r" : 255, "g" : 255, "b" : 255, "a" : 255}
-    }},
-    
-    {"button" : {
-    "mouse" : LEFT,
-    "function" : SELECTTORCHWOOD,
-    "area" : {"pos" : {"x" : 10, "y" : 160}, "pos2" : {"x" : 116, "y" : 246}}},
-    
-    "image" : {"name" : "icons/torchwood.png",
-               "size" : {"x" : 106, "y" : 66},
-                "pos" : {"x" : 10, "y" : 160},
-                "fill" : {"r" : 255, "g" : 255, "b" : 255, "a" : 255}
-    }},
-    
-     {"button" : {
-    "mouse" : LEFT,
-    "function" : SELECTSPIKEWEED,
-    "area" : {"pos" : {"x" : 10, "y" : 240}, "pos2" : {"x" : 116, "y" : 306}}},
-    
-    "image" : {"name" : "icons/spikeweed.png",
-               "size" : {"x" : 106, "y" : 66},
-                "pos" : {"x" : 10, "y" : 240},
-                "fill" : {"r" : 255, "g" : 255, "b" : 255, "a" : 255}
-    }},
-     
-     {"button" : {
-    "mouse" : LEFT,
-    "function" : SELECTSPIKEROCK,
-    "area" : {"pos" : {"x" : 10, "y" : 240}, "pos2" : {"x" : 116, "y" : 306}}},
-    
-    "image" : {"name" : "icons/spikerock.png",
-               "size" : {"x" : 106, "y" : 66},
-                "pos" : {"x" : 10, "y" : 240},
-                "fill" : {"r" : 255, "g" : 255, "b" : 255, "a" : 255}
-    }},
-     
-     {"button" : {
-    "mouse" : LEFT,
-    "function" : SELECTKERNELPULT,
-    "area" : {"pos" : {"x" : 10, "y" : 240}, "pos2" : {"x" : 116, "y" : 306}}},
-    
-    "image" : {"name" : "icons/kernelpult.png",
-               "size" : {"x" : 106, "y" : 66},
-                "pos" : {"x" : 10, "y" : 240},
-                "fill" : {"r" : 255, "g" : 255, "b" : 255, "a" : 255}
-    }},
-     
-    {"button" : {
-    "mouse" : LEFT,
-    "function" : SELECTCOBCANNON,
-    "area" : {"pos" : {"x" : 10, "y" : 320}, "pos2" : {"x" : 116, "y" : 386}}},
-    
-    "image" : {"name" : "icons/cobcannon.png",
-               "size" : {"x" : 106, "y" : 66},
-                "pos" : {"x" : 10, "y" : 320},
-                "fill" : {"r" : 255, "g" : 255, "b" : 255, "a" : 255}
-    }}
-           ]
+    {"button" : {"mouse" : LEFT, "function" : SELECTSUNFLOWER, "area" : {"pos" : {"x" : 10, "y" : 160}, "pos2" : {"x" : 116, "y" : 246}}}, "image" : {"name" : "icons/sunflower.png", "size" : {"x" : 106, "y" : 66}, "pos" : {"x" : 10, "y" : 160}, "fill" : {"r" : 255, "g" : 255, "b" : 255, "a" : 255}}},       
+    {"button" : {"mouse" : LEFT, "function" : SELECTTWINSUNFLOWER, "area" : {"pos" : {"x" : 10, "y" : 160}, "pos2" : {"x" : 116, "y" : 246}}}, "image" : {"name" : "icons/twinsunflower.png", "size" : {"x" : 106, "y" : 66}, "pos" : {"x" : 10, "y" : 160}, "fill" : {"r" : 255, "g" : 255, "b" : 255, "a" : 255}}},     
+    {"button" : {"mouse" : LEFT, "function" : SELECTPEASHOOTER, "area" : {"pos" : {"x" : 10, "y" : 0}, "pos2" : {"x" : 116, "y" : 66}}}, "image" : {"name" : "icons/peashooter.png", "size" : {"x" : 106, "y" : 66}, "pos" : {"x" : 100000, "y" : 0}, "fill" : {"r" : 255, "g" : 255, "b" : 255, "a" : 255}}},    
+    {"button" : {"mouse" : LEFT, "function" : SELECTREPEATER, "area" : {"pos" : {"x" : 10, "y" : 0}, "pos2" : {"x" : 116, "y" : 66}}}, "image" : {"name" : "icons/repeater.png", "size" : {"x" : 106, "y" : 66}, "pos" : {"x" : 100000, "y" : 0}, "fill" : {"r" : 255, "g" : 255, "b" : 255, "a" : 255}}},
+    {"button" : {"mouse" : LEFT, "function" : SELECTGATLINGPEA, "area" : {"pos" : {"x" : 10, "y" : 0}, "pos2" : {"x" : 116, "y" : 66}}}, "image" : {"name" : "icons/gatlingpea.png", "size" : {"x" : 106, "y" : 66}, "pos" : {"x" : 100000, "y" : 0}, "fill" : {"r" : 255, "g" : 255, "b" : 255, "a" : 255}}},
+    {"button" : {"mouse" : LEFT, "function" : SELECTWALLNUT, "area" : {"pos" : {"x" : 10, "y" : 80}, "pos2" : {"x" : 116, "y" : 146}}}, "image" : {"name" : "icons/wallnut.png", "size" : {"x" : 106, "y" : 66}, "pos" : {"x" : 10, "y" : 80}, "fill" : {"r" : 255, "g" : 255, "b" : 255, "a" : 255}}},
+    {"button" : {"mouse" : LEFT, "function" : SELECTTORCHWOOD,"area" : {"pos" : {"x" : 10, "y" : 160}, "pos2" : {"x" : 116, "y" : 246}}}, "image" : {"name" : "icons/torchwood.png", "size" : {"x" : 106, "y" : 66}, "pos" : {"x" : 10, "y" : 160}, "fill" : {"r" : 255, "g" : 255, "b" : 255, "a" : 255}}},
+    {"button" : {"mouse" : LEFT, "function" : SELECTSPIKEWEED, "area" : {"pos" : {"x" : 10, "y" : 240}, "pos2" : {"x" : 116, "y" : 306}}}, "image" : {"name" : "icons/spikeweed.png", "size" : {"x" : 106, "y" : 66}, "pos" : {"x" : 10, "y" : 240}, "fill" : {"r" : 255, "g" : 255, "b" : 255, "a" : 255}}},
+    {"button" : {"mouse" : LEFT, "function" : SELECTSPIKEROCK, "area" : {"pos" : {"x" : 10, "y" : 240}, "pos2" : {"x" : 116, "y" : 306}}}, "image" : {"name" : "icons/spikerock.png", "size" : {"x" : 106, "y" : 66}, "pos" : {"x" : 10, "y" : 240}, "fill" : {"r" : 255, "g" : 255, "b" : 255, "a" : 255}}},
+    {"button" : {"mouse" : LEFT, "function" : SELECTKERNELPULT, "area" : {"pos" : {"x" : 10, "y" : 240}, "pos2" : {"x" : 116, "y" : 306}}},"image" : {"name" : "icons/kernelpult.png","size" : {"x" : 106, "y" : 66},"pos" : {"x" : 10, "y" : 240},"fill" : {"r" : 255, "g" : 255, "b" : 255, "a" : 255}}},
+    {"button" : {"mouse" : LEFT, "function" : SELECTCOBCANNON, "area" : {"pos" : {"x" : 10, "y" : 320}, "pos2" : {"x" : 116, "y" : 386}}}, "image" : {"name" : "icons/cobcannon.png","size" : {"x" : 106, "y" : 66},"pos" : {"x" : 10, "y" : 320},"fill" : {"r" : 255, "g" : 255, "b" : 255, "a" : 255}}}]
 bar_size = 7
 selector_x, selector_y, is_selected = -10000, -10000, False
 def ReloadSelector(x, y, name, visible):
@@ -633,7 +514,6 @@ def TriggerButtonPress(object):
 
 mouse_presses = 0
 def mousePressed():
-
     for object in buttons:
         TriggerButtonPress(object)
     for object in sidebar:
@@ -771,9 +651,9 @@ def Plants(i, row):
                 rows[i]["Projectiles"].append(new_projectile)
             
             RENDERIMAGE(plant, ("animation", "pos", "size", "fill"))
-
+instakill = False
 def Projectiles(i, row):
-    global rows
+    global rows, instakill
     remove_indexes = []
     angle = 0
     for ii, projectile in enumerate(row["Projectiles"]):
@@ -823,7 +703,7 @@ def Projectiles(i, row):
                     if not(already_removed):
                         
                         remove_indexes.append(ii)
-                    closest_setting["health"] -= setting["damage"]
+                    closest_setting["health"] -= setting["damage"] if not(instakill) else 69420
                     
             if not(already_removed):
                 RENDERIMAGE(projectile, ("name", "size", "pos" if not(setting["is_projectile"]) else ""))
@@ -843,7 +723,7 @@ def Projectiles(i, row):
 transition_time = 9
 
 def Restart():
-    global rows, gameover, played_gameover_sound, amplifier, waves_completed, ice, mowers_left, last_melted
+    global rows, gameover, played_gameover_sound, amplifier, waves_completed, ice, mowers_left, last_melted, continue_wave
     gameover = False
     played_gameover_sound = False
     
@@ -854,7 +734,7 @@ def Restart():
     mowers_left = [True for i in range(len(column_pos))]
     ice = [10**16 for _ in range(len(column_pos) - 1)]
     rows = list([{"Plants" : [None for ii in range(len(row_pos) - 1)], "Projectiles" : [], "Zombies" : []} for i in range(len(column_pos) - 1)])
-    
+    continue_wave = False
 Restart()
 def Gameover():
     global gameover, transition_time, played_gameover_sound
@@ -950,7 +830,7 @@ projectile_remove_cooldown = 10
 state = "title"
 
 def draw():
-    global rows, cooldown, projectile_removed, plant_selected, state, s, yv, start_music, removing, mouse_presses, selector_x, selector_y, gameover, wave
+    global rows, cooldown, projectile_removed, plant_selected, is_selected, state, s, yv, start_music, removing, mouse_presses, selector_x, selector_y, gameover, wave
     copy(loadImage("Lawn.png" if wave == None or wave["sound"] != "moon" else "LawnNight.png"), 0, 0, 1400, 600, 0, 0, 1400, 600)
     tint(255, 255, 255, 255)
     Ice() 
@@ -965,27 +845,41 @@ def draw():
     for object in buttons:
         RENDERIMAGE(object, ("name", "fill", "size", "pos"))   
     
-   
+    if plant_selected != None and is_selected:
+        image(loadImage("selector.png"), selector_x, selector_y, 106, 66)
     
     if gameover > 0:
         Gameover()
         return    
     
-    global spawn_cooldown, waves_completed, max_amplifier, amplifier, start_wave
-    print(start_wave <= time.time(), wave if wave != None else None, waves_completed)
+    global spawn_cooldown, waves_completed, max_amplifier, amplifier, start_wave, continue_wave
+    print(start_wave <= time.time(), wave if wave != None else None, waves_completed, continue_wave)
+    if continue_wave:
+        PlaySound("seed", ("minim", "repeat", "play_from_start", "isolate", "group"))      
+        if keyPressed and key == "c":
+            continue_wave = False
+            waves_completed += 1
+            amplifier = min(max_amplifier, amplifier * amplifier_rate)
+            StartWave()
+        return
+    
     if start_wave != -1 and start_wave <= time.time() and wave != None and time.time() > cooldown:
         PlaySound(wave["sound"], ("minim", "repeat", "play_from_start", "isolate", "group"))      
         kys = list(wave.keys())
+        kys.remove("sound")
         for ky in kys:
             if int(wave[ky]) <= 0:
                 wave.pop(ky)
         kys = list(wave.keys())
         kys.remove("sound")
-
         if len(kys) <= 0:
-            waves_completed += 1
-            amplifier = min(max_amplifier, amplifier * amplifier_rate)
-            StartWave()
+            no_zombies = True
+            for row in rows:
+                if len(row["Zombies"]) > 0:
+                    no_zombies = False
+                    break
+                
+            continue_wave = no_zombies
         else:
             cooldown = time.time() + spawn_cooldown
             selected_type = kys[random.randint(0, len(kys) - 1)]
