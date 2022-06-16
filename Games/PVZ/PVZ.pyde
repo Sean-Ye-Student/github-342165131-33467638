@@ -10,10 +10,10 @@ melt_rate = -3
 max_amplifier = 5
 amplifier_rate = 5**(1.0/30.0) #1.055#will reach max_amplifier in 30 waves
 
-easy_waves = [{"sound" : "moon", "Bucket" : 5, "Door" : 5},
-              {"sound" : "grass", "Basic" : 5, "Cone" : 2},
-              {"sound" : "fast", "Zamboni" : 2, "Football" : 2},
-              {"sound" : "brain", "Gargantuar" : 5,  "Basic" : 5}]
+easy_waves = [{"sound" : "grass", "Bucket" : 10, "Door" : 0}]#,
+              #{"sound" : "grass", "Basic" : 5, "Cone" : 2},
+              #{"sound" : "fast", "Zamboni" : 2, "Football" : 2},
+              #{"sound" : "brain", "Gargantuar" : 5,  "Basic" : 5}]
         #   "Basic" : 0,
         #   "Cone" : 0,
         #   "Gargantuar" : 5},
@@ -255,41 +255,41 @@ plants = {"Wallnut" : {"image" : {"size" : {"x" : 148, "y" : 125},"pos" : {"x" :
                                      "pos" : {"x" : 0, "y" : 0},
                                      "fill" : {"r" : 255, "g" : 255, "b" : 255, "a" : 255}, 
                                      "animation" : {"file_index" : "plants/peashooter/(", "file_type" : ").png", "start" : 0,"total_frames" : 49, "frame_duration" : 0.03}}, 
-                          "Settings" : {"offset" : {"x" : 15, "y" : -30}, "projectile_offset" : {"x" : 0, "y" : 0}, "reload_time" : 1.5, "last_shot" : 0, "projectile" : "pea", "amount" : 1, "health" : 5}},
+                          "Settings" : {"offset" : {"x" : 15, "y" : -30}, "projectile_offset" : {"x" : 0, "y" : 0}, "reload_time" : 1.5, "last_shot" : 0, "projectile" : "pea", "health" : 5}},
           
           "Repeater" : {
                           "image" : {"size" : {"x" : 100, "y" : 100},
                                      "pos" : {"x" : 0, "y" : 0},
                                      "fill" : {"r" : 255, "g" : 255, "b" : 255, "a" : 255}, 
                                      "animation" : {"file_index" : "plants/repeater/(", "file_type" : ").png", "start" : 0,"total_frames" : 49, "frame_duration" : 0.03}}, 
-                          "Settings" : {"offset" : {"x" : 0, "y" : -30}, "projectile_offset" : {"x" : 0, "y" : 0}, "reload_time" : 1.5, "last_shot" : 0, "projectile" : "pea", "max_amount" : 2, "amount" : 1, "health" : 5}},
+                          "Settings" : {"offset" : {"x" : 0, "y" : -30}, "projectile_offset" : {"x" : 0, "y" : 0}, "reload_time" : 1.5, "max_reload_time" : 1.5, "last_shot" : 0, "projectile" : "pea", "max_amount" : 2, "amount" : 1, "health" : 5}},
           
            "Gatlingpea" : {
                           "image" : {"size" : {"x" : 90, "y" : 85},
                                      "pos" : {"x" : 0, "y" : 0},
                                      "fill" : {"r" : 255, "g" : 255, "b" : 255, "a" : 255}, 
                                      "animation" : {"file_index" : "plants/gatlingpea/(", "file_type" : ").png", "start" : 0,"total_frames" : 13, "frame_duration" : 0.09}}, 
-                          "Settings" : {"offset" : {"x" : 0, "y" : -30}, "projectile_offset" : {"x" : 0, "y" : -15}, "reload_time" : 1.5, "last_shot" : 0, "projectile" : "pea", "max_amount" : 4, "amount" : 3, "health" : 5}},
+                          "Settings" : {"offset" : {"x" : 0, "y" : -30}, "projectile_offset" : {"x" : 0, "y" : -15}, "reload_time" : 1.5, "max_reload_time" : 1.5, "last_shot" : 0, "projectile" : "pea", "max_amount" : 4, "amount" : 3, "health" : 5}},
           
           "Kernelpult" : {
                           "image" : {"size" : {"x" : 100, "y" : 82},
                                      "pos" : {"x" : 0, "y" : 0},
                                      "fill" : {"r" : 255, "g" : 255, "b" : 255, "a" : 255}, 
                                      "animation" : {"file_index" : "plants/kernelpult/(", "file_type" : ").png", "start" : 0,"total_frames" : 47, "frame_duration" : 0.04}}, 
-                          "Settings" : {"offset" : {"x" : 0, "y" : -30}, "projectile_offset" : {"x" : 0, "y" : 0}, "reload_time" : 1.5, "last_shot" : 0, "projectile" : ["kernel", "butter"], "amount" : 1, "health" : 5}},
+                          "Settings" : {"offset" : {"x" : 0, "y" : -30}, "projectile_offset" : {"x" : 0, "y" : 0}, "reload_time" : 1.5, "last_shot" : 0, "projectile" : ["kernel", "butter"], "health" : 5}},
           "Cobcannon" : {
                           "image" : {"size" : {"x" : 176, "y" : 108},
                                      "pos" : {"x" : 0, "y" : 0},
                                      "fill" : {"r" : 255, "g" : 255, "b" : 255, "a" : 255}, 
                                      "animation" : {"file_index" : "plants/cobcannon/(", "file_type" : ").png", "start" : 0,"total_frames" : 11, "frame_duration" : 0.13}}, 
-                          "Settings" : {"offset" : {"x" : 0, "y" : -30}, "projectile_offset" : {"x" : 0, "y" : 0}, "reload_time" : 3, "last_shot" : 0, "projectile" : "cob", "amount" : 1, "health" : 5 }},
+                          "Settings" : {"offset" : {"x" : 0, "y" : -30}, "projectile_offset" : {"x" : 0, "y" : 0}, "reload_time" : 3, "last_shot" : 0, "projectile" : "cob", "health" : 5 }},
           
           "Spikeweed" : {
                           "image" : {"size" : {"x" : 80, "y" : 34},
                                      "pos" : {"x" : 0, "y" : 0},
                                      "fill" : {"r" : 255, "g" : 255, "b" : 255, "a" : 255}, 
                                      "animation" : {"file_index" : "plants/spikeweed/(", "file_type" : ").png", "start" : 0,"total_frames" : 38, "frame_duration" : 0.04}}, 
-                          "Settings" : {"offset" : {"x" : 0, "y" : -30}, "projectile_offset" : {"x" : 0, "y" : 0}, "reload_time" : 3, "amount" : 1, "health" : 1000 }},
+                          "Settings" : {"offset" : {"x" : 0, "y" : -30}, "projectile_offset" : {"x" : 0, "y" : 0}, "reload_time" : 3, "health" : 1000 }},
           
           "Torchwood" : {
                           "image" : {"size" : {"x" : 66, "y" : 90},
@@ -303,21 +303,21 @@ plants = {"Wallnut" : {"image" : {"size" : {"x" : 148, "y" : 125},"pos" : {"x" :
                                 "pos" : {"x" : 0, "y" : 0},
                                 "fill" : {"r" : 255, "g" : 255, "b" : 255, "a" : 255}, 
                                 "animation" : {"file_index" : "plants/spikerock/(", "file_type" : ").png", "start" : 0,"total_frames" : 33, "frame_duration" : 0.04}}, 
-                    "Settings" : {"offset" : {"x" : 0, "y" : -30}, "projectile_offset" : {"x" : 0, "y" : 0}, "reload_time" : 3, "amount" : 1, "health" : 8000 }},
+                    "Settings" : {"offset" : {"x" : 0, "y" : -30}, "projectile_offset" : {"x" : 0, "y" : 0}, "reload_time" : 3, "health" : 8000 }},
           
           "Sunflower" : {
                           "image" : {"size" : {"x" : 90, "y" : 95},
                                      "pos" : {"x" : 0, "y" : 0},
                                      "fill" : {"r" : 255, "g" : 255, "b" : 255, "a" : 255}, 
-                                     "animation" : {"file_index" : "plants/sunflower/(", "file_type" : ").png", "start" : 0,"total_frames" : 54, "frame_duration" : 0.03}}, 
-                          "Settings" : {"offset" : {"x" : -5, "y" : -30}, "amount" : 1, "health" : 5}},
+                                     "animation" : {"file_index" : "plants/sunflower/(", "file_type" : ").png", "start" : 0,"total_frames" : 54, "frame_duration" : 0.03}},  #24
+                          "Settings" : {"offset" : {"x" : -5, "y" : -30}, "projectile_offset" : {"x" : 0, "y" : 0}, "health" : 5, "reload_time" : 24, "last_shot" : 0, "projectile" : "sun"}},
           
           "Twinsunflower" : {
                           "image" : {"size" : {"x" : 83, "y" : 84},
                                      "pos" : {"x" : 0, "y" : 0},
                                      "fill" : {"r" : 255, "g" : 255, "b" : 255, "a" : 255}, 
                                      "animation" : {"file_index" : "plants/twinsunflower/(", "file_type" : ").png", "start" : 0,"total_frames" : 20, "frame_duration" : 0.09}}, 
-                          "Settings" : {"offset" : {"x" : 0, "y" : -30}, "amount" : 1, "health" : 5}}
+                          "Settings" : {"offset" : {"x" : 0, "y" : -30}, "projectile_offset" : {"x" : 0, "y" : 0}, "amount" : 1, "max_amount" : 2, "health" : 5, "reload_time" : 24, "max_reload_time" : 24, "last_shot" : 0, "projectile" : "sun"}}
 }
 
 for name in plants:
@@ -326,7 +326,8 @@ for name in zombies:
     zombies[name]["Settings"]["name"] = name
 projectile_height = 700
 projectile_gravity = 98
-projectiles = {"pea" : {"image" : {"name" : "plants/projectiles/pea.png", "size" : {"x" : 21, "y" : 21}, "pos" : {"x" : 0, "y" : 0}}, "Settings" : {"offset" : {"x" : 65, "y" : 30}, "start_x" : 0, "start" : time.time(), "speed" : 150, "damage" : 20, "is_projectile" : False}},
+projectiles = {"sun" : {"image" : {"name" : "plants/projectiles/sun.png", "size" : {"x" : 60, "y" : 60}, "pos" : {"x" : 0, "y" : 0}}},
+               "pea" : {"image" : {"name" : "plants/projectiles/pea.png", "size" : {"x" : 21, "y" : 21}, "pos" : {"x" : 0, "y" : 0}}, "Settings" : {"offset" : {"x" : 65, "y" : 30}, "start_x" : 0, "start" : time.time(), "speed" : 150, "damage" : 0, "is_projectile" : False}},
                "lawnmower" : {"image" : {"name" : "Lawn Mower.png", "size" : {"x" : 80, "y" : 68}, "pos" : {"x" : 0, "y" : 0}}, "Settings" : {"offset" : {"x" : 0, "y" : 0}, "start_x" : 0, "start" : time.time(), "speed" : 250, "damage" : 69420, "is_projectile" : False}},
                "kernel" : {"image" : {"name" : "plants/projectiles/kernel.png", "size" : {"x" : 21, "y" : 22}, "pos" : {"x" : 0, "y" : 0}}, "Settings" : {"offset" : {"x" : 0, "y" : 0}, "velocity" : {"x" : 0, "y" : 0}, "start_x" : 0, "start" : time.time(), "damage" : 20, "is_projectile" : True, "target" : {"x" : 0, "y" : 0}}},
                "butter" : {"image" : {"name" : "plants/projectiles/butter.png", "size" : {"x" : 49, "y" : 50}, "pos" : {"x" : 0, "y" : 0}}, "Settings" : {"offset" : {"x" : 0, "y" : 0}, "velocity" : {"x" : 0, "y" : 0}, "start_x" : 0, "start" : time.time(), "damage" : 40, "is_projectile" : True, "target" : {"x" : 0, "y" : 0}}},
@@ -374,7 +375,9 @@ sounds = {"tutorial" : {"minim" : "Cipher - Electronic Light.mp3", "repeat" : -1
           "grass" : {"minim" : "Grasswalk (In-Game).mp3", "repeat" : -1, "play_from_start" : True, "isolate" : True, "group" : 0}, 
           "fast" : {"minim" : "Plants vs Zombies Soundtrack [Mini Games].mp3", "repeat" : -1, "play_from_start" : True, "isolate" : True, "group" : 0},
           "brain" : {"minim" : "Brainiac Maniac.mp3", "repeat" : -1, "play_from_start" : True, "isolate" : True, "group" : 0},
-          "moon" : {"minim" : "Moongrains.mp3", "repeat" : -1, "play_from_start" : True, "isolate" : True, "group" : 0}}
+          "moon" : {"minim" : "Moongrains.mp3", "repeat" : -1, "play_from_start" : True, "isolate" : True, "group" : 0},
+          "sun" : {"minim" : "Sun.mp3", "play_from_start" : True},
+          "error" : {"minim" : "Error.mp3", "play_from_start" : True}}
 
 sound_kys = ("minim", "repeat", "play_from_start", "isolate", "group")
 def PlaySound(sound_name, enabled_keys):
@@ -405,15 +408,31 @@ removing = False
 def RemovePlantMode():
     global removing
     removing = True
-    
+    print(removing)
+
+tutorial = False
+def OpenTutorial():
+    global tutorial, continue_wave
+    tutorial = continue_wave
 buttons = [ {"button" : {
     "mouse" : LEFT,
     "function" : RemovePlantMode,
-    "area" : {"pos" : {"x" : 150, "y" : 30}, "pos2" : {"x" : 225, "y" : 105}}},
+    "area" : {"pos" : {"x" : 320, "y" : 30}, "pos2" : {"x" : 395, "y" : 105}}},
     
     "image" : {"name" : "buttons/Shovel.png",
                "size" : {"x" : 75, "y" : 75},
-                "pos" : {"x" : 150, "y" : 30},
+                "pos" : {"x" : 320, "y" : 30},
+                "fill" : {"r" : 255, "g" : 255, "b" : 255, "a" : 255}
+    }},       
+
+    {"button" : {
+    "mouse" : LEFT,
+    "function" : OpenTutorial,
+    "area" : {"pos" : {"x" : 425, "y" : 30}, "pos2" : {"x" : 500, "y" : 105}}},
+    
+    "image" : {"name" : "buttons/Tutorial.png",
+            "size" : {"x" : 75, "y" : 75},
+                "pos" : {"x" : 425, "y" : 30},
                 "fill" : {"r" : 255, "g" : 255, "b" : 255, "a" : 255}
     }},       
 ]
@@ -464,15 +483,16 @@ sidebar = [
     {"button" : {"mouse" : LEFT, "function" : SELECTKERNELPULT, "area" : {"pos" : {"x" : 10, "y" : 240}, "pos2" : {"x" : 116, "y" : 306}}},"image" : {"name" : "icons/kernelpult.png","size" : {"x" : 106, "y" : 66},"pos" : {"x" : 10, "y" : 240},"fill" : {"r" : 255, "g" : 255, "b" : 255, "a" : 255}}},
     {"button" : {"mouse" : LEFT, "function" : SELECTCOBCANNON, "area" : {"pos" : {"x" : 10, "y" : 320}, "pos2" : {"x" : 116, "y" : 386}}}, "image" : {"name" : "icons/cobcannon.png","size" : {"x" : 106, "y" : 66},"pos" : {"x" : 10, "y" : 320},"fill" : {"r" : 255, "g" : 255, "b" : 255, "a" : 255}}}]
 bar_size = 7
-selector_x, selector_y, is_selected = -10000, -10000, False
+selector_x, selector_y = -10000, -10000
 def ReloadSelector(x, y, name, visible):
-    global selector_x, selector_y, is_selected
+    global selector_x, selector_y
     if plant_selected != None and name == plant_selected.lower():
         selector_x, selector_y = x, y
-        is_selected = visible
+    
+    
     
 def SideBar(column_size, offset):
-    global sidebar, is_selected, plant_selected, selector_x, selector_y
+    global sidebar, plant_selected, selector_x, selector_y
     for i, button in enumerate(sidebar[offset:] + sidebar[:offset]): 
         x, y = list_x, list_y + list_y_increment * i 
         ReloadSelector(x, y, button["image"]["name"][6:len(button["image"]["name"]) - 4], i < column_size)
@@ -503,36 +523,48 @@ def mouseWheel(event):
 button_kys = ("area", "function", "mouse")
 fallback = lambda dic, ky, default: dic[ky] if dic != None else default
 
+press_selected = 10**6
 def TriggerButtonPress(object):
+    global mouse_presses, press_selected
     button = object["button"]
     a, f, m = fallback(button, "area", None), fallback(button, "function", None), fallback(button, "mouse", None)
     p, p2 = fallback(a, "pos", None), fallback(a, "pos2", None)
     x, y, x2, y2 = fallback(p, "x", 0), fallback(p, "y", 0), fallback(p2, "x", 0), fallback(p2, "y", 0)
     if min(x, x2) <= mouseX <= max(x, x2) and min(y, y2) <= mouseY <= max(y, y2):
         if f != None and mouseButton == m:
+            press_selected = mouse_presses
             f()
 
 mouse_presses = 0
 def mousePressed():
+    global mouse_presses
     for object in buttons:
         TriggerButtonPress(object)
     for object in sidebar:
         if object["image"]["fill"]["a"] > 0:
             TriggerButtonPress(object)
 
+    if mouseButton == LEFT and mouse_presses%2 == 0:
+        mouse_presses += 1
+   
+
 def mouseReleased():
-    global mouse_presses, sidebar, shift
+    global mouse_presses, sidebar, shift, plant_selected
     mouse_presses += 1
     for i, object in enumerate(sidebar[shift:] + sidebar[:shift]):
         x, y = list_x, list_y + list_y_increment * i 
         visible = object["image"]["fill"]["a"] > 0
         ReloadSelector(x, y, object["image"]["name"][6:len(object["image"]["name"]) - 4], visible)
+    if mouseButton == LEFT and mouse_presses%2 != 0:
+        mouse_presses += 1
 
 upgradable_plants = {"Gatlingpea" : "Repeater", "Spikerock" : "Spikeweed", "Cobcannon" : "Kernelpult", "Twinsunflower" : "Sunflower"}
 can_place_cobcannon = lambda x, y: rows[y]["Plants"][x - 1]["Settings"]["name"] == "Kernelpult" if x - 1 > -1 and rows[y]["Plants"][x - 1] != None else False
 can_place = lambda x, y, type: rows[y]["Plants"][x] == None if not(type in upgradable_plants.keys()) else rows[y]["Plants"][x] != None and rows[y]["Plants"][x]["Settings"]["name"] == upgradable_plants[type] and (type != "Cobcannon" or can_place_cobcannon(x, y)) 
 
 can_detect_plant = lambda settingz, target_plant : target_plant != None and (settingz["name"] == "Zamboni" or settingz["name"] == "Gargantuar" or (target_plant["Settings"]["name"] != "Spikerock" and target_plant["Settings"]["name"] != "Spikeweed"))                                                                                                                                                                            
+
+plant_prices = {"Wallnut" : 50, "Peashooter" : 100, "Repeater" : 200, "Gatlingpea" : 250, "Kernelpult" : 100, "Cobcannon" : 500, "Spikeweed" : 100, "Torchwood" : 175, "Spikerock" : 125, "Sunflower" : 50, "Twinsunflower" : 150}
 
 def Spawn(object, row, column, is_zombie): 
     new = copycollection(object)
@@ -541,6 +573,7 @@ def Spawn(object, row, column, is_zombie):
         for i in range(len(new["image"]["animations"])):
             new["image"]["animations"][i]["start"] = random.randint(0, 10000)
         rows[row]["Zombies"].append(new)
+        return
     else:
         settingp, imagp  = new["Settings"], new["image"]
         imagp["pos"]["y"] = column_pos[row + 1] + settingp["offset"]["y"] - imagp["size"]["y"]
@@ -613,45 +646,93 @@ def Zombies(i, row):
         else:
             index += 1
 
-def Plants(i, row):
-    global rows
+def Plants(i, row, is_day):
+    global rows, continue_wave
     for ii, plant in enumerate(row["Plants"]):
             if not(plant):
                 continue
-
+            print(not(plant))
+            RENDERIMAGE(plant, ("animation", "pos", "size", "fill"))
+            if continue_wave:
+                return
             settingp, imagp  = plant["Settings"], plant["image"]
+            can_shoot = "last_shot" in settingp.keys()
+            is_sun = can_shoot and settingp["projectile"] == "sun"
+            if can_shoot and time.time() >= settingp["last_shot"] + settingp["reload_time"] and (len(rows[i]["Zombies"]) > 0 or is_sun): 
+               
+                if is_sun and not(is_day):
+                    continue
                 
-            if "last_shot" in settingp.keys() and time.time() >= settingp["last_shot"] + settingp["reload_time"] and len(rows[i]["Zombies"]) > 0: 
                 if "max_amount" in settingp.keys():
                     settingp["amount"] = settingp["amount"] + 1 if settingp["amount"] < settingp["max_amount"] - 1 else 0
-                    settingp["reload_time"] = 0.4 if settingp["amount"] < settingp["max_amount"] - 1 else 1.5
-                    
+                    settingp["reload_time"] = 0.4 if settingp["amount"] < settingp["max_amount"] - 1 else settingp["max_reload_time"]
+                previous = settingp["last_shot"]
                 settingp["last_shot"] = time.time()
+                if previous < 100:
+                    continue
                 projectile = settingp["projectile"] if type(settingp["projectile"]) == type("") else settingp["projectile"][0 if random.randint(1, 100) <= 75 else 1]
                 new_projectile = copycollection(projectiles[projectile])
-                new_settings, new_image = new_projectile["Settings"], new_projectile["image"]
-                new_settings["offset"]["x"] += settingp["projectile_offset"]["x"] 
-                new_settings["offset"]["y"] += settingp["projectile_offset"]["y"] 
-                new_settings["start"] = time.time()
-                new_settings["start_x"], new_settings["start_y"]  = imagp["pos"]["x"] + new_settings["offset"]["x"], imagp["pos"]["y"] + new_settings["offset"]["y"]
-                new_image["pos"]["y"] = new_settings["start_y"]
-                if new_settings["is_projectile"]:
-                    new_settings["velocity"]["y"] = -(2*projectile_gravity*projectile_height)**0.5
-                    new_settings["start_velocity_y"] = new_settings["velocity"]["y"]
-                    new_settings["total_time"] = (-new_settings["velocity"]["y"]/projectile_gravity) + ((2.0*projectile_height)/projectile_gravity)**0.5
+                if not(is_sun):
+                    new_settings, new_image = new_projectile["Settings"], new_projectile["image"]
+                    new_settings["offset"]["x"] += settingp["projectile_offset"]["x"]
+                    new_settings["offset"]["y"] += settingp["projectile_offset"]["y"]
+                    new_settings["start"] = time.time()
+                    new_settings["start_x"], new_settings["start_y"]  = imagp["pos"]["x"] + new_settings["offset"]["x"], imagp["pos"]["y"] + new_settings["offset"]["y"]
+                    new_image["pos"]["y"] = new_settings["start_y"]
                     
-                    closest, closest_y = 10**16, new_image["pos"]["y"]
-                    for zombie in row["Zombies"]:
-                        settingz, imagz = zombie["Settings"], zombie["image"]
-                        d = imagz["pos"]["x"] + imagz["size"]["x"]/2.0 - settingz["speed"] * new_settings["total_time"]*0.5 #+ imagz["size"]["x"]  #projectile_time
-                        closest = min(closest, d) if d > new_settings["start_x"] else closest
-                        closest_y = settingz["offset"]["y"] if d > new_settings["start_x"] else closest_y
-                    new_settings["velocity"]["x"] = ((closest - new_settings["start_x"])/new_settings["total_time"])*2
-                    new_settings["target"]["x"], new_settings["target"]["y"] = closest, closest_y
-                rows[i]["Projectiles"].append(new_projectile)
-            
-            RENDERIMAGE(plant, ("animation", "pos", "size", "fill"))
-instakill = False
+                    if new_settings["is_projectile"]:
+                        new_settings["velocity"]["y"] = -(2*projectile_gravity*projectile_height)**0.5
+                        new_settings["start_velocity_y"] = new_settings["velocity"]["y"]
+                        new_settings["total_time"] = (-new_settings["velocity"]["y"]/projectile_gravity) + ((2.0*projectile_height)/projectile_gravity)**0.5
+                    
+                        closest, closest_y = 10**16, new_image["pos"]["y"]
+                        for zombie in row["Zombies"]:
+                            settingz, imagz = zombie["Settings"], zombie["image"]
+                            d = imagz["pos"]["x"] + imagz["size"]["x"]/2.0 - settingz["speed"] * new_settings["total_time"]*0.5 #+ imagz["size"]["x"]  #projectile_time
+                            closest = min(closest, d) if d > new_settings["start_x"] else closest
+                            closest_y = settingz["offset"]["y"] if d > new_settings["start_x"] else closest_y
+                        new_settings["velocity"]["x"] = ((closest - new_settings["start_x"])/new_settings["total_time"])*2
+                        new_settings["target"]["x"], new_settings["target"]["y"] = closest, closest_y
+                    rows[i]["Projectiles"].append(new_projectile)
+                else:
+                    print("spawned")
+                    new_projectile["image"]["pos"]["x"] = imagp["pos"]["x"] + random.randint(0, 80)
+                    new_projectile["image"]["pos"]["y"] = imagp["pos"]["y"] + random.randint(0, 80)
+                    sun_drops.append(new_projectile)
+
+                    
+random_sun_drop_cooldown = 24
+last_sun_drop = 0
+def Sun():
+    global sun_drops, sun, random_sun_drop_cooldown, last_sun_drop, mouse_presses, plant_selected
+    
+    if not(continue_wave) and time.time() >= random_sun_drop_cooldown + last_sun_drop:
+        last_sun_drop = time.time()
+        new_projectile = copycollection(projectiles["sun"])
+        new_projectile["image"]["pos"]["x"] = random.randint(row_pos[0], row_pos[len(row_pos) - 1])
+        new_projectile["image"]["pos"]["y"] = random.randint(column_pos[0], column_pos[len(column_pos) - 1])
+        sun_drops.append(new_projectile)
+
+    
+    for i, sun_drop in enumerate(sun_drops):
+        angle = time.time()%360.0 * 10
+        x, y = sun_drop["image"]["pos"]["x"], sun_drop["image"]["pos"]["y"]
+        pushMatrix()
+        translate(x, y)
+        rotate(radians(angle))
+        RENDERIMAGE(sun_drop, ("name", "size"))
+
+        if mouse_presses%2 == 1:
+            xs, ys = sun_drop["image"]["size"]["x"], y + sun_drop["image"]["size"]["y"]
+
+            if x - xs/2.0 <= mouseX <= x + xs/2.0 and y - ys/2.0 <= mouseY <= y + ys/2.0:
+                plant_selected = None
+                sun_drops.pop(i)
+                sun += 50
+                PlaySound("sun", ("minim", "play_from_start"))
+                
+        popMatrix()
+instakill = True
 def Projectiles(i, row):
     global rows, instakill
     remove_indexes = []
@@ -685,7 +766,7 @@ def Projectiles(i, row):
                         if plant != None and plant["Settings"]["name"] == "Torchwood" and (c, i) == GetLocation(imagp["pos"]["x"], imagp["pos"]["y"] + imagp["size"]["y"]):
                             imagp["name"] = "plants/projectiles/firepea.png"
                             setting["damage"] *= 2
-                
+                    
                 closest_setting, closest = None, 10**6
                 for zombie in row["Zombies"]:
                     settingz, imagz = zombie["Settings"], zombie["image"]
@@ -723,19 +804,25 @@ def Projectiles(i, row):
 transition_time = 9
 
 def Restart():
-    global rows, gameover, played_gameover_sound, amplifier, waves_completed, ice, mowers_left, last_melted, continue_wave
+    global rows, gameover, played_gameover_sound, amplifier, waves_completed, ice, mowers_left, last_melted, continue_wave, sun, sun_drops, tutorial, highscore
     gameover = False
     played_gameover_sound = False
     
     amplifier = 1 #Maybe hard waves run after every 3 easy waves
     waves_completed = 0
+    sun = 0
 
     last_melted = time.time()
     mowers_left = [True for i in range(len(column_pos))]
     ice = [10**16 for _ in range(len(column_pos) - 1)]
     rows = list([{"Plants" : [None for ii in range(len(row_pos) - 1)], "Projectiles" : [], "Zombies" : []} for i in range(len(column_pos) - 1)])
-    continue_wave = False
-Restart()
+    sun_drops = []
+    continue_wave = True
+    tutorial = False
+    f = open("highscore.txt", "r")
+    highscore = int(f.read())
+    f.close()
+
 def Gameover():
     global gameover, transition_time, played_gameover_sound
     if not(played_gameover_sound):
@@ -813,10 +900,13 @@ def StartWave():
         total_zombies += wave[ky]
     spawn_cooldown = (wave_duration + 0.0)/total_zombies
     start_wave = time.time() + start_cooldown
-StartWave() #You can rig this to a start button later on
+    
+
 
 def setup():
     size(1000, 600)
+    Restart()
+    StartWave() #You can rig this to a start button later on
     minim = Minim(this)
     for ky in sounds:
         sounds[ky]["minim"] = minim.loadFile("sounds/" + sounds[ky]["minim"])
@@ -830,41 +920,73 @@ projectile_remove_cooldown = 10
 state = "title"
 
 def draw():
-    global rows, cooldown, projectile_removed, plant_selected, is_selected, state, s, yv, start_music, removing, mouse_presses, selector_x, selector_y, gameover, wave
-    copy(loadImage("Lawn.png" if wave == None or wave["sound"] != "moon" else "LawnNight.png"), 0, 0, 1400, 600, 0, 0, 1400, 600)
+    global tutorial, buttons
+    if tutorial:
+        PlaySound("tutorial", ("minim", "repeat", "play_from_start", "isolate", "group"))
+        if keyPressed and key == "b":
+            tutorial = False
+        else:
+            return
+    buttons[1]["image"]["fill"]["a"] = 255 if continue_wave else 0
+    
+    
+    global rows, cooldown, projectile_removed, plant_selected, state, s, yv, start_music, removing, mouse_presses, selector_x, selector_y, gameover, wave, sun, press_selected
+    is_day = wave == None or wave["sound"] != "moon" 
+    copy(loadImage("Lawn.png" if is_day else "LawnNight.png"), 0, 0, 1400, 600, 0, 0, 1400, 600)
     tint(255, 255, 255, 255)
     Ice() 
     LawnMower()
     for i, row in enumerate(rows):
-        Plants(i, row)
+        Plants(i, row, is_day)
         Zombies(i, row)
         Projectiles(i, row)
+    Sun()
     
     for object in sidebar:
         RENDERIMAGE(object, ("name", "fill", "size", "pos"))  
     for object in buttons:
         RENDERIMAGE(object, ("name", "fill", "size", "pos"))   
-    
-    if plant_selected != None and is_selected:
+
+    if plant_selected != None:
         image(loadImage("selector.png"), selector_x, selector_y, 106, 66)
-    
+    tint(255)
+    image(loadImage("suncounter.png"), 140, 30, 150, 43)
+    fill(0)
+    textAlign(CENTER)
+    text(str(sun if sun <= 9990 else 9990), 110, 40, 250, 50)
     if gameover > 0:
         Gameover()
         return    
+
     
-    global spawn_cooldown, waves_completed, max_amplifier, amplifier, start_wave, continue_wave
-    print(start_wave <= time.time(), wave if wave != None else None, waves_completed, continue_wave)
+    global spawn_cooldown, waves_completed, highscore, max_amplifier, amplifier, start_wave, continue_wave
+
+    textAlign(CENTER)
+    textSize(25)
+    fill(0, 0, 0, 255)
+    ox, oy = 1, 2
+    text(str(waves_completed) + " Waves Completed", 300-ox, 550-oy, 400, 600)
+    text("Highscore " + str(highscore), 555-ox, 550-oy, 655, 600)
+    
+    text(str(waves_completed) + " Waves Completed", 300+ox, 550+oy, 400, 600)
+    text("Highscore " + str(highscore), 555+ox, 550+oy, 655, 600)
+    textSize(24)
+    fill(231, 191, 96, 255)
+    text(str(waves_completed) + " Waves Completed", 300, 550, 400, 600)
+    text("Highscore " + str(highscore), 555, 550, 655, 600)
+    #print(start_wave <= time.time(), wave if wave != None else None, waves_completed, continue_wave)
     if continue_wave:
         PlaySound("seed", ("minim", "repeat", "play_from_start", "isolate", "group"))      
         if keyPressed and key == "c":
             continue_wave = False
-            waves_completed += 1
+
             amplifier = min(max_amplifier, amplifier * amplifier_rate)
             StartWave()
         return
-    
+    if wave != None:
+        PlaySound(wave["sound"], ("minim", "repeat", "play_from_start", "isolate", "group"))  
     if start_wave != -1 and start_wave <= time.time() and wave != None and time.time() > cooldown:
-        PlaySound(wave["sound"], ("minim", "repeat", "play_from_start", "isolate", "group"))      
+    
         kys = list(wave.keys())
         kys.remove("sound")
         for ky in kys:
@@ -878,8 +1000,15 @@ def draw():
                 if len(row["Zombies"]) > 0:
                     no_zombies = False
                     break
-                
-            continue_wave = no_zombies
+            if no_zombies:
+                waves_completed += 1    
+                continue_wave = True
+                if waves_completed > highscore:
+                    f = open("highscore.txt", "w")
+                    f.write(str(waves_completed))
+                    f.close()
+                    highscore = waves_completed
+            
         else:
             cooldown = time.time() + spawn_cooldown
             selected_type = kys[random.randint(0, len(kys) - 1)]
@@ -895,28 +1024,38 @@ def draw():
                     row["Projectiles"].pop(i)
                 else:
                     i += 1
+                    
     x, y = GetLocation(mouseX, mouseY)
     if x != None and y != None:
         noStroke()
-        fill(0, 0, 0, 50)
-        rect(row_pos[x], column_pos[0], row_pos[x + 1] - row_pos[x], column_pos[len(column_pos) - 1])
-        rect(row_pos[0], column_pos[y], row_pos[len(row_pos) - 1], column_pos[y + 1] - column_pos[y])
-        fill(255, 255, 255, 120)
-        rect(row_pos[x], column_pos[y], row_pos[x + 1] - row_pos[x], column_pos[y + 1] - column_pos[y])
+
+        if plant_selected != None:
+            fill(0, 0, 0, 50)
+            rect(row_pos[x], column_pos[0], row_pos[x + 1] - row_pos[x], column_pos[len(column_pos) - 1])
+            rect(row_pos[0], column_pos[y], row_pos[len(row_pos) - 1], column_pos[y + 1] - column_pos[y])
+            fill(255, 255, 255, 120)
+            rect(row_pos[x], column_pos[y], row_pos[x + 1] - row_pos[x], column_pos[y + 1] - column_pos[y])
         if removing:
             image(loadImage("shovel.png"), mouseX, mouseY - 75, 75, 75) 
-        if mousePressed and mouseButton == LEFT and mouse_presses%2 == 0:
-            mouse_presses += 1
-            if removing:
+        
+        if mouse_presses%2 == 0:
+            if removing and mouse_presses == press_selected + 2:
                 if x - 1 > -1 and rows[y]["Plants"][x - 1] == rows[y]["Plants"][x]:
                     rows[y]["Plants"][x - 1] = None
                 elif x + 1 < len(row_pos) - 1 and rows[y]["Plants"][x + 1] == rows[y]["Plants"][x]:
                     rows[y]["Plants"][x + 1] = None
                 rows[y]["Plants"][x] = None
-            elif plant_selected != None and is_selected and can_place(x, y, plant_selected) and row_pos[x + 1] < ice[y]:
-                Spawn(plants[plant_selected], y, x, False) 
-            removing = False
-    fill(231, 191, 96, 255)
-    textAlign(CENTER)
-    text(str(waves_completed) + " Waves Completed", 300, 550, 400, 600)
-    
+            elif plant_selected != None and row_pos[x + 1] < ice[y] and mouse_presses == press_selected + 4:
+                if sun >= plant_prices[plant_selected] and can_place(x, y, plant_selected):
+                    sun -= plant_prices[plant_selected]
+                    Spawn(plants[plant_selected], y, x, False)
+                else:
+                    PlaySound("error", ("minim", "play_from_start"))
+                    
+                
+           
+
+    if mouse_presses%2 == 0:
+        removing = False
+        if mouse_presses == press_selected + 4:
+            plant_selected = None
