@@ -402,7 +402,7 @@ def ContinueWaves():
         return
     continue_wave = False
     amplifier = min(max_amplifier, amplifier * amplifier_rate) if waves_completed > 0 else 1
-    print("Difficulty amplifier", amplifier)
+    #print("Difficulty amplifier", amplifier)
     StartWave()
 buttons = [ {"button" : {
     "mouse" : LEFT,
@@ -444,7 +444,7 @@ buttons = [ {"button" : {
 plant_selected = None
 def SELECTPLANT(name):
     global plant_selected
-    print(name)
+    #print(name)
     plant_selected = name
 
 def SELECTPEASHOOTER():
