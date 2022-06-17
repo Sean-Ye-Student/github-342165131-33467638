@@ -4,44 +4,24 @@ add_library("minim")
 spawn_pos_x = 900
 column_pos = (80,183,279,385,467, 573) #The borders between rows from the very top to the very bottom
 row_pos = (251, 334, 408, 493, 576, 654, 738, 812, 898, 987) #The borders between columns from the very left to the very right
-
 ice_offset = 50
 melt_rate = -3
-max_amplifier = 5
-amplifier_rate = 5**(1.0/30.0) #1.055#will reach max_amplifier in 30 waves
+max_amplifier = 10
+amplifier_rate = max_amplifier**(1.0/5.0) #1.055#will reach max_amplifier in 5 waves
+easy_waves = [{"sound" : "grass", "Basic" : 2, "Cone" : 0.8},#, #total hp ~800
+              {"sound" : "grass2", "Basic" : 1, "Cone" : 0.4, "Bucket" : 0.2},
+              {"sound" : "grass3", "Basic" : 0.6, "Cone" : 0.2, "Bucket" : 0.4},
+              {"sound" : "grass3", "Basic" : 1.6, "Bucket" : 0.4},
+              {"sound" : "grass2", "Basic" : 1, "Cone" : 1},
+              {"sound" : "grass", "Cone" : 0.4, "Bucket" : 0.4, "Basic" : 0.7}]
 
-easy_waves = [{"sound" : "grass", "Bucket" : 10, "Door" : 0}]#,
-              #{"sound" : "grass", "Basic" : 5, "Cone" : 2},
-              #{"sound" : "fast", "Zamboni" : 2, "Football" : 2},
-              #{"sound" : "brain", "Gargantuar" : 5,  "Basic" : 5}]
-        #   "Basic" : 0,
-        #   "Cone" : 0,
-        #   "Gargantuar" : 5},
-
-        # {"Football" : 0,
-        #   "Basic" : 5,
-        #   "Cone" : 0,
-        #   "Gargantuar" : 5},
-        
-        # {"Football" : 0,
-        #   "Basic" : 0,
-        #   "Cone" : 5,
-        #   "Gargantuar" : 5}]
-hard_waves = easy_waves #[{"Football" : 15,
-#           "Basic" : 0,
-#           "Cone" : 0},
-
-#         {"Football" : 0,
-#           "Basic" : 15,
-#           "Cone" : 0},
-        
-#         {"Football" : 0,
-#           "Basic" : 0,
-#           "Cone" : 15},
-        
-#         {"Football" : 5,
-#           "Basic" : 5,
-#           "Cone" : 5}] 
+hard_waves = [{"sound" : "fast", "Zamboni" : 0.5, "Football" : 0.5}, #total hp ~1600
+              {"sound" : "brain", "Gargantuar" : 0.5,  "Basic" : 1},
+              {"sound" : "moon", "Bucket" : 0.5, "Door" : 0.5},
+              {"sound" : "moon", "Bucket" : 0.3, "Football" : 0.75},
+              {"sound" : "moon", "Door" : 0.3, "Football" : 0.75},
+              {"sound" : "brain", "Gargantuar" : 0.25,  "Cone" : 0.5, "Bucket" : 0.3, "Basic" : 0.9},
+              {"sound" : "fast", "Zamboni" : 0.5, "Gargantuar" : 0.3, "Basic" : 0.45}]
 
 zombies = {"Zamboni" : {"image" : {"size" : {"x" : 185, "y" : 185}, "pos" : {"x" : spawn_pos_x + 185, "y" : 0}, "fill" : {"r" : 255, "g" : 255, "b" : 255, "a" : 255},
                          "animations" : [{"file_index" : "zombies/zamboni/walk/(", 
@@ -262,14 +242,14 @@ plants = {"Wallnut" : {"image" : {"size" : {"x" : 148, "y" : 125},"pos" : {"x" :
                                      "pos" : {"x" : 0, "y" : 0},
                                      "fill" : {"r" : 255, "g" : 255, "b" : 255, "a" : 255}, 
                                      "animation" : {"file_index" : "plants/repeater/(", "file_type" : ").png", "start" : 0,"total_frames" : 49, "frame_duration" : 0.03}}, 
-                          "Settings" : {"offset" : {"x" : 0, "y" : -30}, "projectile_offset" : {"x" : 0, "y" : 0}, "reload_time" : 1.5, "max_reload_time" : 1.5, "last_shot" : 0, "projectile" : "pea", "max_amount" : 2, "amount" : 1, "health" : 5}},
+                          "Settings" : {"offset" : {"x" : 0, "y" : -30}, "projectile_offset" : {"x" : 0, "y" : 0}, "reload_time" : 0, "max_reload_time" : 1.5, "last_shot" : 0, "projectile" : "pea", "max_amount" : 2, "amount" : 0, "health" : 5}},
           
            "Gatlingpea" : {
                           "image" : {"size" : {"x" : 90, "y" : 85},
                                      "pos" : {"x" : 0, "y" : 0},
                                      "fill" : {"r" : 255, "g" : 255, "b" : 255, "a" : 255}, 
                                      "animation" : {"file_index" : "plants/gatlingpea/(", "file_type" : ").png", "start" : 0,"total_frames" : 13, "frame_duration" : 0.09}}, 
-                          "Settings" : {"offset" : {"x" : 0, "y" : -30}, "projectile_offset" : {"x" : 0, "y" : -15}, "reload_time" : 1.5, "max_reload_time" : 1.5, "last_shot" : 0, "projectile" : "pea", "max_amount" : 4, "amount" : 3, "health" : 5}},
+                          "Settings" : {"offset" : {"x" : 0, "y" : -30}, "projectile_offset" : {"x" : 0, "y" : -15}, "reload_time" : 0, "max_reload_time" : 1.5, "last_shot" : 0, "projectile" : "pea", "max_amount" : 4, "amount" : 0, "health" : 5}},
           
           "Kernelpult" : {
                           "image" : {"size" : {"x" : 100, "y" : 82},
@@ -282,7 +262,7 @@ plants = {"Wallnut" : {"image" : {"size" : {"x" : 148, "y" : 125},"pos" : {"x" :
                                      "pos" : {"x" : 0, "y" : 0},
                                      "fill" : {"r" : 255, "g" : 255, "b" : 255, "a" : 255}, 
                                      "animation" : {"file_index" : "plants/cobcannon/(", "file_type" : ").png", "start" : 0,"total_frames" : 11, "frame_duration" : 0.13}}, 
-                          "Settings" : {"offset" : {"x" : 0, "y" : -30}, "projectile_offset" : {"x" : 0, "y" : 0}, "reload_time" : 3, "last_shot" : 0, "projectile" : "cob", "health" : 5 }},
+                          "Settings" : {"offset" : {"x" : 0, "y" : -30}, "projectile_offset" : {"x" : 0, "y" : 0}, "reload_time" : 30, "last_shot" : 0, "projectile" : "cob", "health" : 5 }},
           
           "Spikeweed" : {
                           "image" : {"size" : {"x" : 80, "y" : 34},
@@ -317,7 +297,7 @@ plants = {"Wallnut" : {"image" : {"size" : {"x" : 148, "y" : 125},"pos" : {"x" :
                                      "pos" : {"x" : 0, "y" : 0},
                                      "fill" : {"r" : 255, "g" : 255, "b" : 255, "a" : 255}, 
                                      "animation" : {"file_index" : "plants/twinsunflower/(", "file_type" : ").png", "start" : 0,"total_frames" : 20, "frame_duration" : 0.09}}, 
-                          "Settings" : {"offset" : {"x" : 0, "y" : -30}, "projectile_offset" : {"x" : 0, "y" : 0}, "amount" : 1, "max_amount" : 2, "health" : 5, "reload_time" : 24, "max_reload_time" : 24, "last_shot" : 0, "projectile" : "sun"}}
+                          "Settings" : {"offset" : {"x" : 0, "y" : -30}, "projectile_offset" : {"x" : 0, "y" : 0}, "amount" : 0, "max_amount" : 2, "health" : 5, "reload_time" : 0, "max_reload_time" : 24, "last_shot" : 0, "projectile" : "sun"}}
 }
 
 for name in plants:
@@ -327,11 +307,11 @@ for name in zombies:
 projectile_height = 700
 projectile_gravity = 98
 projectiles = {"sun" : {"image" : {"name" : "plants/projectiles/sun.png", "size" : {"x" : 60, "y" : 60}, "pos" : {"x" : 0, "y" : 0}}},
-               "pea" : {"image" : {"name" : "plants/projectiles/pea.png", "size" : {"x" : 21, "y" : 21}, "pos" : {"x" : 0, "y" : 0}}, "Settings" : {"offset" : {"x" : 65, "y" : 30}, "start_x" : 0, "start" : time.time(), "speed" : 150, "damage" : 0, "is_projectile" : False}},
-               "lawnmower" : {"image" : {"name" : "Lawn Mower.png", "size" : {"x" : 80, "y" : 68}, "pos" : {"x" : 0, "y" : 0}}, "Settings" : {"offset" : {"x" : 0, "y" : 0}, "start_x" : 0, "start" : time.time(), "speed" : 250, "damage" : 69420, "is_projectile" : False}},
+               "pea" : {"image" : {"name" : "plants/projectiles/pea.png", "size" : {"x" : 21, "y" : 21}, "pos" : {"x" : 0, "y" : 0}}, "Settings" : {"offset" : {"x" : 65, "y" : 30}, "start_x" : 0, "start" : time.time(), "speed" : 150, "damage" : 20, "is_projectile" : False}},
+               "lawnmower" : {"image" : {"name" : "plants/projectiles/Lawn Mower.png", "size" : {"x" : 80, "y" : 68}, "pos" : {"x" : 0, "y" : 0}}, "Settings" : {"offset" : {"x" : 0, "y" : 0}, "start_x" : 0, "start" : time.time(), "speed" : 250, "damage" : 69420, "is_projectile" : False}},
                "kernel" : {"image" : {"name" : "plants/projectiles/kernel.png", "size" : {"x" : 21, "y" : 22}, "pos" : {"x" : 0, "y" : 0}}, "Settings" : {"offset" : {"x" : 0, "y" : 0}, "velocity" : {"x" : 0, "y" : 0}, "start_x" : 0, "start" : time.time(), "damage" : 20, "is_projectile" : True, "target" : {"x" : 0, "y" : 0}}},
                "butter" : {"image" : {"name" : "plants/projectiles/butter.png", "size" : {"x" : 49, "y" : 50}, "pos" : {"x" : 0, "y" : 0}}, "Settings" : {"offset" : {"x" : 0, "y" : 0}, "velocity" : {"x" : 0, "y" : 0}, "start_x" : 0, "start" : time.time(), "damage" : 40, "is_projectile" : True, "target" : {"x" : 0, "y" : 0}}},
-               "cob" : {"image" : {"name" : "plants/projectiles/cob.png", "size" : {"x" : 107, "y" : 50}, "pos" : {"x" : 0, "y" : 0}}, "Settings" : {"offset" : {"x" : 200, "y" : 0}, "velocity" : {"x" : 0, "y" : 0}, "start_x" : 0, "start_y" : 0, "start_velocity_y" : 0,  "start" : time.time(), "damage" : 20, "is_projectile" : True, "target" : {"x" : 0, "y" : 0}}}}
+               "cob" : {"image" : {"name" : "plants/projectiles/cob.png", "size" : {"x" : 107, "y" : 50}, "pos" : {"x" : 0, "y" : 0}}, "Settings" : {"offset" : {"x" : 200, "y" : 0}, "velocity" : {"x" : 0, "y" : 0}, "start_x" : 0, "start_y" : 0, "start_velocity_y" : 0,  "start" : time.time(), "damage" : 69420, "is_projectile" : True, "target" : {"x" : 0, "y" : 0}}}}
 
 types = (type([]), type({}))
 def copycollection(coll):
@@ -373,6 +353,8 @@ sounds = {"tutorial" : {"minim" : "Cipher - Electronic Light.mp3", "repeat" : -1
           "menu" : {"minim" : "Crazy Dave Intro Theme.mp3", "repeat" : -1, "play_from_start" : True, "isolate" : True,"group" : 0}, 
           "gameover" : {"minim" : "The Zombies Ate Your Brains.mp3", "repeat" : 0, "play_from_start" : True, "isolate" : True, "group" : 0}, 
           "grass" : {"minim" : "Grasswalk (In-Game).mp3", "repeat" : -1, "play_from_start" : True, "isolate" : True, "group" : 0}, 
+          "grass2" : {"minim" : "Watery Graves.mp3", "repeat" : -1, "play_from_start" : True, "isolate" : True, "group" : 0}, 
+          "grass3" : {"minim" : "Rigor Mormist.mp3", "repeat" : -1, "play_from_start" : True, "isolate" : True, "group" : 0}, 
           "fast" : {"minim" : "Plants vs Zombies Soundtrack [Mini Games].mp3", "repeat" : -1, "play_from_start" : True, "isolate" : True, "group" : 0},
           "brain" : {"minim" : "Brainiac Maniac.mp3", "repeat" : -1, "play_from_start" : True, "isolate" : True, "group" : 0},
           "moon" : {"minim" : "Moongrains.mp3", "repeat" : -1, "play_from_start" : True, "isolate" : True, "group" : 0},
@@ -408,7 +390,6 @@ removing = False
 def RemovePlantMode():
     global removing
     removing = True
-    print(removing)
 
 tutorial = False
 def OpenTutorial():
@@ -417,22 +398,22 @@ def OpenTutorial():
 buttons = [ {"button" : {
     "mouse" : LEFT,
     "function" : RemovePlantMode,
-    "area" : {"pos" : {"x" : 320, "y" : 30}, "pos2" : {"x" : 395, "y" : 105}}},
+    "area" : {"pos" : {"x" : 130, "y" : 30}, "pos2" : {"x" : 205, "y" : 105}}},
     
     "image" : {"name" : "buttons/Shovel.png",
                "size" : {"x" : 75, "y" : 75},
-                "pos" : {"x" : 320, "y" : 30},
+                "pos" : {"x" : 130, "y" : 30},
                 "fill" : {"r" : 255, "g" : 255, "b" : 255, "a" : 255}
     }},       
 
     {"button" : {
     "mouse" : LEFT,
     "function" : OpenTutorial,
-    "area" : {"pos" : {"x" : 425, "y" : 30}, "pos2" : {"x" : 500, "y" : 105}}},
+    "area" : {"pos" : {"x" : 915, "y" : 30}, "pos2" : {"x" : 990, "y" : 105}}},
     
     "image" : {"name" : "buttons/Tutorial.png",
             "size" : {"x" : 75, "y" : 75},
-                "pos" : {"x" : 425, "y" : 30},
+                "pos" : {"x" : 915, "y" : 30},
                 "fill" : {"r" : 255, "g" : 255, "b" : 255, "a" : 255}
     }},       
 ]
@@ -468,7 +449,7 @@ def SELECTKERNELPULT():
 def SELECTCOBCANNON():
     SELECTPLANT("Cobcannon")
 
-list_x, list_y, list_y_increment = 10, 30, 80
+list_x, list_y, list_y_increment, list_x_increment = 10, 30, 80, 120
 
 sidebar = [
     {"button" : {"mouse" : LEFT, "function" : SELECTSUNFLOWER, "area" : {"pos" : {"x" : 10, "y" : 160}, "pos2" : {"x" : 116, "y" : 246}}}, "image" : {"name" : "icons/sunflower.png", "size" : {"x" : 106, "y" : 66}, "pos" : {"x" : 10, "y" : 160}, "fill" : {"r" : 255, "g" : 255, "b" : 255, "a" : 255}}},       
@@ -483,40 +464,85 @@ sidebar = [
     {"button" : {"mouse" : LEFT, "function" : SELECTKERNELPULT, "area" : {"pos" : {"x" : 10, "y" : 240}, "pos2" : {"x" : 116, "y" : 306}}},"image" : {"name" : "icons/kernelpult.png","size" : {"x" : 106, "y" : 66},"pos" : {"x" : 10, "y" : 240},"fill" : {"r" : 255, "g" : 255, "b" : 255, "a" : 255}}},
     {"button" : {"mouse" : LEFT, "function" : SELECTCOBCANNON, "area" : {"pos" : {"x" : 10, "y" : 320}, "pos2" : {"x" : 116, "y" : 386}}}, "image" : {"name" : "icons/cobcannon.png","size" : {"x" : 106, "y" : 66},"pos" : {"x" : 10, "y" : 320},"fill" : {"r" : 255, "g" : 255, "b" : 255, "a" : 255}}}]
 bar_size = 7
+
 selector_x, selector_y = -10000, -10000
+def EditSidebarButton(button, x, y, a):
+    global sidebar
+    button["image"]["fill"]["a"] = a
+    if a <= 0:
+        return
+    
+    x2, y2 = x + button["image"]["size"]["x"], y + button["image"]["size"]["y"]
+    button["image"]["pos"]["x"], button["button"]["area"]["pos"]["x"] = x, x
+    button["image"]["pos"]["y"], button["button"]["area"]["pos"]["y"] = y, y
+    button["button"]["area"]["pos2"]["x"], button["button"]["area"]["pos2"]["y"] = x2, y2
+    
 def ReloadSelector(x, y, name, visible):
     global selector_x, selector_y
     if plant_selected != None and name == plant_selected.lower():
         selector_x, selector_y = x, y
+#"Wallnut" : {"image" : {"size" : {"x" : 148, "y" : 125},"pos" : {"x" : 0, "y" : 0},"fill" : {"r" : 255, "g" : 255, "b" : 255, "a" : 255}, "animation" : {"file_index" : "plants/wallnut/(", "file_type" : ").png","start" : 0,"total_frames" : 17, "frame_duration" : 0.08}}, "Settings" : {"offset" : {"x" : 30, "y" : 0}, "health" : 50}
+def TutorialGrid():
+    global sidebar, plant_selected, selector_x, selector_y, tutorial_start, font, font2
+    rows, columns = 2, 4
     
+    if plant_selected != None:
+        plant = plants[plant_selected]
+        pos, s, offset = plant["image"]["pos"], plant["image"]["size"], plant["Settings"]["offset"]
+        cob_offset = 45 if plant_selected == "Cobcannon" else 0
+        pos["x"], pos["y"] = 818 + offset["x"] - s["x"] + cob_offset, 245 + offset["y"] -  s["y"]
+        RENDERIMAGE(plants[plant_selected], ("animation", "pos", "size", "fill"))
+        
+        f = open("tutorial/almanac.txt", "r")
+        lines = f.readlines()
+        names = lines[0].strip("\n").split()
+        i = names.index(plant_selected) if plant_selected in names else 0
+        new_name = lines[1].strip("\n").split(",")[i]
+        description = lines[i + 2].strip("\n")
+        f.close()
+
+        fill(217, 160, 53)
+        textAlign(CENTER)
+        textFont(font2)
+        text(new_name, 493, 21, 567, 133)
+        
+        fill(43, 51, 97)
+        textAlign(LEFT)
+        textFont(font)
+        text(description, 600, 325, 375, 445)
     
+    for iy in range(rows):
+        for ix in range(columns):
+            button = sidebar[ix + iy * columns]
+            x, y = 55 + ix * list_x_increment, 122 + iy * list_y_increment
+            ReloadSelector(x, y, button["image"]["name"][6:len(button["image"]["name"]) - 4], True)
+            EditSidebarButton(button, x, y, 255)
+
+    for ix in range(3):
+        button = sidebar[ix + rows * columns]
+        x, y = 115 + ix * list_x_increment, 122 + rows * list_y_increment
+        ReloadSelector(x, y, button["image"]["name"][6:len(button["image"]["name"]) - 4], True)
+        EditSidebarButton(button, x, y, 255)
     
 def SideBar(column_size, offset):
     global sidebar, plant_selected, selector_x, selector_y
     for i, button in enumerate(sidebar[offset:] + sidebar[:offset]): 
         x, y = list_x, list_y + list_y_increment * i 
         ReloadSelector(x, y, button["image"]["name"][6:len(button["image"]["name"]) - 4], i < column_size)
-        if i < column_size:
-            for c in button["image"]["fill"].keys():
-                button["image"]["fill"][c] = 255
-           
-            x2, y2 = button["image"]["size"]["x"], y + button["image"]["size"]["y"]
-            button["image"]["pos"]["x"], button["button"]["area"]["pos"]["x"] = x, x
-            button["image"]["pos"]["y"], button["button"]["area"]["pos"]["y"] = y, y
-            button["button"]["area"]["pos2"]["x"], button["button"]["area"]["pos2"]["y"] = x2, y2
-        else:
-            for c in button["image"]["fill"].keys():
-                button["image"]["fill"][c] = 0
+        EditSidebarButton(button, x, y, 255 if i < column_size else 0)
+                
 
 shift = 0
-SideBar(bar_size, 0)
+
 def mouseWheel(event):
-    global shift, plant_selected
+    global shift, plant_selected, continue_wave
     if abs(shift) <= len(sidebar) - 2:
         shift += event.getCount()  
     else:
         shift = 0
-        
+
+    if continue_wave:
+        return
     SideBar(bar_size, shift)
     
     
@@ -651,10 +677,10 @@ def Plants(i, row, is_day):
     for ii, plant in enumerate(row["Plants"]):
             if not(plant):
                 continue
-            print(not(plant))
+            
             RENDERIMAGE(plant, ("animation", "pos", "size", "fill"))
             if continue_wave:
-                return
+                continue
             settingp, imagp  = plant["Settings"], plant["image"]
             can_shoot = "last_shot" in settingp.keys()
             is_sun = can_shoot and settingp["projectile"] == "sun"
@@ -664,8 +690,10 @@ def Plants(i, row, is_day):
                     continue
                 
                 if "max_amount" in settingp.keys():
-                    settingp["amount"] = settingp["amount"] + 1 if settingp["amount"] < settingp["max_amount"] - 1 else 0
-                    settingp["reload_time"] = 0.4 if settingp["amount"] < settingp["max_amount"] - 1 else settingp["max_reload_time"]
+                    settingp["amount"] = settingp["amount"] + 1 if settingp["amount"] < settingp["max_amount"] else 1
+                    #settingp["amount"] = settingp["amount"] + 1 if settingp["amount"] < settingp["max_amount"] - 1 else 0
+                    #settingp["reload_time"] = 0.4 if settingp["amount"] < settingp["max_amount"] - 1 else settingp["max_reload_time"]
+                    settingp["reload_time"] = 0.4 if settingp["amount"] > 1 else settingp["max_reload_time"]
                 previous = settingp["last_shot"]
                 settingp["last_shot"] = time.time()
                 if previous < 100:
@@ -695,7 +723,6 @@ def Plants(i, row, is_day):
                         new_settings["target"]["x"], new_settings["target"]["y"] = closest, closest_y
                     rows[i]["Projectiles"].append(new_projectile)
                 else:
-                    print("spawned")
                     new_projectile["image"]["pos"]["x"] = imagp["pos"]["x"] + random.randint(0, 80)
                     new_projectile["image"]["pos"]["y"] = imagp["pos"]["y"] + random.randint(0, 80)
                     sun_drops.append(new_projectile)
@@ -703,10 +730,11 @@ def Plants(i, row, is_day):
                     
 random_sun_drop_cooldown = 24
 last_sun_drop = 0
+is_day = True
 def Sun():
-    global sun_drops, sun, random_sun_drop_cooldown, last_sun_drop, mouse_presses, plant_selected
+    global sun_drops, sun, random_sun_drop_cooldown, last_sun_drop, mouse_presses, plant_selected, continue_wave, is_day
     
-    if not(continue_wave) and time.time() >= random_sun_drop_cooldown + last_sun_drop:
+    if not(continue_wave) and time.time() >= random_sun_drop_cooldown + last_sun_drop and is_day:
         last_sun_drop = time.time()
         new_projectile = copycollection(projectiles["sun"])
         new_projectile["image"]["pos"]["x"] = random.randint(row_pos[0], row_pos[len(row_pos) - 1])
@@ -732,7 +760,7 @@ def Sun():
                 PlaySound("sun", ("minim", "play_from_start"))
                 
         popMatrix()
-instakill = True
+instakill = False
 def Projectiles(i, row):
     global rows, instakill
     remove_indexes = []
@@ -775,7 +803,7 @@ def Projectiles(i, row):
                     can_reach = setting["is_projectile"] and setting["start_x"] <= x_pos + imagz["size"]["x"] <= imagp["pos"]["x"]
                     d = x_pos - setting["start_x"]
                     if can_hit or can_reach:
-                        if imagp["name"] == "Lawn Mower.png":
+                        if imagp["name"] == "plants/projectiles/Lawn Mower.png":
                             settingz["health"] = 0 
                             continue
                         closest_setting = settingz
@@ -803,6 +831,39 @@ def Projectiles(i, row):
             
 transition_time = 9
 
+def HoverShade(button):
+    if button["image"]["fill"]["a"] <= 0:
+        return
+    x, y = button["image"]["pos"]["x"], button["image"]["pos"]["y"]
+    xs, ys = button["image"]["size"]["x"], button["image"]["size"]["y"]
+    if x <= mouseX <= x + xs and y <= mouseY <= y + ys:
+        fill(0, 0, 0, 127)
+        rect(x, y, xs, ys)
+
+def Buttons():
+    global sidebar, buttons, tutorial, bar_size, shift
+    global list_x, list_y, list_y_increment
+    if tutorial:
+        TutorialGrid()
+    else:
+        SideBar(bar_size, shift)
+    for object in sidebar:
+        RENDERIMAGE(object, ("name", "fill", "size", "pos")) 
+        HoverShade(object) 
+    
+    buttons[0]["image"]["pos"]["x"] = 115 if tutorial else 130
+    buttons[0]["image"]["pos"]["y"] = 424 if tutorial else 30 
+    
+    for object in buttons:
+        if object["image"]["name"] == "buttons/Tutorial.png" and tutorial:
+            continue
+        RENDERIMAGE(object, ("name", "fill", "size", "pos")) 
+        HoverShade(object)
+       
+        
+    tint(255)
+    if plant_selected != None:
+        image(loadImage("selector.png"), selector_x, selector_y, 106, 66)
 def Restart():
     global rows, gameover, played_gameover_sound, amplifier, waves_completed, ice, mowers_left, last_melted, continue_wave, sun, sun_drops, tutorial, highscore
     gameover = False
@@ -840,7 +901,7 @@ def LawnMower():
     global mowers_left, rows, projectiles, gameover
     for x, row in enumerate(rows):  
         if mowers_left[x] == True:
-            image(loadImage("Lawn Mower.png"), 180, column_pos[x], 80, 68)
+            image(loadImage("plants/projectiles/Lawn Mower.png"), 180, column_pos[x], 80, 68)
         
         if gameover:
             continue
@@ -884,7 +945,7 @@ def GetLocation(ax, ay):
 
 wave_message = "Waves Completed" 
 wave = None
-wave_duration = 10 #45
+wave_duration = 45
 spawn_cooldown = 1
 start_cooldown = 6
 start_wave = -1
@@ -904,33 +965,78 @@ def StartWave():
 
 
 def setup():
+    global font, font2
     size(1000, 600)
     Restart()
+    SideBar(bar_size, 0)
     StartWave() #You can rig this to a start button later on
     minim = Minim(this)
     for ky in sounds:
         sounds[ky]["minim"] = minim.loadFile("sounds/" + sounds[ky]["minim"])
     PlaySound("intro", ("minim", "repeat", "play_from_start", "isolate", "group"))
     font = createFont("SERIO___.TTF", 24)
+    font2 = createFont("Barbatos.ttf", 40)
     textFont(font)
+
 cooldown = time.time()
 start_music = time.time() + 6
 projectile_removed = time.time()
 projectile_remove_cooldown = 10
 state = "title"
-
+in_main_menu = True
+sun_preview = 0
 def draw():
-    global tutorial, buttons
+    global in_main_menu, sun, sun_preview
+    global rows, cooldown, projectile_removed, plant_selected, state, s, yv, start_music, mouse_presses, selector_x, selector_y, gameover, wave, press_selected, is_day
+    noStroke()
+    if in_main_menu:
+        tint(255)
+        image(loadImage("Title.png"), 0, 0, 1000, 600)
+        tint(125 if 149 <= mouseX <= 149 + 673 and 532 <= mouseY <= 532 + 56 else 255)
+        image(loadImage("buttons/StartForTint.png"), 149, 532, 673, 56)
+        PlaySound("menu", ("minim", "repeat", "play_from_start", "isolate", "group"))
+        if keyPressed or mousePressed:
+            in_main_menu = False
+        return
+    
+    global tutorial, buttons, continue_wave, removing
     if tutorial:
+        tint(255)
+        image(loadImage("tutorial/Almanac.png"), 0, 0, 1000, 600)
         PlaySound("tutorial", ("minim", "repeat", "play_from_start", "isolate", "group"))
-        if keyPressed and key == "b":
-            tutorial = False
-        else:
-            return
+        Buttons()
+        
+        
+        tint(255)
+        image(loadImage("suncounter.png"), 328, 434, 150, 43)
+        fill(0)
+        textAlign(CENTER)
+        text(str(sun_preview), 260, 444, 328, 454)
+        
+        image(loadImage("tutorial/tip.png"), 47, 383, 159, 83)
+        image(loadImage("tutorial/tip2.png"), 242, 370, 226, 173)
+        print(mouseX, mouseY)
+        sun_preview += 1
+        if sun_preview > 9990:
+            sun_preview = 0
+        if 530 <= mouseY <= 530 + 45:
+            if 555 <= mouseX <= 555 + 164:
+                fill(0, 0, 0, 127)
+                rect(555, 530, 164, 45)
+                if mousePressed and mouseButton == LEFT:
+                    plant_selected = None        
+            
+            if 830 <= mouseX <= 830 + 164: 
+                fill(0, 0, 0, 127)
+                rect(830, 530, 164, 45)
+                if mousePressed and mouseButton == LEFT:
+                    tutorial = False
+
+        return
     buttons[1]["image"]["fill"]["a"] = 255 if continue_wave else 0
     
     
-    global rows, cooldown, projectile_removed, plant_selected, state, s, yv, start_music, removing, mouse_presses, selector_x, selector_y, gameover, wave, sun, press_selected
+    
     is_day = wave == None or wave["sound"] != "moon" 
     copy(loadImage("Lawn.png" if is_day else "LawnNight.png"), 0, 0, 1400, 600, 0, 0, 1400, 600)
     tint(255, 255, 255, 255)
@@ -941,25 +1047,18 @@ def draw():
         Zombies(i, row)
         Projectiles(i, row)
     Sun()
-    
-    for object in sidebar:
-        RENDERIMAGE(object, ("name", "fill", "size", "pos"))  
-    for object in buttons:
-        RENDERIMAGE(object, ("name", "fill", "size", "pos"))   
-
-    if plant_selected != None:
-        image(loadImage("selector.png"), selector_x, selector_y, 106, 66)
+    Buttons()
     tint(255)
-    image(loadImage("suncounter.png"), 140, 30, 150, 43)
+    image(loadImage("suncounter.png"), 220, 30, 150, 43)
     fill(0)
     textAlign(CENTER)
-    text(str(sun if sun <= 9990 else 9990), 110, 40, 250, 50)
+    text(str(min(sun, 9990)), 210, 40, 210, 50)
     if gameover > 0:
         Gameover()
         return    
 
     
-    global spawn_cooldown, waves_completed, highscore, max_amplifier, amplifier, start_wave, continue_wave
+    global spawn_cooldown, waves_completed, highscore, max_amplifier, amplifier, start_wave
 
     textAlign(CENTER)
     textSize(25)
@@ -974,13 +1073,15 @@ def draw():
     fill(231, 191, 96, 255)
     text(str(waves_completed) + " Waves Completed", 300, 550, 400, 600)
     text("Highscore " + str(highscore), 555, 550, 655, 600)
-    #print(start_wave <= time.time(), wave if wave != None else None, waves_completed, continue_wave)
+    #print(amplifier, waves_completed, continue_wave)
     if continue_wave:
-        PlaySound("seed", ("minim", "repeat", "play_from_start", "isolate", "group"))      
+        PlaySound("seed", ("minim", "repeat", "play_from_start", "isolate", "group"))     
+        selected_plant = None
+        removing = None 
         if keyPressed and key == "c":
             continue_wave = False
-
-            amplifier = min(max_amplifier, amplifier * amplifier_rate)
+            amplifier = min(max_amplifier, amplifier * amplifier_rate) if waves_completed > 0 else 1
+            print(amplifier)
             StartWave()
         return
     if wave != None:
@@ -990,7 +1091,7 @@ def draw():
         kys = list(wave.keys())
         kys.remove("sound")
         for ky in kys:
-            if int(wave[ky]) <= 0:
+            if int(wave[ky] + 0.5) <= 0:
                 wave.pop(ky)
         kys = list(wave.keys())
         kys.remove("sound")
@@ -1057,5 +1158,6 @@ def draw():
 
     if mouse_presses%2 == 0:
         removing = False
-        if mouse_presses == press_selected + 4:
+        #print(mouse_presses, press_selected + 4)
+        if mouse_presses > press_selected + 2:
             plant_selected = None
