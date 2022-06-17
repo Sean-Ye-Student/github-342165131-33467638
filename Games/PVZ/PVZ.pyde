@@ -1,13 +1,13 @@
 import time
 import random
 add_library("minim")
-spawn_pos_x = 100#900
+spawn_pos_x = 900
 column_pos = (80,183,279,385,467, 573) #The borders between rows from the very top to the very bottom
 row_pos = (251, 334, 408, 493, 576, 654, 738, 812, 898, 987) #The borders between columns from the very left to the very right
 ice_offset = 50
 melt_rate = -3
-max_amplifier = 10
-amplifier_rate = max_amplifier**(1.0/5.0) #1.055#will reach max_amplifier in 5 waves
+max_amplifier = 160
+amplifier_rate = max_amplifier**(1.0/8.0) #will reach max_amplifier in 8 waves
 easy_waves = [{"sound" : "grass", "Basic" : 2, "Cone" : 0.8},#, #total hp ~800
               {"sound" : "grass2", "Basic" : 1, "Cone" : 0.4, "Bucket" : 0.2},
               {"sound" : "grass3", "Basic" : 0.6, "Cone" : 0.2, "Bucket" : 0.4},
@@ -262,7 +262,7 @@ plants = {"Wallnut" : {"image" : {"size" : {"x" : 148, "y" : 125},"pos" : {"x" :
                                      "pos" : {"x" : 0, "y" : 0},
                                      "fill" : {"r" : 255, "g" : 255, "b" : 255, "a" : 255}, 
                                      "animation" : {"file_index" : "plants/cobcannon/(", "file_type" : ").png", "start" : 0,"total_frames" : 11, "frame_duration" : 0.13}}, 
-                          "Settings" : {"offset" : {"x" : 0, "y" : -30}, "projectile_offset" : {"x" : 0, "y" : 0}, "reload_time" : 30, "last_shot" : 0, "projectile" : "cob", "health" : 5 }},
+                          "Settings" : {"offset" : {"x" : 0, "y" : -30}, "projectile_offset" : {"x" : 0, "y" : 0}, "reload_time" : 12, "last_shot" : 0, "projectile" : "cob", "health" : 5 }},
           
           "Spikeweed" : {
                           "image" : {"size" : {"x" : 80, "y" : 34},
@@ -402,7 +402,7 @@ def ContinueWaves():
         return
     continue_wave = False
     amplifier = min(max_amplifier, amplifier * amplifier_rate) if waves_completed > 0 else 1
-    print(amplifier)
+    print("Difficulty amplifier", amplifier)
     StartWave()
 buttons = [ {"button" : {
     "mouse" : LEFT,
@@ -625,7 +625,6 @@ def Spawn(object, row, column, is_zombie):
         settingp, imagp  = new["Settings"], new["image"]
         imagp["pos"]["y"] = column_pos[row + 1] + settingp["offset"]["y"] - imagp["size"]["y"]
         imagp["pos"]["x"] = row_pos[column + 1] + settingp["offset"]["x"] - imagp["size"]["x"]
-        print(imagp["pos"]["x"], imagp["pos"]["y"])
         rows[row]["Plants"][column] = new
         if settingp["name"] == "Cobcannon":
             rows[row]["Plants"][column - 1] = new
@@ -897,6 +896,12 @@ def Save():
     f = open("saved/Lawn.txt", "a")
     for row in rows:
         plants = list(map(lambda x : x["Settings"]["name"] if x != None else None, row["Plants"]))
+        for x, plant in enumerate(plants):
+           if x >= len(plants) - 1:
+               break
+           if row["Plants"][x] == row["Plants"][x + 1]:
+               plants[x] = None #Only edit the save, don't change the actual in game rows
+    
         f.write(str(plants) + "\n")
     f.close()
     
@@ -935,18 +940,6 @@ def LoadSave():
     f = open("saved/LawnMowers.txt", "r")
     mowers_left = map(lambda x : x.strip() == "True", f.read().strip("[]\n").split(","))
     f.close()
-    
-
-    # f = open("PlantData.txt", "r")
-    # lines = f.readlines()
-    # if not(PastSave):
-    #     ResetSave()
-    #     return
-    # for r, row in enumerate(lines):
-    #     for i, plant in enumerate(map(lambda x : str(x).strip(" ' "), row.strip("[]\n").split(","))):
-    #         rows[r]["Plants"][i] = copycollection(plants[plant]) if plant != str(None) else None
-
-    # f.close()
     print("Loaded")
         
 def Restart(save_data):
@@ -1074,13 +1067,13 @@ state = "title"
 in_main_menu = True
 sun_preview = 0
 saved_already = False
+
 def draw():
     global in_main_menu, sun, sun_preview
     global rows, cooldown, projectile_removed, plant_selected, state, s, yv, start_music, mouse_presses, selector_x, selector_y, gameover, wave, press_selected, is_day
     global continue_menu, saved_already
     global tutorial, buttons, continue_wave, removing
     noStroke()
-    
     buttons[1]["image"]["fill"]["a"] = 255 if continue_wave else 0
     buttons[2]["image"]["fill"]["a"] = 255 if continue_wave and not(continue_menu) and not(tutorial) else 0
     
@@ -1109,7 +1102,7 @@ def draw():
         
         image(loadImage("tutorial/tip.png"), 47, 383, 159, 83)
         image(loadImage("tutorial/tip2.png"), 242, 370, 226, 173)
-        print(mouseX, mouseY)
+
         sun_preview += 1
         if sun_preview > 9990:
             sun_preview = 0
@@ -1167,11 +1160,7 @@ def draw():
     fill(231, 191, 96, 255)
     text(str(waves_completed) + " Waves Completed", 300, 550, 400, 600)
     text("Highscore " + str(highscore), 555, 550, 655, 600)
-    #print(amplifier, waves_completed, continue_wave)
-    
-
-
-    
+        
     if continue_wave:
         PlaySound("seed", ("minim", "repeat", "play_from_start", "isolate", "group"))     
         selected_plant = None
