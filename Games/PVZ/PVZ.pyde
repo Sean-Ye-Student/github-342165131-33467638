@@ -1,7 +1,7 @@
 import time
 import random
 add_library("minim")
-spawn_pos_x = 900
+spawn_pos_x = 100#900
 column_pos = (80,183,279,385,467, 573) #The borders between rows from the very top to the very bottom
 row_pos = (251, 334, 408, 493, 576, 654, 738, 812, 898, 987) #The borders between columns from the very left to the very right
 ice_offset = 50
@@ -395,6 +395,15 @@ tutorial = False
 def OpenTutorial():
     global tutorial, continue_wave
     tutorial = continue_wave
+    
+def ContinueWaves():
+    global continue_menu, continue_wave, amplifier, max_amplifier, amplifier_rate, waves_completed, tutorial
+    if not(continue_wave) or tutorial or continue_menu:
+        return
+    continue_wave = False
+    amplifier = min(max_amplifier, amplifier * amplifier_rate) if waves_completed > 0 else 1
+    print(amplifier)
+    StartWave()
 buttons = [ {"button" : {
     "mouse" : LEFT,
     "function" : RemovePlantMode,
@@ -404,7 +413,7 @@ buttons = [ {"button" : {
                "size" : {"x" : 75, "y" : 75},
                 "pos" : {"x" : 130, "y" : 30},
                 "fill" : {"r" : 255, "g" : 255, "b" : 255, "a" : 255}
-    }},       
+    }},              
 
     {"button" : {
     "mouse" : LEFT,
@@ -415,7 +424,19 @@ buttons = [ {"button" : {
             "size" : {"x" : 75, "y" : 75},
                 "pos" : {"x" : 915, "y" : 30},
                 "fill" : {"r" : 255, "g" : 255, "b" : 255, "a" : 255}
-    }},       
+    }}, 
+    
+  
+    {"button" : {
+    "mouse" : LEFT,
+    "function" : ContinueWaves,
+    "area" : {"pos" : {"x" : 775, "y" : 485}, "pos2" : {"x" : 980, "y" : 526}}},
+    
+    "image" : {"name" : "buttons/continue.png",
+               "size" : {"x" : 205, "y" : 41},
+                "pos" : {"x" : 775, "y" : 485},
+                "fill" : {"r" : 255, "g" : 255, "b" : 255, "a" : 255}
+    }},      
 ]
 
 
@@ -604,6 +625,7 @@ def Spawn(object, row, column, is_zombie):
         settingp, imagp  = new["Settings"], new["image"]
         imagp["pos"]["y"] = column_pos[row + 1] + settingp["offset"]["y"] - imagp["size"]["y"]
         imagp["pos"]["x"] = row_pos[column + 1] + settingp["offset"]["x"] - imagp["size"]["x"]
+        print(imagp["pos"]["x"], imagp["pos"]["y"])
         rows[row]["Plants"][column] = new
         if settingp["name"] == "Cobcannon":
             rows[row]["Plants"][column - 1] = new
@@ -864,7 +886,70 @@ def Buttons():
     tint(255)
     if plant_selected != None:
         image(loadImage("selector.png"), selector_x, selector_y, 106, 66)
-def Restart():
+        
+def Save():
+    global sun, amplifier, waves_completed, rows, mowers_left
+    f = open("saved/Data.txt", "w")
+    f.writelines([str(sun) + "\n", str(amplifier) + "\n", str(waves_completed) + "\n"])
+    f.close()
+    
+    f = open("saved/Lawn.txt", "w").close() #clears the file
+    f = open("saved/Lawn.txt", "a")
+    for row in rows:
+        plants = list(map(lambda x : x["Settings"]["name"] if x != None else None, row["Plants"]))
+        f.write(str(plants) + "\n")
+    f.close()
+    
+    f = open("saved/LawnMowers.txt", "w").close()
+    f = open("saved/LawnMowers.txt", "a")
+    f.write(str(mowers_left) + "\n")
+    f.close()
+    print("Saved")
+
+def PastSave():
+    f = open("saved/Data.txt", "r")
+    lines = f.readlines()
+    f.close()
+    return not(len(lines) <= 0 or len(str(lines[0]).strip()) == 0)
+def LoadSave():
+    global rows
+    
+    
+    global sun, amplifier, waves_completed, rows, mowers_left
+    f = open("saved/Data.txt", "r")
+    lines = f.readlines()
+    sun, amplifier, waves_completed = map(lambda x : float(x.strip("\n")), lines)
+    sun = int(sun)
+    waves_completed = int(waves_completed)
+    f.close()
+    
+    f = open("saved/Lawn.txt", "r")
+    lines = f.readlines()
+    for r, row in enumerate(lines):
+        for i, plant in enumerate(map(lambda x : str(x).strip(" ' "), row.strip("[]\n").split(","))):
+            if plant != str(None):
+                Spawn(copycollection(plants[plant]), r, i, False)
+            
+    f.close()
+    
+    f = open("saved/LawnMowers.txt", "r")
+    mowers_left = map(lambda x : x.strip() == "True", f.read().strip("[]\n").split(","))
+    f.close()
+    
+
+    # f = open("PlantData.txt", "r")
+    # lines = f.readlines()
+    # if not(PastSave):
+    #     ResetSave()
+    #     return
+    # for r, row in enumerate(lines):
+    #     for i, plant in enumerate(map(lambda x : str(x).strip(" ' "), row.strip("[]\n").split(","))):
+    #         rows[r]["Plants"][i] = copycollection(plants[plant]) if plant != str(None) else None
+
+    # f.close()
+    print("Loaded")
+        
+def Restart(save_data):
     global rows, gameover, played_gameover_sound, amplifier, waves_completed, ice, mowers_left, last_melted, continue_wave, sun, sun_drops, tutorial, highscore
     gameover = False
     played_gameover_sound = False
@@ -874,7 +959,7 @@ def Restart():
     sun = 0
 
     last_melted = time.time()
-    mowers_left = [True for i in range(len(column_pos))]
+    mowers_left = [True for i in range(len(column_pos) - 1)]
     ice = [10**16 for _ in range(len(column_pos) - 1)]
     rows = list([{"Plants" : [None for ii in range(len(row_pos) - 1)], "Projectiles" : [], "Zombies" : []} for i in range(len(column_pos) - 1)])
     sun_drops = []
@@ -883,6 +968,9 @@ def Restart():
     f = open("highscore.txt", "r")
     highscore = int(f.read())
     f.close()
+    if save_data:
+        Save()
+    
 
 def Gameover():
     global gameover, transition_time, played_gameover_sound
@@ -895,8 +983,7 @@ def Gameover():
     image(loadImage("messages/Gameover.png"), 218, 67, 564, 466)
     
     if (time.time() - gameover)/transition_time >= 1:
-        if keyPressed and key == "r":
-            Restart()
+        Restart(True)
 def LawnMower():
     global mowers_left, rows, projectiles, gameover
     for x, row in enumerate(rows):  
@@ -965,9 +1052,9 @@ def StartWave():
 
 
 def setup():
-    global font, font2
+    global font, font2, continue_menu
     size(1000, 600)
-    Restart()
+    Restart(False)
     SideBar(bar_size, 0)
     StartWave() #You can rig this to a start button later on
     minim = Minim(this)
@@ -977,7 +1064,8 @@ def setup():
     font = createFont("SERIO___.TTF", 24)
     font2 = createFont("Barbatos.ttf", 40)
     textFont(font)
-
+    continue_menu = PastSave()
+    
 cooldown = time.time()
 start_music = time.time() + 6
 projectile_removed = time.time()
@@ -985,10 +1073,17 @@ projectile_remove_cooldown = 10
 state = "title"
 in_main_menu = True
 sun_preview = 0
+saved_already = False
 def draw():
     global in_main_menu, sun, sun_preview
     global rows, cooldown, projectile_removed, plant_selected, state, s, yv, start_music, mouse_presses, selector_x, selector_y, gameover, wave, press_selected, is_day
+    global continue_menu, saved_already
+    global tutorial, buttons, continue_wave, removing
     noStroke()
+    
+    buttons[1]["image"]["fill"]["a"] = 255 if continue_wave else 0
+    buttons[2]["image"]["fill"]["a"] = 255 if continue_wave and not(continue_menu) and not(tutorial) else 0
+    
     if in_main_menu:
         tint(255)
         image(loadImage("Title.png"), 0, 0, 1000, 600)
@@ -998,8 +1093,7 @@ def draw():
         if keyPressed or mousePressed:
             in_main_menu = False
         return
-    
-    global tutorial, buttons, continue_wave, removing
+
     if tutorial:
         tint(255)
         image(loadImage("tutorial/Almanac.png"), 0, 0, 1000, 600)
@@ -1033,12 +1127,11 @@ def draw():
                     tutorial = False
 
         return
-    buttons[1]["image"]["fill"]["a"] = 255 if continue_wave else 0
-    
-    
-    
+
     is_day = wave == None or wave["sound"] != "moon" 
     copy(loadImage("Lawn.png" if is_day else "LawnNight.png"), 0, 0, 1400, 600, 0, 0, 1400, 600)
+
+    
     tint(255, 255, 255, 255)
     Ice() 
     LawnMower()
@@ -1053,6 +1146,7 @@ def draw():
     fill(0)
     textAlign(CENTER)
     text(str(min(sun, 9990)), 210, 40, 210, 50)
+    
     if gameover > 0:
         Gameover()
         return    
@@ -1074,16 +1168,39 @@ def draw():
     text(str(waves_completed) + " Waves Completed", 300, 550, 400, 600)
     text("Highscore " + str(highscore), 555, 550, 655, 600)
     #print(amplifier, waves_completed, continue_wave)
+    
+
+
+    
     if continue_wave:
         PlaySound("seed", ("minim", "repeat", "play_from_start", "isolate", "group"))     
         selected_plant = None
         removing = None 
-        if keyPressed and key == "c":
-            continue_wave = False
-            amplifier = min(max_amplifier, amplifier * amplifier_rate) if waves_completed > 0 else 1
-            print(amplifier)
-            StartWave()
+        
+        if continue_menu:
+            tint(255)
+            image(loadImage("continue.png"), 253, 136, 493, 270)
+            if 360 <= mouseY <= 400:
+                pressed = mousePressed and mouseButton == LEFT
+                fill(0,0,0, 127)
+                if 283 <= mouseX <= 488:
+                    rect(283, 360, 205, 40)
+                    if pressed:
+                        LoadSave()
+                        continue_menu = False
+                if 510 <= mouseX <= 715:
+                    rect(510, 360, 205, 40)
+                    if pressed:
+                        Restart(True)
+                        continue_menu = False
+            return
+        
+        if not(saved_already):
+            saved_already = True
+            Save()
         return
+    
+    
     if wave != None:
         PlaySound(wave["sound"], ("minim", "repeat", "play_from_start", "isolate", "group"))  
     if start_wave != -1 and start_wave <= time.time() and wave != None and time.time() > cooldown:
@@ -1104,6 +1221,7 @@ def draw():
             if no_zombies:
                 waves_completed += 1    
                 continue_wave = True
+                saved_already = False
                 if waves_completed > highscore:
                     f = open("highscore.txt", "w")
                     f.write(str(waves_completed))
@@ -1115,7 +1233,10 @@ def draw():
             selected_type = kys[random.randint(0, len(kys) - 1)]
             wave[selected_type] -= 1
             Spawn(zombies[selected_type], random.randint(0,4), None, True)
-           
+    
+            
+    
+    
     if time.time() >= projectile_removed + projectile_remove_cooldown:
         projectile_removed = time.time()
         for row in rows:
@@ -1154,7 +1275,7 @@ def draw():
                     PlaySound("error", ("minim", "play_from_start"))
                     
                 
-           
+
 
     if mouse_presses%2 == 0:
         removing = False
