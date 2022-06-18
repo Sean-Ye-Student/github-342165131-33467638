@@ -1,27 +1,28 @@
 import time #Importing time, random and minim modules / libraries
 import random
 add_library("minim")
-spawn_pos_x = 900 #Offsets the zombies to the end of the map
+spawn_pos_x = 900 # Offsets the zombies to the end of the map
 column_pos = (80,183,279,385,467, 573) #The borders between rows from the very top to the very bottom
 row_pos = (251, 334, 408, 493, 576, 654, 738, 812, 898, 987) #The borders between columns from the very left to the very right
 ice_offset = 50 #Controls the ice's offset from the zamboni and the rate at which it melts
 melt_rate = -3
-max_amplifier = 160 #Maximum difficulty
+max_amplifier = 40 #Maximum difficulty
+max_easy_amplifier = 11 #Maximum difficuty for an easy wave, reduces lag as the easier waves generally have more zombies
 amplifier_rate = max_amplifier**(1.0/8.0) #Will reach max_amplifier in 8 waves
-easy_waves = [{"sound" : "grass", "Basic" : 2, "Cone" : 0.8},#, #total hp ~800
+easy_waves = [{"sound" : "grass", "Basic" : 2, "Cone" : 0.8}, #total hp ~800 
               {"sound" : "grass2", "Basic" : 1, "Cone" : 0.4, "Bucket" : 0.2},
               {"sound" : "grass3", "Basic" : 0.6, "Cone" : 0.2, "Bucket" : 0.4},
               {"sound" : "grass3", "Basic" : 1.6, "Bucket" : 0.4},
               {"sound" : "grass2", "Basic" : 1, "Cone" : 1},
               {"sound" : "grass", "Cone" : 0.4, "Bucket" : 0.4, "Basic" : 0.7}]
 
-hard_waves = [{"sound" : "fast", "Zamboni" : 0.5, "Football" : 0.5}, #total hp ~1600
+hard_waves = [{"sound" : "fast", "Zamboni" : 0.375, "Football" : 0.375}, #total hp ~1600
               {"sound" : "brain", "Gargantuar" : 0.5,  "Basic" : 1},
-              {"sound" : "moon", "Bucket" : 0.5, "Door" : 0.5},
-              {"sound" : "moon", "Bucket" : 0.3, "Football" : 0.75},
-              {"sound" : "moon", "Door" : 0.3, "Football" : 0.75},
-              {"sound" : "brain", "Gargantuar" : 0.25,  "Cone" : 0.5, "Bucket" : 0.3, "Basic" : 0.9},
-              {"sound" : "fast", "Zamboni" : 0.5, "Gargantuar" : 0.3, "Basic" : 0.45}]
+              {"sound" : "moon", "Bucket" : 0.375, "Door" : 0.375},
+              {"sound" : "moon", "Bucket" : 0.3, "Football" : 0.45},
+              {"sound" : "moon", "Door" : 0.3, "Football" : 0.45},
+              {"sound" : "brain", "Gargantuar" : 0.25,  "Cone" : 0.25, "Bucket" : 0.2, "Basic" : 0.05},
+              {"sound" : "fast", "Zamboni" : 0.4, "Gargantuar" : 0.3, "Basic" : 0.05}]
 
 zombies = {"Zamboni" : {"image" : {"size" : {"x" : 185, "y" : 185}, "pos" : {"x" : spawn_pos_x + 185, "y" : 0}, "fill" : {"r" : 255, "g" : 255, "b" : 255, "a" : 255},
                          "animations" : [{"file_index" : "zombies/zamboni/walk/(", #Dictionary with all the zombies
@@ -402,7 +403,6 @@ def ContinueWaves(): #Starts the next wave
         return
     continue_wave = False
     amplifier = min(max_amplifier, amplifier * amplifier_rate) if waves_completed > 0 else 1
-    #print("Difficulty amplifier", amplifier)
     StartWave()
 buttons = [ {"button" : { #Dictionary of all the buttons and their properties
     "mouse" : LEFT,
@@ -737,7 +737,7 @@ def Plants(i, row, is_day): #Runs logic for all the plants
                         closest, closest_y = 10**16, new_image["pos"]["y"]
                         for zombie in row["Zombies"]:
                             settingz, imagz = zombie["Settings"], zombie["image"]
-                            d = imagz["pos"]["x"] + imagz["size"]["x"]/2.0 - settingz["speed"] * new_settings["total_time"]*0.5 #+ imagz["size"]["x"]  #projectile_time
+                            d = imagz["pos"]["x"] + imagz["size"]["x"]/2.0 - (0 if settingz["blocked"] else (settingz["speed"] * new_settings["total_time"]*0.5)) #+ imagz["size"]["x"]  #projectile_time
                             closest = min(closest, d) if d > new_settings["start_x"] else closest
                             closest_y = settingz["offset"]["y"] if d > new_settings["start_x"] else closest_y #Finds the target zombie
                         new_settings["velocity"]["x"] = ((closest - new_settings["start_x"])/new_settings["total_time"])*2 #Calculate the x velocity
@@ -821,7 +821,8 @@ def Projectiles(i, row):
                     settingz, imagz = zombie["Settings"], zombie["image"]
                     x_pos = imagz["pos"]["x"] + settingz["offset"]["x"] 
                     can_hit = setting["start_x"] <= x_pos <= imagp["pos"]["x"]
-                    can_reach = setting["is_projectile"] and setting["start_x"] <= x_pos + imagz["size"]["x"] <= imagp["pos"]["x"]
+                    zombie_end_pos = x_pos + imagz["size"]["x"]
+                    can_reach = setting["is_projectile"] and setting["start_x"] <= zombie_end_pos and (zombie_end_pos <= x_pos + imagz["size"]["x"] or abs(x_pos + imagz["size"]["x"] - imagp["pos"]["x"]) < imagp["size"]["x"]) 
                     d = x_pos - setting["start_x"]
                     if can_hit or can_reach:
                         if imagp["name"] == "plants/projectiles/Lawn Mower.png":
@@ -987,23 +988,22 @@ def LawnMower(): #Runs logic for the lawn mowers, also detects when you lose
             continue
         
         for zombie in row["Zombies"]:
-            
             #Detects if the zombies in the same tile have passed the lawn mower
             settingz, imagz = zombie["Settings"], zombie["image"]
             x_pos = settingz["offset"]["x"] + imagz["pos"]["x"]
             if x_pos < row_pos[0] and settingz["health"] > 0: #Checks if the zombie has passed the mower
                 if mowers_left[x] != True:
-                    gameover = time.time()
+                    if x_pos < row_pos[0] - 100:
+                        gameover = time.time()
                     return #No lawn mower was found, so the zombie gets past
-                na, y = GetLocation(row_pos[0], imagz["pos"]["y"] + imagz["size"]["y"] + settingz["ground_offset"])
-                if y != None: #Damages the zombie, so it does not trigger a gameover
-                    settingz["health"] = 0
-                    new_mower = copycollection(projectiles["lawnmower"]) #Spawns a lawn mower projectile
-                    new_mower["Settings"]["start_x"], new_mower["image"]["pos"]["y"] = 180, column_pos[y]
-                    new_mower["Settings"]["start"] = time.time()
-                    rows[y]["Projectiles"].append(new_mower)
-                    mowers_left[y] = False #Stores that the lawn mower is no longer available
-                    break
+                
+                settingz["health"] = 0 #Damages the zombie, so it does not trigger a gameover
+                new_mower = copycollection(projectiles["lawnmower"]) #Spawns a lawn mower projectile
+                new_mower["Settings"]["start_x"], new_mower["image"]["pos"]["y"] = 180, column_pos[x]
+                new_mower["Settings"]["start"] = time.time()
+                rows[x]["Projectiles"].append(new_mower)
+                mowers_left[x] = False #Stores that the lawn mower is no longer available
+                break
         
 
 def Ice(): #Runs logic for ice
@@ -1037,7 +1037,7 @@ def StartWave(): #Starts and selectes wave
     for ky in wave:
         if ky == "sound":
             continue
-        wave[ky] *= amplifier
+        wave[ky] *= amplifier if is_hard else min(max_easy_amplifier, amplifier)
         total_zombies += wave[ky]
     spawn_cooldown = (wave_duration + 0.0)/total_zombies #Assigns a spawn cooldown
     start_wave = time.time() + start_cooldown
@@ -1221,7 +1221,7 @@ def draw(): #Runs lots of logic and Renders everything
             cooldown = time.time() + spawn_cooldown
             selected_type = kys[random.randint(0, len(kys) - 1)]
             wave[selected_type] -= 1 #Spawns zombies
-            Spawn(zombies[selected_type], random.randint(0,4), None, True)
+            Spawn(zombies[selected_type], random.randint(0, 4), None, True)
     
             
     
