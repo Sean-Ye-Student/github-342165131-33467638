@@ -1,0 +1,171 @@
+<?xml version="1.0" standalone="no"?>
+<mlt LC_NUMERIC="C" version="6.23.0" title="Shotcut version 20.11.28" producer="main_bin">
+  <profile description="automatic" width="1000" height="600" progressive="1" sample_aspect_num="1" sample_aspect_den="1" display_aspect_num="10" display_aspect_den="6" frame_rate_num="29116" frame_rate_den="1000" colorspace="709"/>
+  <playlist id="main_bin">
+    <property name="xml_retain">1</property>
+  </playlist>
+  <producer id="black" in="00:00:00.000" out="00:11:18.684">
+    <property name="length">00:11:18.718</property>
+    <property name="eof">pause</property>
+    <property name="resource">0</property>
+    <property name="aspect_ratio">1</property>
+    <property name="mlt_service">color</property>
+    <property name="mlt_image_format">rgb24a</property>
+    <property name="set.test_audio">0</property>
+  </producer>
+  <playlist id="background">
+    <entry producer="black" in="00:00:00.000" out="00:11:18.684"/>
+  </playlist>
+  <producer id="producer0" in="00:00:00.000" out="00:04:28.095">
+    <property name="length">00:04:28.129</property>
+    <property name="eof">pause</property>
+    <property name="resource">C:/Users/sean1/Videos/Captures/PVZ 2022-06-17 19-08-48.mp4</property>
+    <property name="audio_index">1</property>
+    <property name="video_index">0</property>
+    <property name="mute_on_pause">0</property>
+    <property name="mlt_service">avformat-novalidate</property>
+    <property name="seekable">1</property>
+    <property name="aspect_ratio">1</property>
+    <property name="creation_time">2022-06-17T23:13:16</property>
+    <property name="shotcut:hash">9ddca9a9fc739e081a2c371a1ce3ea0a</property>
+    <property name="ignore_points">0</property>
+    <property name="shotcut:caption">PVZ 2022-06-17 19-08-48.mp4</property>
+    <property name="global_feed">1</property>
+    <property name="xml">was here</property>
+    <filter id="filter0">
+      <property name="background">color:#00000000</property>
+      <property name="mlt_service">affine</property>
+      <property name="shotcut:filter">affineSizePosition</property>
+      <property name="transition.fill">1</property>
+      <property name="transition.distort">0</property>
+      <property name="transition.rect">-139 -58 1920 1080 1</property>
+      <property name="transition.valign">middle</property>
+      <property name="transition.halign">center</property>
+      <property name="shotcut:animIn">00:00:00.000</property>
+      <property name="shotcut:animOut">00:00:00.000</property>
+      <property name="transition.threads">0</property>
+    </filter>
+  </producer>
+  <producer id="producer1" in="00:00:00.000" out="00:04:28.095">
+    <property name="length">00:04:28.129</property>
+    <property name="eof">pause</property>
+    <property name="resource">C:/Users/sean1/Videos/Captures/PVZ 2022-06-17 19-08-48.mp4</property>
+    <property name="audio_index">1</property>
+    <property name="video_index">0</property>
+    <property name="mute_on_pause">0</property>
+    <property name="mlt_service">avformat-novalidate</property>
+    <property name="seekable">1</property>
+    <property name="aspect_ratio">1</property>
+    <property name="creation_time">2022-06-17T23:13:16</property>
+    <property name="shotcut:hash">9ddca9a9fc739e081a2c371a1ce3ea0a</property>
+    <property name="ignore_points">0</property>
+    <property name="shotcut:caption">PVZ 2022-06-17 19-08-48.mp4</property>
+    <property name="global_feed">1</property>
+    <property name="xml">was here</property>
+    <filter id="filter1" in="00:00:00.034" out="00:04:28.095">
+      <property name="background">color:#00000000</property>
+      <property name="mlt_service">affine</property>
+      <property name="shotcut:filter">affineSizePosition</property>
+      <property name="transition.fill">1</property>
+      <property name="transition.distort">0</property>
+      <property name="transition.rect">-139 -58 1920 1080 1</property>
+      <property name="transition.valign">middle</property>
+      <property name="transition.halign">center</property>
+      <property name="shotcut:animIn">00:00:00.000</property>
+      <property name="shotcut:animOut">00:00:00.000</property>
+      <property name="transition.threads">0</property>
+      <property name="transition.fix_rotate_x">0</property>
+    </filter>
+  </producer>
+  <producer id="producer2" in="00:00:00.000" out="00:06:04.431">
+    <property name="length">00:06:04.465</property>
+    <property name="eof">pause</property>
+    <property name="resource">C:/Users/sean1/Videos/Captures/PVZ 2022-06-17 19-14-04.mp4</property>
+    <property name="audio_index">1</property>
+    <property name="video_index">0</property>
+    <property name="mute_on_pause">0</property>
+    <property name="mlt_service">avformat-novalidate</property>
+    <property name="seekable">1</property>
+    <property name="aspect_ratio">1</property>
+    <property name="creation_time">2022-06-17T23:20:08</property>
+    <property name="shotcut:hash">00376860e614789db2a1db5d2af8ebee</property>
+    <property name="ignore_points">0</property>
+    <property name="shotcut:caption">PVZ 2022-06-17 19-14-04.mp4</property>
+    <property name="global_feed">1</property>
+    <property name="xml">was here</property>
+    <filter id="filter2" in="00:00:01.717" out="00:06:03.915">
+      <property name="background">color:#00000000</property>
+      <property name="mlt_service">affine</property>
+      <property name="shotcut:filter">affineSizePosition</property>
+      <property name="transition.fill">1</property>
+      <property name="transition.distort">0</property>
+      <property name="transition.rect">-139 -58 1920 1080 1</property>
+      <property name="transition.valign">middle</property>
+      <property name="transition.halign">center</property>
+      <property name="shotcut:animIn">00:00:00.000</property>
+      <property name="shotcut:animOut">00:00:00.000</property>
+      <property name="transition.threads">0</property>
+      <property name="transition.fix_rotate_x">0</property>
+    </filter>
+  </producer>
+  <producer id="producer3" in="00:00:00.000" out="00:00:48.358">
+    <property name="length">00:00:48.393</property>
+    <property name="eof">pause</property>
+    <property name="resource">c:/Users/sean1/Videos/Captures/PVZ 2022-06-17 19-21-55.mp4</property>
+    <property name="audio_index">1</property>
+    <property name="video_index">0</property>
+    <property name="mute_on_pause">0</property>
+    <property name="mlt_service">avformat-novalidate</property>
+    <property name="seekable">1</property>
+    <property name="aspect_ratio">1</property>
+    <property name="creation_time">2022-06-17T23:22:43</property>
+    <property name="shotcut:hash">4ff3fa0fac8dad795ff7c7f321262b98</property>
+    <property name="global_feed">1</property>
+    <property name="shotcut:caption">PVZ 2022-06-17 19-21-55.mp4</property>
+    <property name="xml">was here</property>
+    <filter id="filter3" out="00:00:48.358">
+      <property name="background">color:#00000000</property>
+      <property name="mlt_service">affine</property>
+      <property name="shotcut:filter">affineSizePosition</property>
+      <property name="transition.fill">1</property>
+      <property name="transition.distort">0</property>
+      <property name="transition.rect">-139 -58 1920 1080 1</property>
+      <property name="transition.valign">middle</property>
+      <property name="transition.halign">center</property>
+      <property name="shotcut:animIn">00:00:00.000</property>
+      <property name="shotcut:animOut">00:00:00.000</property>
+      <property name="transition.threads">0</property>
+      <property name="transition.fix_rotate_x">0</property>
+    </filter>
+  </producer>
+  <playlist id="playlist0">
+    <property name="shotcut:video">1</property>
+    <property name="shotcut:name">V1</property>
+    <entry producer="producer0" in="00:00:00.000" out="00:00:00.000"/>
+    <entry producer="producer1" in="00:00:00.034" out="00:04:28.095"/>
+    <entry producer="producer2" in="00:00:01.717" out="00:06:03.915"/>
+    <entry producer="producer3" in="00:00:00.000" out="00:00:48.358"/>
+  </playlist>
+  <tractor id="tractor0" title="Shotcut version 20.11.28" global_feed="1" in="00:00:00.000" out="00:11:18.684">
+    <property name="shotcut">1</property>
+    <property name="shotcut:projectAudioChannels">2</property>
+    <property name="shotcut:projectFolder">1</property>
+    <property name="shotcut:scaleFactor">0.074</property>
+    <track producer="background"/>
+    <track producer="playlist0"/>
+    <transition id="transition0">
+      <property name="a_track">0</property>
+      <property name="b_track">1</property>
+      <property name="mlt_service">mix</property>
+      <property name="always_active">1</property>
+      <property name="sum">1</property>
+    </transition>
+    <transition id="transition1">
+      <property name="a_track">0</property>
+      <property name="b_track">1</property>
+      <property name="version">0.9</property>
+      <property name="mlt_service">frei0r.cairoblend</property>
+      <property name="disable">1</property>
+    </transition>
+  </tractor>
+</mlt>
