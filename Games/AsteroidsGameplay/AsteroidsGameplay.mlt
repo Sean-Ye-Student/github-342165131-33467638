@@ -1,0 +1,91 @@
+<?xml version="1.0" standalone="no"?>
+<mlt LC_NUMERIC="C" version="6.23.0" title="Shotcut version 20.11.28" producer="main_bin">
+  <profile description="automatic" width="1000" height="600" progressive="1" sample_aspect_num="1" sample_aspect_den="1" display_aspect_num="10" display_aspect_den="6" frame_rate_num="29116" frame_rate_den="1000" colorspace="709"/>
+  <playlist id="main_bin">
+    <property name="xml_retain">1</property>
+  </playlist>
+  <producer id="black" in="00:00:00.000" out="00:00:49.526">
+    <property name="length">00:00:49.560</property>
+    <property name="eof">pause</property>
+    <property name="resource">0</property>
+    <property name="aspect_ratio">1</property>
+    <property name="mlt_service">color</property>
+    <property name="mlt_image_format">rgb24a</property>
+    <property name="set.test_audio">0</property>
+  </producer>
+  <playlist id="background">
+    <entry producer="black" in="00:00:00.000" out="00:00:49.526"/>
+  </playlist>
+  <producer id="producer0" in="00:00:00.000" out="00:00:49.526">
+    <property name="length">00:00:49.560</property>
+    <property name="eof">pause</property>
+    <property name="resource">c:/Users/sean1/Downloads/Screen Recording 2022-06-18 at 8.09.12 PM.MOV</property>
+    <property name="audio_index">-1</property>
+    <property name="video_index">0</property>
+    <property name="mute_on_pause">0</property>
+    <property name="mlt_service">avformat-novalidate</property>
+    <property name="seekable">1</property>
+    <property name="aspect_ratio">1</property>
+    <property name="creation_time">2022-06-19T00:11:08</property>
+    <property name="shotcut:hash">37a0dd35e6e2ce193606eafd76d3567c</property>
+    <property name="global_feed">1</property>
+    <property name="shotcut:caption">Screen Recording 2022-06-18 at 8.09.12 PM.MOV</property>
+    <property name="xml">was here</property>
+  </producer>
+  <playlist id="playlist0">
+    <property name="shotcut:video">1</property>
+    <property name="shotcut:name">V1</property>
+    <entry producer="producer0" in="00:00:00.000" out="00:00:49.526"/>
+  </playlist>
+  <producer id="producer1" in="00:00:00.000" out="00:00:49.629">
+    <property name="length">00:00:49.663</property>
+    <property name="eof">pause</property>
+    <property name="resource">AsteroidsGameplay.mp3</property>
+    <property name="audio_index">0</property>
+    <property name="video_index">-1</property>
+    <property name="mute_on_pause">0</property>
+    <property name="mlt_service">avformat-novalidate</property>
+    <property name="seekable">1</property>
+    <property name="creation_time">2022-06-19T00:20:44</property>
+    <property name="shotcut:hash">c59d29a3a94253eff07cb478cbbd6c60</property>
+    <property name="ignore_points">0</property>
+    <property name="shotcut:caption">AsteroidsGameplay.mp3</property>
+    <property name="global_feed">1</property>
+    <property name="xml">was here</property>
+  </producer>
+  <playlist id="playlist1">
+    <property name="shotcut:audio">1</property>
+    <property name="shotcut:name">A1</property>
+    <entry producer="producer1" in="00:00:00.000" out="00:00:49.526"/>
+  </playlist>
+  <tractor id="tractor0" title="Shotcut version 20.11.28" global_feed="1" in="00:00:00.000" out="00:00:49.526">
+    <property name="shotcut">1</property>
+    <property name="shotcut:projectAudioChannels">2</property>
+    <property name="shotcut:projectFolder">1</property>
+    <property name="shotcut:scaleFactor">27.01</property>
+    <track producer="background"/>
+    <track producer="playlist0"/>
+    <track producer="playlist1" hide="video"/>
+    <transition id="transition0">
+      <property name="a_track">0</property>
+      <property name="b_track">1</property>
+      <property name="mlt_service">mix</property>
+      <property name="always_active">1</property>
+      <property name="sum">1</property>
+    </transition>
+    <transition id="transition1">
+      <property name="a_track">0</property>
+      <property name="b_track">1</property>
+      <property name="version">0.9</property>
+      <property name="mlt_service">frei0r.cairoblend</property>
+      <property name="disable">1</property>
+    </transition>
+    <transition id="transition2">
+      <property name="a_track">0</property>
+      <property name="b_track">2</property>
+      <property name="mlt_service">mix</property>
+      <property name="always_active">1</property>
+      <property name="sum">1</property>
+    </transition>
+  </tractor>
+</mlt>
